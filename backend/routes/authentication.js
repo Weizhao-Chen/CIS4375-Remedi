@@ -49,8 +49,12 @@ router.post('/auth/register', (req, res, next) => {
 router.post('/auth/login', (req, res, next) => {
   const db = req.app.get('db')
 
-  const email = req.body.email
-  const password = req.body.password
+  const {email} = req.body
+  const {password} = req.body
+
+// old  
+  // const email = req.body.email
+  // const password = req.body.password
 
   if (
     !email ||
@@ -85,7 +89,9 @@ router.post('/auth/login', (req, res, next) => {
         }
 
         // confidential data should not be sent to client
+        // eslint-disable-next-line no-param-reassign
         user = user.get({ plain: true })
+        // eslint-disable-next-line no-param-reassign
         delete user.password
 
         // signin
@@ -96,6 +102,7 @@ router.post('/auth/login', (req, res, next) => {
             data: user
           },
           config.get('options.secret'),
+          // eslint-disable-next-line no-shadow
           (err, token) => {
             if (err) next(err)
 
