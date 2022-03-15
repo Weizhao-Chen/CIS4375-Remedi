@@ -1,6 +1,7 @@
 import vue from 'vue'
 import VueRouter from 'vue-router'
 
+// eslint-disable-next-line import/no-cycle
 import store from '../store'
 // home
 import index from '../views/home/index.vue'
@@ -13,6 +14,8 @@ import notFound from '../views/error/notFound.vue'
 import register from '../views/account/register.vue'
 import login from '../views/account/login.vue'
 import account from '../views/account/index.vue'
+
+import EMR from '../views/home/EMR.vue'
 
 vue.use(VueRouter)
 
@@ -34,6 +37,13 @@ const router = new VueRouter({
     {
       path: '/about',
       component: about,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/EMR',
+      component: EMR,
       meta: {
         isOpen: true,
       },
