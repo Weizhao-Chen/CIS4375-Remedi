@@ -2,7 +2,6 @@
   <div>
     <h2>About</h2>
     <p>Demo App</p>
-    <p>HelloWorld</p>
   </div>
 </template>
 
