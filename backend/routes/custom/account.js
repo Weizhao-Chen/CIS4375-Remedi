@@ -8,7 +8,6 @@ router.post('/', (req, res, next) => {
   const token =
     req.body.token || req.query.token || req.headers['x-access-token']
   const db = req.app.get('db')
-  // eslint-disable-next-line prefer-const
   let { email, password } = req.body
   const user = req.account
   let updateOptions
