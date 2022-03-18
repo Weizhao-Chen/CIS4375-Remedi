@@ -1,27 +1,27 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('accountType', {
-    id: {
+  return sequelize.define('Module', {
+    moduleID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    description: {
+    emrID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'EMR',
+        key: 'emrID'
+      }
+    },
+    moduleName: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'accountType',
+    tableName: 'Module',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -30,10 +30,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__accountT__3213E83F9611EB87",
+        name: "PK__Module__8EEC8E371EC1E27E",
         unique: true,
         fields: [
-          { name: "id" },
+          { name: "moduleID" },
         ]
       },
     ]

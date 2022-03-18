@@ -8,36 +8,36 @@ const validator = require('validator')
 
 router.post('/auth/register', (req, res, next) => {
   const db = req.app.get('db')
-  const newUser = db.login.build(req.body)
+  const newLogin = db.login.build(req.body)
 
   if (
-    !newUser.email ||
-    !newUser.password ||
-    !validator.isEmail(newUser.email) ||
-    !validator.isLength(newUser.password, {
+    !newLogin.email ||
+    !newLogin.password ||
+    !validator.isEmail(newLogin.email) ||
+    !validator.isLength(newLogin.password, {
       min: 8,
-      max: 16
+      max: 36
     })
   ) {
     res.sendStatus(400)
     return
   }
 
-  newUser.password = bcrypt.hashSync(newUser.password, 8)
+  newLogin.password = bcrypt.hashSync(newLogin.password, 8)
 
   db.login
     .findOne({
       where: {
-        email: newUser.email
+        email: newLogin.email
       }
     })
-    .then(user => {
-      if (user) {
+    .then(login => {
+      if (login) {
         res.sendStatus(409)
         return
       }
-
-      newUser
+console.log("hello")
+newLogin
         .save()
         .then(() => {
           res.sendStatus(200)
@@ -49,7 +49,7 @@ router.post('/auth/register', (req, res, next) => {
 router.post('/auth/login', (req, res, next) => {
   const db = req.app.get('db')
 
-  const email = req.body.email
+  const email = req.body.username
   const password = req.body.password
 
   if (
@@ -58,26 +58,25 @@ router.post('/auth/login', (req, res, next) => {
     !validator.isEmail(email) ||
     !validator.isLength(password, {
       min: 8,
-      max: 16
+      max: 36
     })
   ) {
     res.sendStatus(400)
     return
   }
-
   db.login
     .findOne({
       where: {
         email
       }
     })
-    .then(user => {
-      if (!user) {
+    .then(login => {
+      if (!login) {
         res.sendStatus(401)
         return
       }
 
-      bcrypt.compare(password, user.password, (err, isMatched) => {
+      bcrypt.compare(password, login.password, (err, isMatched) => {
         if (err) next(err)
         if (!isMatched) {
           res.sendStatus(401)
@@ -85,15 +84,15 @@ router.post('/auth/login', (req, res, next) => {
         }
 
         // confidential data should not be sent to client
-        user = user.get({ plain: true })
-        delete user.password
+        login = login.get({ plain: true })
+        delete login.password
 
         // signin
         jwt.sign(
           {
             iss: config.get('options.iss') || 'iss-not-specified',
             exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
-            data: user
+            data: login
           },
           config.get('options.secret'),
           (err, token) => {

@@ -14,6 +14,16 @@
           class="nav-link"
           to="/about">About</router-link>
       </li>
+      <li class="nav-item">
+        <router-link
+          class="nav-link"
+          to="/emr">EMR</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link
+          class="nav-link"
+          to="/emrList">EMR 2</router-link>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">

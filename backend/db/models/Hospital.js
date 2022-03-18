@@ -1,39 +1,47 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('login', {
-    id: {
+  return sequelize.define('Hospital', {
+    hospitalID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    email: {
+    hospitalName: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    password: {
+    hospitalAddressLineOne: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    createdAt: {
-      type: DataTypes.DATE,
+    hospitalAddressLineTwo: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    updatedAt: {
-      type: DataTypes.DATE,
+    hospitalCity: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    accountTypeId: {
+    hospitalState: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    hospitalZipCode: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'accountType',
-        key: 'id'
-      }
+      allowNull: false
+    },
+    hospitalContactName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    hospitalContactInfo: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'login',
+    tableName: 'Hospital',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -42,10 +50,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__login__3213E83FE843EC58",
+        name: "PK__Hospital__C7F8EC05708FAC10",
         unique: true,
         fields: [
-          { name: "id" },
+          { name: "hospitalID" },
         ]
       },
     ]

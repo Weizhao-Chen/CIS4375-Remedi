@@ -1,39 +1,43 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('login', {
-    id: {
+  return sequelize.define('Airline', {
+    airlineID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    email: {
+    airlineName: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    password: {
+    airlinePhoneNumber: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    createdAt: {
-      type: DataTypes.DATE,
+    airlineAddressLineOne: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    updatedAt: {
-      type: DataTypes.DATE,
+    airlineAddressLineTwo: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    accountTypeId: {
+    airlineCity: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    airlineState: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    airlineZipCode: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'accountType',
-        key: 'id'
-      }
+      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'login',
+    tableName: 'Airline',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -42,10 +46,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__login__3213E83FE843EC58",
+        name: "PK__Airline__D04734A9F7E79408",
         unique: true,
         fields: [
-          { name: "id" },
+          { name: "airlineID" },
         ]
       },
     ]

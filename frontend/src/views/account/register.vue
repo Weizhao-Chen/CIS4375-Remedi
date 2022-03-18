@@ -8,19 +8,14 @@
             <p>Please provide required information to create an account.</p>
 
             <div class="form-group">
-              <label>Username</label>
+              <label>Fake Email</label>
               <input
-                v-validate="'required|min:3|max:16'"
-                v-model="form.model.username"
+                v-model="form.model.email"
                 class="form-control"
                 type="text"
-                autocomplete="username"
-                placeholder="Username"
-                name="username">
-              <span
-                v-show="errors.has('username')"
-                class="invalid-feedback"
-                v-html="errors.first('username')" />
+                autocomplete="email"
+                placeholder="email"
+                name="email">
             </div>
 
             <div class="form-group">
@@ -31,42 +26,28 @@
                 type="text"
                 placeholder="Name"
                 name="name">
-              <span
-                v-show="errors.has('name')"
-                class="invalid-feedback"
-                v-html="errors.first('name')" />
             </div>
 
             <div class="form-group">
               <label>Password</label>
               <input
-                v-validate="'required|min:6|max:16'"
                 v-model="form.model.password"
                 class="form-control"
                 type="password"
                 autocomplete="new-password"
                 placeholder="Password"
                 name="password">
-              <span
-                v-show="errors.has('password')"
-                class="invalid-feedback"
-                v-html="errors.first('password')" />
             </div>
 
             <div class="form-group">
               <label>Confirm Password</label>
               <input
-                v-validate="'confirmed'"
                 v-model="form.model.confirmPassword"
                 class="form-control"
                 type="password"
                 autocomplete="new-password"
                 placeholder="Confirm Password"
                 name="confirmPassword">
-              <span
-                v-show="errors.has('confirmPassword')"
-                class="invalid-feedback"
-                v-html="errors.first('confirmPassword')" />
             </div>
 
             <input
@@ -97,10 +78,10 @@ export default {
     return {
       form: {
         model: {
-          password: 'tim-password',
-          confirmPassword: 'tim-password',
-          username: 'tim',
-          name: 'Minion Tim',
+          email: '',
+          name: '',
+          password: '',
+          confirmPassword: '',
         },
       },
     }
@@ -109,17 +90,17 @@ export default {
     ...mapActions(['register']),
 
     submit() {
-      this.$validator.validateAll().then(res => {
-        if (res) {
+      //this.$validator.validateAll().then(res => {
+        //if (res) {
           this.register(this.form.model)
-        } else {
-          swal(
-            'Not so fast!',
-            'Please provide required data in valid format',
-            'warning',
-          )
-        }
-      })
+        //} else {
+         // Swal.fire({
+            //title: 'Not so fast!',
+            //text: 'Please provide required data in valid format',
+            //icon: 'warning',
+          //})
+        //}
+      //})
     },
   },
 }

@@ -10,17 +10,12 @@
             <div class="form-group">
               <label>Username</label>
               <input
-                v-validate="'required|min:3|max:16'"
                 v-model="form.model.username"
                 class="form-control"
                 type="text"
                 autocomplete="username"
                 placeholder="Username"
                 name="username">
-              <span
-                v-show="errors.has('username')"
-                class="invalid-feedback"
-                v-html="errors.first('username')" />
             </div>
 
             <div class="form-group">
@@ -33,10 +28,6 @@
                 autocomplete="new-password"
                 placeholder="Password"
                 name="password">
-              <span
-                v-show="errors.has('password')"
-                class="invalid-feedback"
-                v-html="errors.first('password')" />
             </div>
 
             <input
@@ -67,8 +58,8 @@ export default {
     return {
       form: {
         model: {
-          password: 'tim-password',
-          username: 'tim',
+          username: '',
+          password: '',
         },
       },
     }
@@ -77,17 +68,7 @@ export default {
     ...mapActions(['login']),
 
     submit() {
-      this.$validator.validateAll().then(res => {
-        if (res) {
           this.login(this.form.model)
-        } else {
-          swal(
-            'Not so fast!',
-            'Please provide required data in valid format',
-            'warning',
-          )
-        }
-      })
     },
   },
 }

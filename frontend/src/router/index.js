@@ -14,6 +14,10 @@ import register from '../views/account/register.vue'
 import login from '../views/account/login.vue'
 import account from '../views/account/index.vue'
 
+//views
+import emradmin from "../views/management/emradmin.vue"
+import emrList from "../views/management/emrList.vue"
+
 vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -34,6 +38,20 @@ const router = new VueRouter({
     {
       path: '/about',
       component: about,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/emr',
+      component: emradmin,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/emrList',
+      component: emrList,
       meta: {
         isOpen: true,
       },

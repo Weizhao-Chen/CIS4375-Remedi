@@ -1,39 +1,43 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('login', {
-    id: {
+  return sequelize.define('Rental_Car_Company', {
+    rentalCompanyID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    email: {
+    rentalCompanyName: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    password: {
+    rentalPhoneNumber: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    createdAt: {
-      type: DataTypes.DATE,
+    rentalAddressLineOne: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    updatedAt: {
-      type: DataTypes.DATE,
+    rentalAddressLineTwo: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    accountTypeId: {
+    rentalCity: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    rentalState: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    rentalZipCode: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'accountType',
-        key: 'id'
-      }
+      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'login',
+    tableName: 'Rental_Car_Company',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -42,10 +46,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__login__3213E83FE843EC58",
+        name: "PK__Rental_C__85E5EF9FC4ECBF0E",
         unique: true,
         fields: [
-          { name: "id" },
+          { name: "rentalCompanyID" },
         ]
       },
     ]

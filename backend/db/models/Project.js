@@ -1,39 +1,43 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('login', {
-    id: {
+  return sequelize.define('Project', {
+    projectID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    email: {
+    projectName: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    password: {
+    projectStartDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    projectEndDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    projectNotes: {
       type: DataTypes.STRING,
+      allowNull: true
+    },
+    projectComplete: {
+      type: DataTypes.BOOLEAN,
       allowNull: false
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    accountTypeId: {
+    hospitalID: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
-        model: 'accountType',
-        key: 'id'
+        model: 'Hospital',
+        key: 'hospitalID'
       }
     }
   }, {
     sequelize,
-    tableName: 'login',
+    tableName: 'Project',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -42,10 +46,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__login__3213E83FE843EC58",
+        name: "PK__Project__11F14D85E49F6657",
         unique: true,
         fields: [
-          { name: "id" },
+          { name: "projectID" },
         ]
       },
     ]
