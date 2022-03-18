@@ -17,8 +17,8 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {
@@ -31,3 +31,23 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+
+/*{
+  sequelize,
+  tableName: 'EMR',
+  schema: 'dbo',
+  timestamps: true,
+  underscored: true,
+  createdAt: 'CREATED_AT',
+  updatedAt: 'UPDATED_AT',
+  deletedAt: false,
+  indexes: [
+    {
+      name: "PK__EMR__A319B07F852F27CF",
+      unique: true,
+      fields: [
+        { name: "emrID" },
+      ]
+    },
+  ]
+}*/

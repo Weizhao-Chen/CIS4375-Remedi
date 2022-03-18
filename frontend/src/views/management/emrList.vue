@@ -86,7 +86,6 @@ export default {
     loadData(){
       axios.get(`${config.api}/api/EMR/find`)
         .then((response) => {
-          console.log(response)
           this.DB_DATA = response.data;
         })
         .catch(() => {

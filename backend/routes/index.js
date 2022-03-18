@@ -11,7 +11,7 @@ const custom = require('./custom')
 // register routes
 router.use('/test', test)
 //comment this out to skip authentication
-router.use(authentication)
+// router.use(authentication)
 router.use(custom)
 
 module.exports = router
