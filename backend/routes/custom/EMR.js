@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router({ caseSensitive: true })
 
 router.get('/find', (req, res, next) => {
-    const dbo = req.app.get('db')
-    return dbo.EMR.findAll({
+    const db = req.app.get('db')
+    return db.EMR.findAll({
         raw : true,
     })
         .then((EMR) => res.send(EMR))
@@ -15,8 +15,8 @@ router.get('/find', (req, res, next) => {
 
 router.post('/create', (req, res, next) => {
     const name_text = req.body.name
-    const dbo = req.app.get('dbo')
-    dbo.EMR.create({
+    const dbo = req.app.get('db')
+    db.EMR.create({
         emrName: name_text
         })
         .then(() => {
@@ -31,11 +31,11 @@ router.post('/create', (req, res, next) => {
 router.put('/update', (req, res, next) => {
     const emrID = req.body.id
     const name_text = req.body.name
-    const dbo = req.app.get('dbo')
+    const db = req.app.get('db')
 
     console.log(req.body.name)
     
-    dbo.EMR.update({
+    db.EMR.update({
         emrName: name_text
         }, {
             where: {
@@ -53,9 +53,9 @@ router.put('/update', (req, res, next) => {
 
 router.delete('/delete/:emrID', (req, res, next) => {
     const id = req.params.emrID;
-    const dbo = req.app.get('dbo')
+    const db = req.app.get('db')
 
-    dbo.EMR.destroy({
+    db.EMR.destroy({
         where: { emrID: id }
     }).then(() => {
         res.status(200).send('The record has been deleted!');

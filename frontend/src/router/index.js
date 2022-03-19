@@ -17,6 +17,7 @@ import account from '../views/account/index.vue'
 //views
 import emradmin from "../views/management/emradmin.vue"
 import emrList from "../views/management/emrList.vue"
+import emrEdit from "../views/management/emrEdit.vue"
 
 vue.use(VueRouter)
 
@@ -54,6 +55,15 @@ const router = new VueRouter({
       component: emrList,
       meta: {
         isOpen: true,
+      },
+    },
+    {
+      path: '/emr/edit',
+      name: '/emr/edit',
+      component: emrEdit,
+      // props: true,
+      meta: {
+        isOpen: true
       },
     },
     {

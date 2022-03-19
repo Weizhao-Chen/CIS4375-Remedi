@@ -62,7 +62,7 @@ export default {
         field: 'emrID',
         type: 'number'
       },{
-        label: 'emr name',
+        label: 'emrname',
         field: 'emrName'
       }]
     };
@@ -73,15 +73,15 @@ export default {
   },
   methods: {
     onRowDoubleClick(params){
-      // this.$router.push({
-      //   name: '/emr/edit',
-      //   params: {
-      //     emrID: params.row.emrID
-      //   }
-      // })
+      this.$router.push({
+        name: '/emr/edit',
+        params: {
+          emrID: params.row.emrID
+        }
+      })
     },
     addNewEMR(){
-      // this.$router.push('/emr/edit')
+      this.$router.push('/emr/edit')
     },
     loadData(){
       axios.get(`${config.api}/api/EMR/find`)
