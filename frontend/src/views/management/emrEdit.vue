@@ -14,8 +14,8 @@
         <button class="swal2-editform swal2-styled goBackButton" v-on:click="goBack">Go Back</button>
       </div>
       <div class="editFormFooter-right">
-        <button v-if="!isNewEMR" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateEMR">Update EMR</button>
-        <button v-if="!isNewEMR" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteEMR">Delete EMR</button>
+        <button v-if="isNewEMR" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateEMR">Update EMR</button>
+        <button v-if="isNewEMR" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteEMR">Delete EMR</button>
         <button v-if="isNewEMR" class="swal2-editform swal2-styled addNewButton" :disabled="validationFormCheck === false" v-on:click="addEMR">Submit New EMR</button>
       </div>
     </div>
@@ -28,28 +28,20 @@
           @validation="validationName = $event"
           type="text"
           name="emrName"
-          label="name"
+          label="emr Name"
           validation="required"
           v-model="form.model.emrName"
-          :validation-messages="{required: 'The name is required'}"
+          :validation-messages="{required: 'The Name is required'}"
         />
-        <!-- <FormulateInput
-          type="text"
-          name="emrName"
-          label="name"
-          v-model="form.model.emrName"
-        /> -->
       </div>
     </form>
   </div>
 </template>
 
 <script>
-//https://grokonez.com/frontend/vue-js/vue-js-nodejs-express-restapis-sequelize-orm-mysql-crud-example
 import axios from '../../utilities/axios';
 import config from '../../config';
 import Swal from 'sweetalert2';
-import {mapActions} from "vuex";
 import { ModelListSelect } from 'vue-search-select';
 import { ModelSelect } from 'vue-search-select'
 
@@ -58,8 +50,8 @@ export default {
  props: ["emrID"],
   data() {
     return {
-      isNewEMR: true,
       validationName: {},
+      isNewEMR: true,
       DB_DATA: [],
       form: {
         model: {
@@ -106,13 +98,13 @@ export default {
             this.loadData()
             Swal.fire(
               'Done!',
-              'The FAQ has been updated.',
+              'The EMR has been updated.',
               'success'
             )
             this.goBack()
           })
           .catch(() => {
-            Swal.fire('Error', 'Something went wrong (updating FAQ)', 'error')
+            Swal.fire('Error', 'Something went wrong (updating EMR)', 'error')
           })
     },
     deleteEMR(){

@@ -10,6 +10,9 @@ module.exports = function(sequelize, DataTypes) {
     emrName: {
       type: DataTypes.STRING,
       allowNull: false
+      // validate: {
+      //   notEmpty: true
+      // }
     }
   }, {
     sequelize,
@@ -19,16 +22,16 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     createdAt: false,
     updatedAt: false,
-    deletedAt: false,
-    indexes: [
-      {
-        name: "PK__EMR__A319B07F852F27CF",
-        unique: true,
-        fields: [
-          { name: "emrID" },
-        ]
-      },
-    ]
+    deletedAt: false
+    // indexes: [
+    //   {
+    //     name: "PK__EMR__A319B07F852F27CF",
+    //     unique: true,
+    //     fields: [
+    //       { name: "emrID" },
+    //     ]
+    //   },
+    // ]
   });
 };
 

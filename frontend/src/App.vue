@@ -25,6 +25,7 @@ import headerAnonymous from './views/templates/header-anonymous.vue'
 import header from './views/templates/header.vue'
 import footer from './views/templates/footer.vue'
 
+
 export default {
   name: 'App',
   components: {

@@ -62,7 +62,7 @@ export default {
         field: 'emrID',
         type: 'number'
       },{
-        label: 'emrname',
+        label: 'name',
         field: 'emrName'
       }]
     };
