@@ -73,15 +73,104 @@ export default {
   },
   methods: {
     onRowDoubleClick(params){
-      this.$router.push({
-        name: '/emr/edit',
-        params: {
-          emrID: params.row.emrID
+      Swal.fire({
+        title: 'Edit Record',
+        html:
+          'Item ID: ' + params.row.emrID +
+          '<br>' +
+          '<form>Name <input id="form-name" class="swal2-input" placeholder="Name" value="' + params.row.emrName + '">' +
+          '</form>'
+        ,
+        showCancelButton: true,
+        showDenyButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Submit',
+        cancelButtonText: 'Cancel',
+        denyButtonText: `Delete Record`,
+        customClass: {
+          denyButton: 'order-1 right-gap',
+          cancelButton: 'order-2',
+          confirmButton: 'order-3',
+        },
+        preConfirm: () => {
+          const name = document.getElementById('form-name').value
+          if (!name) {
+            Swal.showValidationMessage(`Name cannot be blank`)
+          }
+          return {name: name}
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const data = {
+            id: params.row.emrID,
+            name: result.value.name
+          }
+          axios.put(`${config.api}/api/EMR/update`, data)
+            .then((response) => {
+              this.loadData()
+              Swal.fire(
+                'Done!',
+                'The record has been updated.',
+                'success'
+              )
+            })
+            .catch(() => {
+              Swal.fire('Error', 'Something went wrong', 'error')
+            })
+        } else if (result.isDenied){
+          const emrid = params.row.emrID
+          axios.delete(`${config.api}/api/EMR/delete/` + emrid)
+            .then((response) => {
+              this.loadData()
+              Swal.fire(
+                'Done!',
+                'The record has been deleted.',
+                'success'
+              )
+            })
+            .catch(() => {
+              Swal.fire('Error', 'Something went wrong', 'error')
+            })
         }
       })
     },
     addNewEMR(){
-      this.$router.push('/emr/edit')
+      Swal.fire({
+        title: 'Add Record',
+        html:
+          '<form>Name <input id="form-name" class="swal2-input" placeholder="Name">' +
+          '</form>'
+        ,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Submit',
+        cancelButtonText: 'Cancel',
+        preConfirm: () => {
+          const name = document.getElementById('form-name').value
+          if (!name) {
+            Swal.showValidationMessage(`Name cannot be blank`)
+          }
+          return {name: name}
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const data = {
+            name: result.value.name
+          }
+          axios.post(`${config.api}/api/EMR/create`, data)
+            .then((response) => {
+              this.loadData()
+              Swal.fire(
+                'Done!',
+                'The record has been created.',
+                'success'
+              )
+            })
+            .catch(() => {
+              Swal.fire('Error', 'Something went wrong', 'error')
+            })
+        }
+      })
     },
     loadData(){
       axios.get(`${config.api}/api/EMR/find`)

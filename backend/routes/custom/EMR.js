@@ -46,10 +46,10 @@ router.get('/find/:emrid', (req, res, next) => {
 })
 
 router.post('/create', (req, res, next) => {
-    // const name_text = req.body.emrName
+    const name_text = req.body.name
     const db = req.app.get('db')
     db.EMR.create({
-        emrName: req.body.emrName
+        emrName: name_text
     })
         .then(() => {
             res.status(200).send('OK');
@@ -60,33 +60,33 @@ router.post('/create', (req, res, next) => {
     })
 })
 
-router.put('/update/:emrid', (req, res, next) => {
-    // const emrID = req.body.emrID
-    // const name_text = req.body.emrName
+router.put('/update', (req, res, next) => {
+    const emrID = req.body.id
+    const emrName = req.body.name
     const db = req.app.get('db')
 
     db.EMR.update({
-        emrName: req.body.emrName
+        emrName: emrName
         }, {
-            where: {
-                emrID: req.body.emrid
-            }
+           where: {
+               emrID: emrID
+           }
         })
         .then(() => {
             res.status(200).send('OK');
         })
         .catch(err => {
-            console.log('There was an error updating EMR', JSON.stringify(err))
-            return res.send(err)
-    })
+           console.log('There was an error updating EMR', JSON.stringify(err))
+           return res.send(err)
+   })
 })
 
 router.delete('/delete/:emrid', (req, res, next) => {
-    // const id = req.params.emrid;
+    const id = req.params.emrid;
     const db = req.app.get('db')
 
     db.EMR.destroy({
-        where: { emrID: req.params.emrid }
+        where: { emrID: id }
     }).then(() => {
         res.status(200).send('The record has been deleted!');
     }).catch(err => {
