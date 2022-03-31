@@ -23,16 +23,20 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    projectComplete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
-    },
     hospitalID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'Hospital',
         key: 'hospitalID'
+      }
+    },
+    projectStatusID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Project_Status',
+        key: 'projectStatusID'
       }
     }
   }, {
@@ -45,6 +49,13 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: 'UPDATED_AT',
     deletedAt: false,
     indexes: [
+      {
+        name: "PK__Project__11F14D85070E9DE6",
+        unique: true,
+        fields: [
+          { name: "projectID" },
+        ]
+      },
       {
         name: "PK__Project__11F14D85E49F6657",
         unique: true,

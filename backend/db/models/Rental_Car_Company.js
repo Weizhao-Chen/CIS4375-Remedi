@@ -25,14 +25,16 @@ module.exports = function(sequelize, DataTypes) {
     },
     rentalCity: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "Houston"
     },
     rentalState: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "Texas"
     },
     rentalZipCode: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.CHAR,
       allowNull: false
     }
   }, {
@@ -41,10 +43,17 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
+      {
+        name: "PK__Rental_C__85E5EF9FA9CE5816",
+        unique: true,
+        fields: [
+          { name: "rentalCompanyID" },
+        ]
+      },
       {
         name: "PK__Rental_C__85E5EF9FC4ECBF0E",
         unique: true,

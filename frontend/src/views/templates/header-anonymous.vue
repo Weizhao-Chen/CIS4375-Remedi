@@ -22,7 +22,22 @@
       <li class="nav-item">
         <router-link
           class="nav-link"
-          to="/emrList">EMR 2</router-link>
+          to="/projectstatus">Project Status</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link
+          class="nav-link"
+          to="/contractorstatus">Contractor Status</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link
+          class="nav-link"
+          to="/module">Module</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link
+          class="nav-link"
+          to="/rentalcarcompany">Rental Car Company</router-link>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

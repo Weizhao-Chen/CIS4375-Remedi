@@ -33,14 +33,16 @@ module.exports = function(sequelize, DataTypes) {
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "Houston"
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "Texas"
     },
     zipCode: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.CHAR,
       allowNull: false
     },
     phoneNumber: {
@@ -51,25 +53,25 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    onboarded: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true
-    },
     remediHistory: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false
     },
     supportWisdom: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false
     },
     numberOfGoLives: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
     },
     numberofEpicProjects: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
     },
     yearsOfSupportEpic: {
       type: DataTypes.INTEGER,
@@ -77,11 +79,21 @@ module.exports = function(sequelize, DataTypes) {
     },
     supportVirtualEpic: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false
     },
     creditCardHotel: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false
+    },
+    contractorStatusID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Contractor_Status',
+        key: 'contractorStatusID'
+      }
     }
   }, {
     sequelize,
@@ -93,6 +105,13 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: 'UPDATED_AT',
     deletedAt: false,
     indexes: [
+      {
+        name: "PK__Contract__BE48F41509B717E2",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+        ]
+      },
       {
         name: "PK__Contract__BE48F4155DE2FD63",
         unique: true,
