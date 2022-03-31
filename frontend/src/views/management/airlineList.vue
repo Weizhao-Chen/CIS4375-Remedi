@@ -2,10 +2,10 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Rental Car Company List</span>
+        <span class="tableHeading-text">Airline List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewRentalCarCompany">Add New Rental Car Company</button>
+        <button class="swal2-editform swal2-styled" v-on:click="addNewAirline">Add New Airline</button>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'rentalCompanyID', type: 'asc'}
+          initialSortBy: {field: 'airlineID', type: 'asc'}
         }"
         :pagination-options="{
           enabled: true,
@@ -56,32 +56,38 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      myAPI: `${config.api}/api/Rental_Car_Company`,
+      myAPI: `${config.api}/api/Airline`,
       dataFields: [{
         label: 'id',
-        field: 'rentalCompanyID',
+        field: 'airlineID',
         type: 'number'
       },{
         label: 'name',
-        field: 'rentalCompanyName'
+        field: 'airlineName'
       },{
         label: 'phone',
-        field: 'rentalPhoneNumber'
+        field: 'airlinePhoneNumber'
       },{
         label: 'street',
-        field: 'rentalAddressLineOne'
+        field: 'airlineAddressLineOne'
       },{
         label: 'street2',
-        field: 'rentalAddressLineTwo'
+        field: 'airlineAddressLineTwo'
       },{
         label: 'city',
-        field: 'rentalCity'
+        field: 'airlineCity'
       },{
         label: 'state',
-        field: 'rentalState'
+        field: 'airlineState'
+      },{
+        label: 'country',
+        field: 'airlineCountry'
       },{
         label: 'zip',
-        field: 'rentalZipCode'
+        field: 'airlineZipCode'
+      },{
+        label: 'website',
+        field: 'airlineWebsite'
       }]
     };
   },
@@ -92,17 +98,17 @@ export default {
   methods: {
     onRowDoubleClick(params){
       this.$router.push({
-        name: '/rentalcarcompany/edit',
+        name: '/airline/edit',
         params: {
-          rentalCompanyID: params.row.rentalCompanyID
+          airlineID: params.row.airlineID
         }
       })
     },
-    addNewRentalCarCompany(){
-      this.$router.push('/rentalcarcompany/edit')
+    addNewAirline(){
+      this.$router.push('/airline/edit')
     },
     loadData(){
-      axios.get(`${config.api}/api/Rental_Car_Company/find`)
+      axios.get(`${config.api}/api/Airline/find`)
         .then((response) => {
           this.DB_DATA = response.data;
         })

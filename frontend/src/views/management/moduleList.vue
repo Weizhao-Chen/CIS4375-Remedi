@@ -2,10 +2,10 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">FAQ List</span>
+        <span class="tableHeading-text">Module List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewFAQ">Add New FAQ List</button>
+        <button class="swal2-editform swal2-styled" v-on:click="addNewModule">Add New Module List</button>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'faq_id', type: 'asc'}
+          initialSortBy: {field: 'moduleID', type: 'asc'}
         }"
         :pagination-options="{
           enabled: true,
@@ -57,7 +57,7 @@ export default {
     return {
       DB_DATA: [],
       FAQ_CATEGORY_DATA: [],
-      myAPI: `${config.api}/api/faqList`,
+      myAPI: `${config.api}/api/Module`,
       dataFields: [{
         label: 'id',
         field: 'faq_id',

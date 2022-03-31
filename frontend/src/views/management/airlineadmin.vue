@@ -1,20 +1,20 @@
 <template>
   <div>
-    <h2>Rental Car Company Manager</h2>
+    <h2>Airline Manager</h2>
     <br>
-    <locationList-list />
+    <airlineList-list />
   </div>
 </template>
 
 <script>
 
-import rentalcarcompanyList from "./rentalcarcompanyList.vue";
+import airlineList from "./airlineList.vue";
 
 //Vue.use(Router);
 
 export default {
   components: {
-    'rentalcarcompanyList-list' : rentalcarcompanyList
+    'airlineList-list' : airlineList
   }
 }
 </script>

@@ -21,7 +21,9 @@ import emrEdit from "../views/management/emrEdit.vue"
 
 import projectstatusList from "../views/management/projectstatusList.vue"
 import contractorstatusList from "../views/management/contractorstatusList.vue"
-import rentalcarcompanyList from "../views/management/rentalcarcompanyList.vue"
+
+import airlineEdit from "../views/management/airlineEdit.vue"
+import airlineadmin from "../views/management/airlineadmin.vue"
 
 vue.use(VueRouter)
 
@@ -69,8 +71,18 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/rentalcarcompany',
-      component: rentalcarcompanyList,
+      path: '/airline',
+      component: airlineadmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/airline/edit',
+      name: '/airline/edit',
+      component: airlineEdit,
+      props: true,
       meta: {
         isOpen: true,
       },

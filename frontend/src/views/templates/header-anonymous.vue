@@ -37,7 +37,7 @@
       <li class="nav-item">
         <router-link
           class="nav-link"
-          to="/rentalcarcompany">Rental Car Company</router-link>
+          to="/airline">Airline</router-link>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
