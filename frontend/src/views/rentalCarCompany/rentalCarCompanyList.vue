@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      myAPI: `${config.api}/api/hospital`,
+      myAPI: `${config.api}/api/Rental_Car_Company`,
       dataFields: [
         {
           label: 'id',
@@ -182,7 +182,7 @@ export default {
 
           axios
             .put(
-              `${config.api}/api/car-rental-company/update/${
+              `${config.api}/api/Rental_Car_Company/update/${
                 params.row.rentalCompanyID
               }`,
               data,
@@ -197,7 +197,7 @@ export default {
         } else if (result.isDenied) {
           const id = params.row.rentalCompanyID
           axios
-            .delete(`${config.api}/api/car-rental-company/delete/` + id)
+            .delete(`${config.api}/api/Rental_Car_Company/delete/` + id)
             .then(response => {
               this.loadData()
               Swal.fire('Done!', 'The record has been deleted.', 'success')
@@ -254,7 +254,7 @@ export default {
           //   name: result.value.name,
           // }
           axios
-            .post(`${config.api}/api/car-rental-company/create`, result.value)
+            .post(`${config.api}/api/Rental_Car_Company/create`, result.value)
             .then(response => {
               this.loadData()
               Swal.fire('Done!', 'The record has been created.', 'success')
@@ -267,7 +267,7 @@ export default {
     },
     loadData() {
       axios
-        .get(`${config.api}/api/car-rental-company/find`)
+        .get(`${config.api}/api/Rental_Car_Company/find`)
         .then(response => (this.DB_DATA = response.data))
         .catch(() => {
           Swal.fire('Error 2', 'Something went wrong', 'error')

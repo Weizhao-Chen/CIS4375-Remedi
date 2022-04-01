@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      myAPI: `${config.api}/api/hospital`,
+      myAPI: `${config.api}/api/Hospital`,
       dataFields: [
         {
           label: 'id',
@@ -199,7 +199,7 @@ export default {
 
           axios
             .put(
-              `${config.api}/api/hospital/update/${params.row.hospitalID}`,
+              `${config.api}/api/Hospital/update/${params.row.hospitalID}`,
               data,
             )
             .then(response => {
@@ -212,7 +212,7 @@ export default {
         } else if (result.isDenied) {
           const id = params.row.hospitalID
           axios
-            .delete(`${config.api}/api/hospital/delete/` + id)
+            .delete(`${config.api}/api/Hospital/delete/` + id)
             .then(response => {
               this.loadData()
               Swal.fire('Done!', 'The record has been deleted.', 'success')
@@ -275,7 +275,7 @@ export default {
           //   name: result.value.name,
           // }
           axios
-            .post(`${config.api}/api/hospital/create`, result.value)
+            .post(`${config.api}/api/Hospital/create`, result.value)
             .then(response => {
               this.loadData()
               Swal.fire('Done!', 'The record has been created.', 'success')
@@ -288,7 +288,7 @@ export default {
     },
     loadData() {
       axios
-        .get(`${config.api}/api/hospital/find`)
+        .get(`${config.api}/api/Hospital/find`)
         .then(response => (this.DB_DATA = response.data))
         .catch(() => {
           Swal.fire('Error 2', 'Something went wrong', 'error')

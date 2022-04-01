@@ -25,6 +25,8 @@ import contractorstatusList from '../views/management/contractorstatusList.vue'
 import airlineEdit from '../views/management/airlineEdit.vue'
 import airlineadmin from '../views/management/airlineadmin.vue'
 
+import hospitalList from '../views/hospitals/hospitalList.vue'
+import rentalCarCompany from '../views/rentalCarCompany/rentalCarCompanyList.vue'
 vue.use(VueRouter)
 
 const router = new VueRouter({

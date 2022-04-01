@@ -11,7 +11,7 @@ router.get('/find', (req, res, next) => {
   return db.Hospital.findAll({
     raw: true,
   })
-    .then((hospitals) => res.send(hospitals))
+    .then((Hospital) => res.send(Hospital))
     .catch((err) => {
       console.log('There was an error querying Hospital', JSON.stringify(err))
       return res.send(err)
@@ -27,8 +27,8 @@ router.get('/find/:id', (req, res, next) => {
       hospitalID: req.params.id,
     },
   })
-    .then((hospital) => {
-      res.send(hospital)
+    .then((Hospital) => {
+      res.send(Hospital)
     })
     .catch((err) => {
       console.log('There was an error querying Hosiptal', JSON.stringify(err))

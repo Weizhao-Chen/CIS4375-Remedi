@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     airlineAddressLineTwo: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     airlineCity: {
       type: DataTypes.STRING,
