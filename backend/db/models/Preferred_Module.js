@@ -37,6 +37,14 @@ module.exports = function(sequelize, DataTypes) {
           { name: "moduleID" },
         ]
       },
+      {
+        name: "PK__Preferre__D6A63CF6678AB998",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "moduleID" },
+        ]
+      },
     ]
   });
 };

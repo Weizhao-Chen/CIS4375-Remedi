@@ -21,21 +21,27 @@ module.exports = function(sequelize, DataTypes) {
     },
     hospitalCity: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "Houston"
     },
     hospitalState: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "Texas"
     },
     hospitalZipCode: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.CHAR,
       allowNull: false
     },
     hospitalContactName: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    hospitalContactInfo: {
+    hospitalContactPhone: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    hospitalContactEmail: {
       type: DataTypes.STRING,
       allowNull: false
     }
@@ -49,6 +55,13 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: 'UPDATED_AT',
     deletedAt: false,
     indexes: [
+      {
+        name: "PK__Hospital__C7F8EC0523C7D765",
+        unique: true,
+        fields: [
+          { name: "hospitalID" },
+        ]
+      },
       {
         name: "PK__Hospital__C7F8EC05708FAC10",
         unique: true,

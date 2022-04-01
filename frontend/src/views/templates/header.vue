@@ -18,6 +18,20 @@
       </li>
       <li class="nav-item">
         <router-link class="nav-link" to="/hospital">Hospital</router-link>
+        <router-link class="nav-link" to="/projectstatus"
+          >Project Status</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/contractorstatus"
+          >Contractor Status</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/module">Module</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/airline">Airline</router-link>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

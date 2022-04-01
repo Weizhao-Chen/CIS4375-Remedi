@@ -25,14 +25,24 @@ module.exports = function(sequelize, DataTypes) {
     },
     airlineCity: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "Houston"
     },
     airlineState: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Texas"
+    },
+    airlineCountry: {
       type: DataTypes.STRING,
       allowNull: false
     },
     airlineZipCode: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.CHAR,
+      allowNull: false
+    },
+    airlineWebsite: {
+      type: DataTypes.STRING,
       allowNull: false
     }
   }, {
@@ -41,10 +51,17 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
+      {
+        name: "PK__Airline__D04734A96C640C6B",
+        unique: true,
+        fields: [
+          { name: "airlineID" },
+        ]
+      },
       {
         name: "PK__Airline__D04734A9F7E79408",
         unique: true,

@@ -25,12 +25,19 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {
         name: "PK__Module__8EEC8E371EC1E27E",
+        unique: true,
+        fields: [
+          { name: "moduleID" },
+        ]
+      },
+      {
+        name: "PK__Module__8EEC8E37973239B7",
         unique: true,
         fields: [
           { name: "moduleID" },

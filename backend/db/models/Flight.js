@@ -27,6 +27,23 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TIME,
       allowNull: false
     },
+    seatNumber: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    specialApprovalGranted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
+    },
+    specialApprovalName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    specialApprovalDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
     airlineID: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -47,6 +64,13 @@ module.exports = function(sequelize, DataTypes) {
     indexes: [
       {
         name: "PK__Flight__0E0186225222424C",
+        unique: true,
+        fields: [
+          { name: "flightID" },
+        ]
+      },
+      {
+        name: "PK__Flight__0E0186229B8C3AAC",
         unique: true,
         fields: [
           { name: "flightID" },

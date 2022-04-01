@@ -1,19 +1,19 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('EMR', {
-    emrID: {
+  return sequelize.define('Project_Status', {
+    projectStatusID: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    emrName: {
+    projectStatusType: {
       type: DataTypes.STRING,
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'EMR',
+    tableName: 'Project_Status',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -22,17 +22,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__EMR__A319B07F33943F27",
+        name: "PK__Project___A0FCF07C72B0AD8A",
         unique: true,
         fields: [
-          { name: "emrID" },
-        ]
-      },
-      {
-        name: "PK__EMR__A319B07F852F27CF",
-        unique: true,
-        fields: [
-          { name: "emrID" },
+          { name: "projectStatusID" },
         ]
       },
     ]

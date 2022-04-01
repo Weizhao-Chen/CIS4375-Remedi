@@ -25,11 +25,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     accountTypeId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'accountType',
-        key: 'id'
-      }
+      allowNull: true
+    },
+    account_type_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
@@ -41,6 +41,13 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: 'UPDATED_AT',
     deletedAt: false,
     indexes: [
+      {
+        name: "PK__login__3213E83FCEEB3FEB",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
       {
         name: "PK__login__3213E83FE843EC58",
         unique: true,

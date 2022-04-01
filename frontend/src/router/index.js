@@ -15,11 +15,15 @@ import login from '../views/account/login.vue'
 import account from '../views/account/index.vue'
 
 //views
-import emradmin from '../views/management/emradmin.vue'
+// import emradmin from "../views/management/emradmin.vue"
 import emrList from '../views/management/emrList.vue'
 import emrEdit from '../views/management/emrEdit.vue'
-import hospitalList from '../views/hospitals/hospitalList.vue'
-import rentalCarCompany from '../views/rentalCarCompany/rentalCarCompanyList.vue'
+
+import projectstatusList from '../views/management/projectstatusList.vue'
+import contractorstatusList from '../views/management/contractorstatusList.vue'
+
+import airlineEdit from '../views/management/airlineEdit.vue'
+import airlineadmin from '../views/management/airlineadmin.vue'
 
 vue.use(VueRouter)
 
@@ -47,14 +51,38 @@ const router = new VueRouter({
     },
     {
       path: '/emr',
-      component: emradmin,
+      component: emrList,
       meta: {
         isOpen: true,
       },
     },
     {
-      path: '/emrList',
-      component: emrList,
+      path: '/projectstatus',
+      component: projectstatusList,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/contractorstatus',
+      component: contractorstatusList,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/airline',
+      component: airlineadmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/airline/edit',
+      name: '/airline/edit',
+      component: airlineEdit,
+      props: true,
       meta: {
         isOpen: true,
       },
