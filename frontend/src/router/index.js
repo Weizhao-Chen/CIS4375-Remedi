@@ -15,9 +15,11 @@ import login from '../views/account/login.vue'
 import account from '../views/account/index.vue'
 
 //views
-import emradmin from "../views/management/emradmin.vue"
-import emrList from "../views/management/emrList.vue"
-import emrEdit from "../views/management/emrEdit.vue"
+import emradmin from '../views/management/emradmin.vue'
+import emrList from '../views/management/emrList.vue'
+import emrEdit from '../views/management/emrEdit.vue'
+import hospitalList from '../views/hospitals/hospitalList.vue'
+import rentalCarCompany from '../views/rentalCarCompany/rentalCarCompanyList.vue'
 
 vue.use(VueRouter)
 
@@ -63,7 +65,7 @@ const router = new VueRouter({
       component: emrEdit,
       // props: true,
       meta: {
-        isOpen: true
+        isOpen: true,
       },
     },
     {
@@ -103,6 +105,21 @@ const router = new VueRouter({
       path: '/account',
       component: account,
     },
+    {
+      path: '/hospital',
+      component: hospitalList,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/rental-car-co',
+      component: rentalCarCompany,
+      meta: {
+        isOpen: true,
+      },
+    },
+
     {
       path: '*',
       component: notFound,

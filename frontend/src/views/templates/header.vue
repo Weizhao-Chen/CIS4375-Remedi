@@ -5,36 +5,27 @@
         <span class="navbar-brand">Frontend</span>
       </li>
       <li class="nav-item">
-        <router-link
-          class="nav-link"
-          to="/home">Home</router-link>
+        <router-link class="nav-link" to="/home">Home</router-link>
       </li>
       <li class="nav-item">
-        <router-link
-          class="nav-link"
-          to="/about">About</router-link>
+        <router-link class="nav-link" to="/about">About</router-link>
       </li>
       <li class="nav-item">
-        <router-link
-          class="nav-link"
-          to="/emr">EMR</router-link>
+        <router-link class="nav-link" to="/emr">EMR</router-link>
       </li>
       <li class="nav-item">
-        <router-link
-          class="nav-link"
-          to="/emrList">EMR 2</router-link>
+        <router-link class="nav-link" to="/emrList">EMR 2</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/hospital">Hospital</router-link>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <router-link
-          class="nav-link"
-          to="/account">My Account</router-link>
+        <router-link class="nav-link" to="/account">My Account</router-link>
       </li>
       <li class="nav-item">
-        <span
-          class="nav-link custom-link"
-          @click="confirmLogout">Logout</span>
+        <span class="nav-link custom-link" @click="confirmLogout">Logout</span>
       </li>
     </ul>
   </nav>
@@ -72,7 +63,7 @@ export default {
 }
 </script>
 
-<style lang='stylus'>
+<style lang="stylus">
 .custom-link {
   cursor: pointer;
 }
