@@ -206,8 +206,9 @@ export default {
         })
     },
     loadData(){
-      axios.get(`${config.api}/api/Airline/findOne/` + this.airlineid)
+      axios.get(`${config.api}/api/Airline/find/` + this.airlineID)
         .then((response) => {
+          this.DB_DATA = response.data;
           this.form.model.AirlineName = response.data.airlineName
           this.form.model.AirlinePhoneNumber = response.data.airlinePhoneNumber
           this.form.model.AirlineAddressLineOne = response.data.airlineAddressLineOne

@@ -38,7 +38,7 @@ router.get('/findlist', (req, res, next) => {
     const db = req.app.get('db')
 
     return db.Airline.findAll({
-        attributes:['airlineName','airlinePhoneNumber']
+        attributes:['airlineID','airlineName']
     })
         .then((Airline) => res.send(Airline))
         .catch((err) => {
@@ -47,7 +47,7 @@ router.get('/findlist', (req, res, next) => {
         });
 })
 
-router.get('/findOne/:airlineid', (req, res, next) => {
+router.get('/find/:airlineid', (req, res, next) => {
     const db = req.app.get('db')
 
     return db.Airline.find({
@@ -74,11 +74,11 @@ router.put('/update/:airlineid', (req, res, next) => {
         airlineState: req.body.AirlineState,
         airlineZipCode: req.body.AirlineZipCode,
         airlineCountry: req.body.AirlineCountry,
-        airlineWebsite: req.body.AirlineWebsite
+        airlineWebsite: req.body.AirlineWebsite,
         }, {
            where: {
-            airlineID: airlineid
-           }
+            airlineID: req.params.airlineid,
+           },
         })
         .then(() => {
             res.status(200).send('OK');
