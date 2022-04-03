@@ -51,8 +51,8 @@
 
 <script>
 //https://grokonez.com/frontend/vue-js/vue-js-nodejs-express-restapis-sequelize-orm-mysql-crud-example
-import axios from '../../utilities/axios';
-import config from '../../config';
+import axios from '../../../../utilities/axios'
+import config from '../../../../config'
 import Swal from 'sweetalert2';
 import {mapActions} from "vuex";
 import { ModelListSelect } from 'vue-search-select';

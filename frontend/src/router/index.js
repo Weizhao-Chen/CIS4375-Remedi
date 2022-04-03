@@ -16,8 +16,8 @@ import account from '../views/account/index.vue'
 
 //views
 // import emradmin from "../views/management/emradmin.vue"
-import emrList from '../views/management/emrList.vue'
-import emrEdit from '../views/management/emrEdit.vue'
+import emrList from '../views/management/forms/emr/emrList.vue'
+import emrEdit from '../views/management/forms/emr/emrEdit.vue'
 
 import projectstatusList from '../views/management/projectstatusList.vue'
 import contractorstatusList from '../views/management/contractorstatusList.vue'
@@ -25,14 +25,14 @@ import contractorstatusList from '../views/management/contractorstatusList.vue'
 import airlineEdit from '../views/management/airlineEdit.vue'
 import airlineadmin from '../views/management/airlineadmin.vue'
 
-import hospitalList from '../views/hospitals/hospitalList.vue'
-import rentalCarCompany from '../views/rentalCarCompany/rentalCarCompanyList.vue'
+import hospitalList from '../views/management/popups/hospitalList.vue'
+import rentalCarCompany from '../views/management/popups/rentalCarCompanyList.vue'
 
-import moduleEdit from '../views/management/moduleEdit.vue'
-import moduleadmin from '../views/management/moduleadmin.vue'
+import moduleEdit from '../views/management/forms/module/moduleEdit.vue'
+import moduleadmin from '../views/management/forms/module/moduleadmin.vue'
 
-import contractorEdit from '../views/management/contractorEdit.vue'
-import contractoradmin from '../views/management/contractoradmin.vue'
+import contractorEdit from '../views/management/forms/contractor/contractorEdit.vue'
+import contractoradmin from '../views/management/forms/contractor/contractoradmin.vue'
 vue.use(VueRouter)
 
 const router = new VueRouter({

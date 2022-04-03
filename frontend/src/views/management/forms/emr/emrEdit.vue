@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import axios from '../../utilities/axios';
-import config from '../../config';
+import axios from '../../../../utilities/axios'
+import config from '../../../../config'
 import Swal from 'sweetalert2';
 import { ModelListSelect } from 'vue-search-select';
 import { ModelSelect } from 'vue-search-select'

@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import axios from '../../utilities/axios'
-import config from '../../config'
+import axios from '../../../utilities/axios'
+import config from '../../../config'
 import 'vue-good-table/dist/vue-good-table.css'
 import { VueGoodTable } from 'vue-good-table'
 import Swal from 'sweetalert2'
