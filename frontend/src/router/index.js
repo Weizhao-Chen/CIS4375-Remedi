@@ -30,6 +30,9 @@ import rentalCarCompany from '../views/rentalCarCompany/rentalCarCompanyList.vue
 
 import moduleEdit from '../views/management/moduleEdit.vue'
 import moduleadmin from '../views/management/moduleadmin.vue'
+
+import contractorEdit from '../views/management/contractorEdit.vue'
+import contractoradmin from '../views/management/contractoradmin.vue'
 vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -57,6 +60,15 @@ const router = new VueRouter({
     {
       path: '/emr',
       component: emrList,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/emr/edit',
+      name: '/emr/edit',
+      component: emrEdit,
+      // props: true,
       meta: {
         isOpen: true,
       },
@@ -93,6 +105,23 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/contractor',
+      component: contractoradmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/contractor/edit',
+      name: '/contractor/edit',
+      component: contractorEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
       path: '/module',
       component: moduleadmin,
       props: true,
@@ -105,15 +134,6 @@ const router = new VueRouter({
       name: '/module/edit',
       component: moduleEdit,
       props: true,
-      meta: {
-        isOpen: true,
-      },
-    },
-    {
-      path: '/emr/edit',
-      name: '/emr/edit',
-      component: emrEdit,
-      // props: true,
       meta: {
         isOpen: true,
       },

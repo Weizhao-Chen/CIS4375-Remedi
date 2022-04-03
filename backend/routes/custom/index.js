@@ -11,6 +11,7 @@ const Airline = require('./Airline')
 const Module = require('./Module')
 const Hospital = require('./Hospital')
 const Rental_Car_Company = require('./Rental_Car_Company')
+const Contractor = require('./Contractor')
 
 router.use('/api/home', home)
 router.use('/api/account', account)
@@ -21,4 +22,5 @@ router.use('/api/Airline', Airline)
 router.use('/api/Module', Module)
 router.use('/api/Hospital', Hospital)
 router.use('/api/Rental_Car_Company', Rental_Car_Company)
+router.use('/api/Contractor', Contractor)
 module.exports = router

@@ -30,6 +30,9 @@
       <li class="nav-item">
         <router-link class="nav-link" to="/airline">Airline</router-link>
       </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/contractor">Contractor</router-link>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">

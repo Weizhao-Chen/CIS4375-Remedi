@@ -72,7 +72,7 @@ router.delete('/delete/:moduleid', (req, res, next) => {
     }).then(() => {
         res.status(200).send('The record has been deleted!');
     }).catch(err => {
-        console.log('There was an error deleting EMR', JSON.stringify(err))
+        console.log('There was an error deleting Module', JSON.stringify(err))
         return res.send(err)
     });
 })

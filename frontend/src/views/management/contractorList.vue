@@ -63,22 +63,22 @@ export default {
         field: 'contractorID',
         type: 'number'
       },{
-        label: 'onsite',
+        label: 'Onsite',
         field: 'virtualOnsite'
       },{
-        label: 'last-name',
+        label: 'Last Name',
         field: 'lastName'
       },{
-        label: 'first-name',
+        label: 'First Name',
         field: 'firstName'
       },{
-        label: 'preferred-name',
+        label: 'Preferred Name',
         field: 'preferredName'
       },{
-        label: 'address-one',
+        label: 'Street',
         field: 'addressLineOne'
       },{
-        label: 'address-two',
+        label: 'Street 2',
         field: 'addressLineTwo'
       },{
         label: 'city',
@@ -90,7 +90,7 @@ export default {
         label: 'zip',
         field: 'zipCode'
       },{
-        label: 'phone-number',
+        label: 'phone number',
         field: 'phoneNumber'
       },{
         label: 'email',
@@ -103,18 +103,18 @@ export default {
         field: 'supportWisdom'
       },{
         label: 'GoLives',
-        field: 'numberofGoLives'
+        field: 'numberOfGoLives'
       },{
-        label: 'Epic-Project',
+        label: 'Epic Project',
         field: 'numberofEpicProjects'
       },{
-        label: 'Support-Epic',
+        label: 'Support Epic',
         field: 'yearsOfSupportEpic'
       },{
-        label: 'Virtual-Epic',
+        label: 'Virtual Epic',
         field: 'supportVirtualEpic'
       },{
-        label: 'credit-card',
+        label: 'credit card',
         field: 'creditCardHotel'
       },{
         label: 'type',
