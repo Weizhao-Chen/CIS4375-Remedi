@@ -71,15 +71,11 @@ router.post('/create', (req, res, next) => {
 })
 router.put('/update', (req, res, next) => {
     const db = req.app.get('db')
-    const id1 = req.body.ContractorID
-    const id2 = req.body.ClinicID
+    const id11 = req.body.ContractorID
+    const id22 = req.body.ClinicID
     db.Assigned_Clinic_Area.update({
-        contractorID: id1,
-        clinicID: id2
-        }, {
-           where: {
-                contractorID: contractorID
-           }
+        contractorID: id11,
+        clinicID: id22
         })
         .then(() => {
             res.status(200).send('OK');
@@ -92,8 +88,11 @@ router.put('/update', (req, res, next) => {
 router.delete('/delete/:contractorid', (req, res, next) => {
     const db = req.app.get('db')
 
+    const id = req.params.contractorid;
+
     db.Assigned_Clinic_Area.destroy({
-        where: { contractorID: contractorid }
+        where: { contractorID: id,
+                ClinicID: req.params.clinicid }
     }).then(() => {
         res.status(200).send('The record has been deleted!');
     }).catch(err => {

@@ -49,8 +49,8 @@
       @delete="deleteItem"
     >
       <template v-slot:header>
-        <span v-if="form.model.contractorID">Edit Assigned Clinic Area</span>
-        <span v-if="!form.model.contractorID">Add Assigned Clinic Area</span>
+        <span v-if="form.model.ContractorID">Edit Assigned Clinic Area</span>
+        <span v-if="!form.model.ContractorID">Add Assigned Clinic Area</span>
       </template>
 
       <template v-slot:body>
@@ -110,7 +110,8 @@ export default {
       },
       dataFields: [{
         label: 'Contractor ID',
-        field: 'Contractor.contractorID'
+        field: 'Contractor.contractorID',
+        type: 'number'
       },{
       //   label: 'Contractor LName',
       //   field: 'Contractor.lastName'
@@ -119,7 +120,8 @@ export default {
       //   field: 'Contractor.firstName'
       // },{
         label: 'Clinic ID',
-        field: 'Clinic_Area.clinicID'
+        field: 'Clinic_Area.clinicID',
+        type: 'number'
       }
       // {
       //   label: 'Clinic Area Name',

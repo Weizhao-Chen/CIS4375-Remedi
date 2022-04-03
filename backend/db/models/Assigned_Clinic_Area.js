@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
+      // primaryKey: true,
       references: {
         model: Contractors
         // key: 'contractorID'
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     clinicID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      // primaryKey: true,
+      primaryKey: true,
       references: {
         model: Clinic_Areas
         // key: 'clinicID'
