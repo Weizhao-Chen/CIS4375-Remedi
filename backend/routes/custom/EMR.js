@@ -19,36 +19,36 @@ router.get('/find', (req, res, next) => {
 })
 
 //placeholder
-router.get('/findlist', (req, res, next) => {
-    const db = req.app.get('db')
+// router.get('/findlist', (req, res, next) => {
+//     const db = req.app.get('db')
 
-    return db.EMR.findAll({
-        attributes:['emrID','emrName']
-    })
-        .then((EMR) => res.send(EMR))
-        .catch((err) => {
-            console.log('There was an error querying EMR', JSON.stringify(err))
-            return res.send(err)
-        });
-})
+//     return db.EMR.findAll({
+//         attributes:['emrID','emrName']
+//     })
+//         .then((EMR) => res.send(EMR))
+//         .catch((err) => {
+//             console.log('There was an error querying EMR', JSON.stringify(err))
+//             return res.send(err)
+//         });
+// })
 
-//placeholder
-router.get('/find/:emrid', (req, res, next) => {
-    const db = req.app.get('db')
+// //placeholder
+// router.get('/find/:emrid', (req, res, next) => {
+//     const db = req.app.get('db')
 
-    return db.EMR.find({
-        where: {
-            emrID:req.params.emrid
-        }
-    })
-        .then((EMR) => {
-            res.send(EMR)
-        })
-        .catch((err) => {
-            console.log('There was an error querying EMR', JSON.stringify(err))
-            return res.send(err)
-        });
-})
+//     return db.EMR.find({
+//         where: {
+//             emrID:req.params.emrid
+//         }
+//     })
+//         .then((EMR) => {
+//             res.send(EMR)
+//         })
+//         .catch((err) => {
+//             console.log('There was an error querying EMR', JSON.stringify(err))
+//             return res.send(err)
+//         });
+// })
 //crud - create
 router.post('/create', (req, res, next) => {
     //since the id is auto increment, there is no need to call it again.

@@ -14,9 +14,6 @@
         <router-link class="nav-link" to="/emr">EMR</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="/emrList">EMR 2</router-link>
-      </li>
-      <li class="nav-item">
         <router-link class="nav-link" to="/hospital">Hospital</router-link>
       </li>
       <li class="nav-item">

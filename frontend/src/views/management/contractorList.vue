@@ -2,10 +2,10 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Module List</span>
+        <span class="tableHeading-text">Contractor List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewModule">Add New Module List</button>
+        <button class="swal2-editform swal2-styled" v-on:click="addNewContractor">Add New Contractor List</button>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'moduleID', type: 'asc'}
+          initialSortBy: {field: 'contractorID', type: 'asc'}
         }"
         :pagination-options="{
           enabled: true,
@@ -56,18 +56,69 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      EMR_DATA: [],
-      myAPI: `${config.api}/api/Module`,
+      Contractor_Status_DATA: [],
+      myAPI: `${config.api}/api/Contractor`,
       dataFields: [{
         label: 'id',
-        field: 'moduleID',
+        field: 'contractorID',
         type: 'number'
       },{
-        label: 'emr',
-        field: 'EMR.emrName'
+        label: 'onsite',
+        field: 'virtualOnsite'
       },{
-        label: 'name',
-        field: 'moduleName'
+        label: 'last-name',
+        field: 'lastName'
+      },{
+        label: 'first-name',
+        field: 'firstName'
+      },{
+        label: 'preferred-name',
+        field: 'preferredName'
+      },{
+        label: 'address-one',
+        field: 'addressLineOne'
+      },{
+        label: 'address-two',
+        field: 'addressLineTwo'
+      },{
+        label: 'city',
+        field: 'city'
+      },{
+        label: 'state',
+        field: 'state'
+      },{
+        label: 'zip',
+        field: 'zipCode'
+      },{
+        label: 'phone-number',
+        field: 'phoneNumber'
+      },{
+        label: 'email',
+        field: 'email'
+      },{
+        label: 'history',
+        field: 'remediHistory'
+      },{
+        label: 'wisdom',
+        field: 'supportWisdom'
+      },{
+        label: 'GoLives',
+        field: 'numberofGoLives'
+      },{
+        label: 'Epic-Project',
+        field: 'numberofEpicProjects'
+      },{
+        label: 'Support-Epic',
+        field: 'yearsOfSupportEpic'
+      },{
+        label: 'Virtual-Epic',
+        field: 'supportVirtualEpic'
+      },{
+        label: 'credit-card',
+        field: 'creditCardHotel'
+      },{
+        label: 'type',
+        field: 'Contractor_Status.contractorStatusType'
       }]
     };
   },
@@ -78,17 +129,17 @@ export default {
   methods: {
     onRowDoubleClick(params){
       this.$router.push({
-        name: '/module/edit',
+        name: '/contractor/edit',
         params: {
-          moduleID: params.row.moduleID
+          contractorID: params.row.contractorID
         }
       })
     },
-    addNewModule(){
-      this.$router.push('/module/edit')
+    addNewContractor(){
+      this.$router.push('/contractor/edit')
     },
     loadData(){
-      axios.get(`${config.api}/api/Module/find`)
+      axios.get(`${config.api}/api/Contractor/find`)
         .then((response) => {
           this.DB_DATA = response.data;
         })

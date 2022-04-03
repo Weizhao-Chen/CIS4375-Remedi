@@ -27,6 +27,9 @@ import airlineadmin from '../views/management/airlineadmin.vue'
 
 import hospitalList from '../views/hospitals/hospitalList.vue'
 import rentalCarCompany from '../views/rentalCarCompany/rentalCarCompanyList.vue'
+
+import moduleEdit from '../views/management/moduleEdit.vue'
+import moduleadmin from '../views/management/moduleadmin.vue'
 vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -84,6 +87,23 @@ const router = new VueRouter({
       path: '/airline/edit',
       name: '/airline/edit',
       component: airlineEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/module',
+      component: moduleadmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/module/edit',
+      name: '/module/edit',
+      component: moduleEdit,
       props: true,
       meta: {
         isOpen: true,

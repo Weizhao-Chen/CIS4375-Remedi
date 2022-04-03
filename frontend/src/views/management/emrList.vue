@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      // myAPI: `${config.api}/api/EMR`,
+      myAPI: `${config.api}/api/EMR`,
       dataFields: [
         {
           label: 'id',
@@ -171,12 +171,13 @@ export default {
       axios
         .get(`${config.api}/api/EMR/find`)
         .then(response => {
-          this.DB_DATA = response.data
+          this.DB_DATA = response.data;
         })
         .catch(() => {
           Swal.fire('Error 2', 'Something went wrong', 'error')
         })
     },
+    deleteItem(){},
   },
   beforeMount() {
     this.loadData()
