@@ -41,6 +41,9 @@
       <li class="nav-item">
         <router-link class="nav-link" to="/clinicarea">Clinic Area</router-link>
       </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/assignedclinicarea">Assigned Clinic Area</router-link>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">

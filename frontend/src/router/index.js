@@ -36,6 +36,8 @@ import contractoradmin from '../views/management/forms/contractor/contractoradmi
 
 import clinicareaEdit from '../views/management/forms/clinic area/clinicareaEdit.vue'
 import clinicareaadmin from '../views/management/forms/clinic area/clinicareaadmin.vue'
+
+import assignedclinicareaList from '../views/management/popups/assignedclinicareaList.vue'
 vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -198,6 +200,13 @@ const router = new VueRouter({
     {
       path: '/hospital',
       component: hospitalList,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/assignedclinicarea',
+      component: assignedclinicareaList,
       meta: {
         isOpen: true,
       },

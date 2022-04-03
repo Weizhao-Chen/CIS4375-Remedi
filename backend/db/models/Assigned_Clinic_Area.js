@@ -1,22 +1,28 @@
 const Sequelize = require('sequelize');
+const _Contractor = require("./Contractor");
+const _Clinic_Area = require("./Clinic_Area");
 module.exports = function(sequelize, DataTypes) {
+
+  const Contractors = _Contractor(sequelize, DataTypes);
+  const Clinic_Areas = _Clinic_Area(sequelize, DataTypes);
+
   return sequelize.define('Assigned_Clinic_Area', {
     contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'Contractor',
-        key: 'contractorID'
+        model: Contractors
+        // key: 'contractorID'
       }
     },
     clinicID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
+      // primaryKey: true,
       references: {
-        model: 'Clinic_Area',
-        key: 'clinicID'
+        model: Clinic_Areas
+        // key: 'clinicID'
       }
     }
   }, {
@@ -25,8 +31,8 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {
