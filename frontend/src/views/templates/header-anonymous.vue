@@ -42,6 +42,9 @@
         <router-link class="nav-link" to="/project">Project</router-link>
       </li>
       <li class="nav-item">
+        <router-link class="nav-link" to="/contractorproject">Contractor Project</router-link>
+      </li>
+      <li class="nav-item">
         <router-link class="nav-link" to="/clinicarea">Clinic Area</router-link>
       </li>
       <li class="nav-item">

@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="jumbotron dashboard">
-      <div v-if="!isNewAssignedClinicArea" class="dashlabel">
-        Assigned Clinic Area Number: {{ this.assignedClinicAreaID }}
+      <div v-if="!isNewContractorProject" class="dashlabel">
+        Assigned Contractor Project Number: {{ this.contractorProjectID }}
       </div>
       <div v-else class="dashlabel">
-        Adding New Clinic Area
+        Adding New Contractor Project
       </div>
     </div>
 
@@ -14,9 +14,9 @@
         <button class="swal2-editform swal2-styled goBackButton" v-on:click="goBack">Go Back</button>
       </div>
       <div class="editFormFooter-right">
-        <button v-if="!isNewAssignedClinicArea" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateAssignedClinicArea">Update Assigned Clinic Area</button>
-        <button v-if="!isNewAssignedClinicArea" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteAssignedClinicArea">Delete Assigned Clinic Area</button>
-        <button v-if="isNewAssignedClinicArea" class="swal2-editform swal2-styled addNewButton" :disabled="validationFormCheck === false" v-on:click="addAssignedClinicArea">Submit Assigned Clinic Area</button>
+        <button v-if="!isNewContractorProject" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateContractorProject">Update Contractor Project</button>
+        <button v-if="!isNewContractorProject" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteContractorProject">Delete Contractor Project</button>
+        <button v-if="isNewContractorProject" class="swal2-editform swal2-styled addNewButton" :disabled="validationFormCheck === false" v-on:click="addContractorProject">Submit Contractor Project</button>
       </div>
     </div>
 
@@ -35,13 +35,13 @@
             </model-list-select>
         </div>
         <div class="editForm-right">
-            <label class="form-custom-label" for="form-Clinic_Area">Clinic Area</label>
-            <model-list-select :list="Clinic_Area_DATA"
-                           v-model="form.model.ClinicID"
-                           option-value="clinicID"
-                           id="form-Clinic_Area"
-                           option-text="clinicID"
-                           :isError='validationClinicArea === true'
+            <label class="form-custom-label" for="form-Project">Project</label>
+            <model-list-select :list="Project_DATA"
+                           v-model="form.model.ProjectID"
+                           option-value="projectID"
+                           id="form-Project"
+                           option-text="projectID"
+                           :isError='validationProject === true'
                            placeholder="select one">
             </model-list-select>
         </div>
@@ -59,17 +59,17 @@ import { ModelListSelect } from 'vue-search-select';
 import { ModelSelect } from 'vue-search-select'
 
 export default {
-  props: ["assignedClinicAreaID"],
+  props: ["contractorProjectID"],
   data() {
     return {
-      isNewAssignedClinicArea: true,
+      isNewContractorProject: true,
       DB_DATA: [],
       Contractor_DATA: [],
-      Clinic_Area_DATA: [],
+      Project_DATA: [],
       form: {
         model: {
           ContractorID: '',
-          ClinicID: '',
+          ProjectID: '',
         },
       },
     };
@@ -86,8 +86,8 @@ export default {
         return false
       }
     },
-    validationClinicArea: function () {
-      if (this.form.model.ClinicID === ''){
+    validationProject: function () {
+      if (this.form.model.ProjectID === ''){
         return true
       } else {
         return false
@@ -95,7 +95,7 @@ export default {
     },
     validationFormCheck: function () {
       if (this.validationContractor === false &&
-        this.validationClinicArea === false){
+        this.validationProject === false){
         return true
       } else {
         return false
@@ -104,10 +104,10 @@ export default {
   },
   methods: {
     goBack(){
-      this.$router.push('/assignedclinicarea')
+      this.$router.push('/contractorproject')
     },
-    addAssignedClinicArea(){
-      axios.post(`${config.api}/api/Assigned_Clinic_Area/create`, this.form.model)
+    addContractorProject(){
+      axios.post(`${config.api}/api/Contractor_Project/create`, this.form.model)
         .then((response) => {
           Swal.fire(
             'Done!',
@@ -117,49 +117,49 @@ export default {
           this.goBack()
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong (creating Assigned Clinic Area)', 'error')
+          Swal.fire('Error', 'Something went wrong (creating Contractor Project)', 'error')
         })
     },
-    updateAssignedClinicArea(){
-      const AssignedClinicAreaID = this.assignedClinicAreaID
-        axios.put(`${config.api}/api/Assigned_Clinic_Area/update/` + AssignedClinicAreaID, this.form.model)
+    updateContractorProject(){
+      const ContractorProjectID = this.contractorProjectID
+        axios.put(`${config.api}/api/Contractor_Project/update/` + ContractorProjectID, this.form.model)
           .then((response) => {
             this.loadData()
             Swal.fire(
               'Done!',
-              'The Assigned Clinic Area has been updated.',
+              'The Contractor Project has been updated.',
               'success'
             )
             this.goBack()
           })
           .catch(() => {
-            Swal.fire('Error', 'Something went wrong (updating Assigned Clinic Area) or there is repeating data', 'error')
+            Swal.fire('Error', 'Something went wrong (updating Contractor Project) or there is repeating data', 'error')
           })
     },
-    deleteAssignedClinicArea(){
-      const AssignedClinicAreaID = this.assignedClinicAreaID
-        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/` + AssignedClinicAreaID)
+    deleteContractorProject(){
+      const ContractorProjectID = this.contractorProjectID
+        axios.delete(`${config.api}/api/Contractor_Project/delete/` + `ContractorProjectID`)
           .then((response) => {
             Swal.fire(
               'Done!',
-              'The Assigned Clinic Area has been deleted.',
+              'The Contractor Project has been deleted.',
               'success'
             )
             this.goBack()
           })
           .catch(() => {
-            Swal.fire('Error', 'Something went wrong (deleting Assigned Clinic Area)', 'error')
+            Swal.fire('Error', 'Something went wrong (deleting Contractor Project)', 'error')
           })
     },
     loadData(){
-      axios.get(`${config.api}/api/Assigned_Clinic_Area/find/` + this.assignedClinicAreaID)
+      axios.get(`${config.api}/api/Contractor_Project/find/` + this.contractorProjectID)
         .then((response) => {
           this.DB_DATA = response.data;
             this.form.model.ContractorID = response.data.contractorID,
-            this.form.model.ClinicID = response.data.clinicID
+            this.form.model.ProjectID = response.data.projectID
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong (finding Assigned Clinic Area)', 'error')
+          Swal.fire('Error', 'Something went wrong (finding Contractor Project)', 'error')
         })
     },
     loadFields(){
@@ -170,19 +170,19 @@ export default {
         .catch(() => {
           Swal.fire('Error', 'Something went wrong (loading Contractor)', 'error')
         })
-      axios.get(`${config.api}/api/Clinic_Area/find`)
+      axios.get(`${config.api}/api/Project/find`)
         .then((response) => {
-          this.Clinic_Area_DATA = response.data;
+          this.Project_DATA = response.data;
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong (loading Clinic Area)', 'error')
+          Swal.fire('Error', 'Something went wrong (loading Project)', 'error')
         })
     }
   },
   beforeMount() {
     this.loadFields()
-    if (this.assignedClinicAreaID !== undefined){
-      this.isNewAssignedClinicArea = false
+    if (this.contractorProjectID !== undefined){
+      this.isNewContractorProject = false
       this.loadData()
     }
   }

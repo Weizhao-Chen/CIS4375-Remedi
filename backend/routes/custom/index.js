@@ -15,6 +15,7 @@ const Contractor = require('./Contractor')
 const Clinic_Area = require('./Clinic_Area')
 const Assigned_Clinic_Area = require('./Assigned_Clinic_Area')
 const Project = require('./Project')
+const Contractor_Project = require('./Contractor_Project')
 
 router.use('/api/home', home)
 router.use('/api/account', account)
@@ -29,4 +30,5 @@ router.use('/api/Contractor', Contractor)
 router.use('/api/Clinic_Area', Clinic_Area)
 router.use('/api/Assigned_Clinic_Area', Assigned_Clinic_Area)
 router.use('/api/Project', Project)
+router.use('/api/Contractor_Project', Contractor_Project)
 module.exports = router
