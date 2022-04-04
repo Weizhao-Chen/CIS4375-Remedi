@@ -16,5 +16,11 @@ module.exports = {
 
     models.Assigned_Clinic_Area.belongsTo(models.Contractor, {foreignKey: "contractorID"});
     models.Assigned_Clinic_Area.belongsTo(models.Clinic_Area, {foreignKey: "clinicID"});
+
+    models.Project.belongsTo(models.Hospital, {foreignKey: "hospitalID"});
+    models.Hospital.hasMany(models.Project, {foreignKey: "hospitalID"});
+    models.Project.belongsTo(models.Project_Status, {foreignKey: "projectStatusID"});
+
+    models.Project_Status.hasMany(models.Project, {foreignKey: "projectStatusID"});
   }
 }

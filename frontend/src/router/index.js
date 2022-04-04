@@ -39,6 +39,10 @@ import clinicareaadmin from '../views/management/forms/clinic area/clinicareaadm
 
 import assignedclinicareaEdit from '../views/management/forms/assigned clinic area/assignedclinicareaEdit.vue'
 import assignedclinicareaadmin from '../views/management/forms/assigned clinic area/assignedclinicareaadmin.vue'
+
+import projectEdit from '../views/management/forms/project/projectEdit.vue'
+import projectadmin from '../views/management/forms/project/projectadmin.vue'
+
 vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -122,6 +126,23 @@ const router = new VueRouter({
       path: '/contractor/edit',
       name: '/contractor/edit',
       component: contractorEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/project',
+      component: projectadmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/project/edit',
+      name: '/project/edit',
+      component: projectEdit,
       props: true,
       meta: {
         isOpen: true,

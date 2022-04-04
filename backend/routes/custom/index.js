@@ -14,6 +14,7 @@ const Rental_Car_Company = require('./Rental_Car_Company')
 const Contractor = require('./Contractor')
 const Clinic_Area = require('./Clinic_Area')
 const Assigned_Clinic_Area = require('./Assigned_Clinic_Area')
+const Project = require('./Project')
 
 router.use('/api/home', home)
 router.use('/api/account', account)
@@ -27,4 +28,5 @@ router.use('/api/Rental_Car_Company', Rental_Car_Company)
 router.use('/api/Contractor', Contractor)
 router.use('/api/Clinic_Area', Clinic_Area)
 router.use('/api/Assigned_Clinic_Area', Assigned_Clinic_Area)
+router.use('/api/Project', Project)
 module.exports = router

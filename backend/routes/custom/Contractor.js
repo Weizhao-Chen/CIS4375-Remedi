@@ -101,7 +101,7 @@ router.put('/update/:contractorid', (req, res, next) => {
 router.delete('/delete/:contractorid', (req, res, next) => {
     const db = req.app.get('db')
 
-    db.contractorID.destroy({
+    db.Contractor.destroy({
         where: { contractorID: req.params.contractorid }
     }).then(() => {
         res.status(200).send('The record has been deleted!');
