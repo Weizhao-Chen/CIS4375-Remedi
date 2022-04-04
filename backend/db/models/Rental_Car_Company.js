@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     rentalAddressLineTwo: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     rentalCity: {
       type: DataTypes.STRING,

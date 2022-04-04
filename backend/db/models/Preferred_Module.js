@@ -1,23 +1,19 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Preferred_Module', {
-    contractorID: {
+    preferredModuleID: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Contractor',
-        key: 'contractorID'
-      }
+      primaryKey: true
+    },
+    contractorID: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     moduleID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Module',
-        key: 'moduleID'
-      }
+      allowNull: false
     }
   }, {
     sequelize,
@@ -25,24 +21,15 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Preferre__D6A63CF62C3CDEF7",
+        name: "PK__Preferre__61DADE1D7B81BB5D",
         unique: true,
         fields: [
-          { name: "contractorID" },
-          { name: "moduleID" },
-        ]
-      },
-      {
-        name: "PK__Preferre__D6A63CF6678AB998",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "moduleID" },
+          { name: "preferredModuleID" },
         ]
       },
     ]

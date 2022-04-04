@@ -5,14 +5,8 @@ router.get('/find', (req, res, next) => {
     const db = req.app.get('db')
     return db.Assigned_Clinic_Area.findAll({
         include: [
-            {
-                model: db.Contractor,
-                attributes: ['contractorID']
-            },
-            {
-                model: db.Clinic_Area,
-                attributes: ['clinicID']
-            }
+            db.Contractor,
+            db.Clinic_Area
         ]
     })
         .then((Assigned_Clinic_Area) => res.send(Assigned_Clinic_Area))
@@ -21,45 +15,27 @@ router.get('/find', (req, res, next) => {
             return res.send(err)
         });
 })
-// router.get('/find/:contractorid', (req, res, next) => {
-//     const db = req.app.get('db')
-
-//     return db.Assigned_Clinic_Area.find({
-//         where: {
-//             contractorID:req.params.contractorid,
-//             include: [
-//                 db.Contractor,
-//             db.Clinic_Area
-
-//                 // {
-//                 //     model: db.Contractor,
-//                 //     attributes: ['contractorID','lastName']
-//                 // },
-//                 // {
-//                 //     model: db.Clinic_Area,
-//                 //     attributes: ['clinicID','clinicAreaName']
-//                 // }
-//             ]
-//         }
-//     })
-//         .then((Assigned_Clinic_Area) => {
-//             res.send(Assigned_Clinic_Area)
-//         })
-//         .catch((err) => {
-//             console.log('There was an error querying Assigned Clinic Area 2', JSON.stringify(err))
-//             return res.send(err)
-//         });
-// })
-router.post('/create', (req, res, next) => {
+router.get('/find/:assignedclinicareaid', (req, res, next) => {
     const db = req.app.get('db')
 
-    const id1 = req.body.ContractorID
-    const id2 = req.body.ClinicID
+    return db.Assigned_Clinic_Area.find({
+        where: {
+            assignedClinicAreaID:req.params.assignedclinicareaid,
+        }
+    })
+        .then((Assigned_Clinic_Area) => {
+            res.send(Assigned_Clinic_Area)
+        })
+        .catch((err) => {
+            console.log('There was an error querying Assigned Clinic Area 2', JSON.stringify(err))
+            return res.send(err)
+        });
+})
+router.post('/create', (req, res, next) => {
+    const db = req.app.get('db')
     db.Assigned_Clinic_Area.create({
-        // lastName: req.body.LastName,
-        // clinicAreaName: req.body.ClinicAreaName,
-        contractorID: id1,
-        clinicID: id2
+        contractorID: req.body.ContractorID,
+        clinicID: req.body.ClinicID
     })
         .then(() => {
             res.status(200).send('OK');
@@ -69,13 +45,15 @@ router.post('/create', (req, res, next) => {
         return res.send(err)
     })
 })
-router.put('/update', (req, res, next) => {
+router.put('/update/:assignedclinicareaid', (req, res, next) => {
     const db = req.app.get('db')
-    const id11 = req.body.ContractorID
-    const id22 = req.body.ClinicID
     db.Assigned_Clinic_Area.update({
-        contractorID: id11,
-        clinicID: id22
+        contractorID: req.body.ContractorID,
+        clinicID: req.body.ClinicID
+        }, {
+            where: {
+                assignedClinicAreaID: assignedclinicareaid
+            }
         })
         .then(() => {
             res.status(200).send('OK');
@@ -85,14 +63,11 @@ router.put('/update', (req, res, next) => {
            return res.send(err)
    })
 })
-router.delete('/delete/:contractorid', (req, res, next) => {
+router.delete('/delete/:AssignedClinicAreaID', (req, res, next) => {
     const db = req.app.get('db')
-
-    const id = req.params.contractorid;
-
+    
     db.Assigned_Clinic_Area.destroy({
-        where: { contractorID: id,
-                ClinicID: req.params.clinicid }
+        where: { assignedClinicAreaID: req.params.AssignedClinicAreaID}
     }).then(() => {
         res.status(200).send('The record has been deleted!');
     }).catch(err => {

@@ -1,23 +1,19 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Rental_car', {
-    rentalCompanyID: {
+  return sequelize.define('Rental_Car', {
+    rentalCarID: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Rental_Car_Company',
-        key: 'rentalCompanyID'
-      }
+      primaryKey: true
+    },
+    rentalCompanyID: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     contractorID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Contractor',
-        key: 'contractorID'
-      }
+      allowNull: false
     },
     driverPassenger: {
       type: DataTypes.STRING,
@@ -37,28 +33,19 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'Rental_car',
+    tableName: 'Rental_Car',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Rental_c__5616AAEC84597E6D",
+        name: "PK__Rental_C__AA2246611750ADD6",
         unique: true,
         fields: [
-          { name: "contractorID" },
-          { name: "rentalCompanyID" },
-        ]
-      },
-      {
-        name: "PK__Rental_c__5616AAECD54E4B01",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "rentalCompanyID" },
+          { name: "rentalCarID" },
         ]
       },
     ]

@@ -1,23 +1,19 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Contractor_Flight', {
-    contractorID: {
+    contractorFlightID: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Contractor',
-        key: 'contractorID'
-      }
+      primaryKey: true
+    },
+    contractorID: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     flightID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Flight',
-        key: 'flightID'
-      }
+      allowNull: false
     },
     contractorFlyerNumber: {
       type: DataTypes.STRING,
@@ -29,24 +25,15 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Contract__8EA8EC77321EBF7C",
+        name: "PK__Contract__0E84A6C65C0BA337",
         unique: true,
         fields: [
-          { name: "contractorID" },
-          { name: "flightID" },
-        ]
-      },
-      {
-        name: "PK__Contract__8EA8EC777C2B7223",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "flightID" },
+          { name: "contractorFlightID" },
         ]
       },
     ]

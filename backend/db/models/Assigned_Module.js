@@ -1,32 +1,23 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Assigned_Module', {
-    contractorID: {
+    assignedModuleID: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Contractor',
-        key: 'contractorID'
-      }
+      primaryKey: true
+    },
+    contractorID: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     moduleID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Module',
-        key: 'moduleID'
-      }
+      allowNull: false
     },
     projectID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'Project',
-        key: 'projectID'
-      }
+      allowNull: false
     }
   }, {
     sequelize,
@@ -34,25 +25,15 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'dbo',
     timestamps: true,
     underscored: true,
-    createdAt: 'CREATED_AT',
-    updatedAt: 'UPDATED_AT',
+    createdAt: false,
+    updatedAt: false,
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Assigned__52B7CDBB6CBD1D80",
+        name: "PK__Assigned__AA25194AD6750276",
         unique: true,
         fields: [
-          { name: "contractorID" },
-          { name: "moduleID" },
-          { name: "projectID" },
-        ]
-      },
-      {
-        name: "PK__Assigned__D6A63CF6F799D883",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "moduleID" },
+          { name: "assignedModuleID" },
         ]
       },
     ]

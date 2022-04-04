@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     hospitalAddressLineTwo: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     hospitalCity: {
       type: DataTypes.STRING,
