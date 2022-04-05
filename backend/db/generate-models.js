@@ -76,8 +76,8 @@ const auto = new SequelizeAuto(
     additional: {
       timestamps: enableTimestamps,
       underscored: true,
-      createdAt: 'CREATED_AT',
-      updatedAt: 'UPDATED_AT',
+      createdAt: false,
+      updatedAt: false,
       deletedAt: false
     },
     logging: false,

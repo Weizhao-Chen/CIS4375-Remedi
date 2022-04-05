@@ -1,19 +1,15 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Assigned_Clinic_Area', {
-    assignedClinicAreaID: {
-      autoIncrement: true,
+    contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    contractorID: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     clinicID: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     sequelize,
@@ -26,10 +22,27 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Assigned__D447B5704CC58FD5",
+        name: "PK__Assigned__2124AC3C002B4F13",
         unique: true,
         fields: [
-          { name: "assignedClinicAreaID" },
+          { name: "contractorID" },
+          { name: "clinicID" },
+        ]
+      },
+      {
+        name: "PK__Assigned__2124AC3C557AEF24",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "clinicID" },
+        ]
+      },
+      {
+        name: "PK__Assigned__2124AC3C823896E5",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "clinicID" },
         ]
       },
     ]

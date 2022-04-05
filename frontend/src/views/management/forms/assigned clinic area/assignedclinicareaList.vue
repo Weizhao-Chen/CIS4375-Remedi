@@ -60,10 +60,6 @@ export default {
       Clinic_Area_DATA: [],
       myAPI: `${config.api}/api/Assigned_Clinic_Area`,
       dataFields: [{
-        label: 'id',
-        field: 'assignedClinicAreaID',
-        type: 'number'
-      },{
         label: 'contractor id',
         field: 'Contractor.contractorID'
       },{
@@ -81,7 +77,7 @@ export default {
       this.$router.push({
         name: '/assignedclinicarea/edit',
         params: {
-          assignedClinicAreaID: params.row.assignedClinicAreaID
+          contractorID: params.row.contractorID
         }
       })
     },

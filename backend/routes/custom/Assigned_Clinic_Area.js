@@ -63,11 +63,13 @@ router.put('/update/:assignedclinicareaid', (req, res, next) => {
            return res.send(err)
    })
 })
-router.delete('/delete/:AssignedClinicAreaID', (req, res, next) => {
+router.delete('/delete/:ContractorID/ClinicID', (req, res, next) => {
     const db = req.app.get('db')
-    
+    const ContractorIDs = req.params.ContractorID
+    const ClinicIDs = req.params.ClinicID
     db.Assigned_Clinic_Area.destroy({
-        where: { assignedClinicAreaID: req.params.AssignedClinicAreaID}
+        where: { ContractorID: ContractorIDs,
+            ClinicID: ClinicIDs}
     }).then(() => {
         res.status(200).send('The record has been deleted!');
     }).catch(err => {

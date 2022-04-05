@@ -121,8 +121,9 @@ export default {
         })
     },
     updateAssignedClinicArea(){
-      const AssignedClinicAreaID = this.assignedClinicAreaID
-        axios.put(`${config.api}/api/Assigned_Clinic_Area/update/` + AssignedClinicAreaID, this.form.model)
+      const ContractorID = this.contractorID
+      const ClinicID = this.clinicID
+        axios.put(`${config.api}/api/Assigned_Clinic_Area/update/` + ContractorID, this.form.model)
           .then((response) => {
             this.loadData()
             Swal.fire(
@@ -137,8 +138,9 @@ export default {
           })
     },
     deleteAssignedClinicArea(){
-      const AssignedClinicAreaID = this.assignedClinicAreaID
-        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/` + AssignedClinicAreaID)
+      const ContractorID = this.contractorID
+      const ClinicID = this.clinicID
+        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/` + ContractorID + ClinicID)
           .then((response) => {
             Swal.fire(
               'Done!',

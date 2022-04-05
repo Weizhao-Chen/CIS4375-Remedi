@@ -1,23 +1,20 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Assigned_Module', {
-    assignedModuleID: {
-      autoIncrement: true,
+    contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    contractorID: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     moduleID: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     projectID: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     sequelize,
@@ -30,10 +27,29 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Assigned__AA25194AD6750276",
+        name: "PK__Assigned__52B7CDBB6CBD1D80",
         unique: true,
         fields: [
-          { name: "assignedModuleID" },
+          { name: "contractorID" },
+          { name: "moduleID" },
+          { name: "projectID" },
+        ]
+      },
+      {
+        name: "PK__Assigned__52B7CDBBA1C1198C",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "moduleID" },
+          { name: "projectID" },
+        ]
+      },
+      {
+        name: "PK__Assigned__D6A63CF6F799D883",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "moduleID" },
         ]
       },
     ]

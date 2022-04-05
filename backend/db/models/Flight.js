@@ -51,6 +51,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'Airline',
         key: 'airlineID'
       }
+    },
+    flightCost: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,

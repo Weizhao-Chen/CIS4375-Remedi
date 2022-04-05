@@ -61,10 +61,6 @@ export default {
       Project_DATA: [],
       myAPI: `${config.api}/api/Assigned_Module`,
       dataFields: [{
-        label: 'id',
-        field: 'assignedModuleID',
-        type: 'number'
-      },{
         label: 'contractor id',
         field: 'Contractor.contractorID'
       },{

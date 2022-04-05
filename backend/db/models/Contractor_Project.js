@@ -1,19 +1,15 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Contractor_Project', {
-    contractorProjectID: {
-      autoIncrement: true,
+    contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    contractorID: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     projectID: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     sequelize,
@@ -26,10 +22,27 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Contract__A5B44B881BF9912B",
+        name: "PK__Contract__FF57E0CD5D3B895B",
         unique: true,
         fields: [
-          { name: "contractorProjectID" },
+          { name: "contractorID" },
+          { name: "projectID" },
+        ]
+      },
+      {
+        name: "PK__Contract__FF57E0CD6F0567AD",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "projectID" },
+        ]
+      },
+      {
+        name: "PK__Contract__FF57E0CDF6ED3BF8",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "projectID" },
         ]
       },
     ]
