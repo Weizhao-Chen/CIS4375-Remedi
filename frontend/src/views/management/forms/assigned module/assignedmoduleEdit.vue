@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="jumbotron dashboard">
-      <div v-if="!isNewAssignedClinicArea" class="dashlabel">
-        Assigned Clinic Area Number: {{ this.assignedClinicAreaID }}
+      <div v-if="!isNewAssignedModule" class="dashlabel">
+        Assigned Module Number: {{ this.assignedModuleID }}
       </div>
       <div v-else class="dashlabel">
         Adding New Module
@@ -14,9 +14,9 @@
         <button class="swal2-editform swal2-styled goBackButton" v-on:click="goBack">Go Back</button>
       </div>
       <div class="editFormFooter-right">
-        <button v-if="!isNewAssignedClinicArea" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateAssignedClinicArea">Update Assigned Clinic Area</button>
-        <button v-if="!isNewAssignedClinicArea" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteAssignedClinicArea">Delete Assigned Clinic Area</button>
-        <button v-if="isNewAssignedClinicArea" class="swal2-editform swal2-styled addNewButton" :disabled="validationFormCheck === false" v-on:click="addAssignedClinicArea">Submit Assigned Clinic Area</button>
+        <button v-if="!isNewAssignedModule" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateAssignedModule">Update Assigned Module</button>
+        <button v-if="!isNewAssignedModule" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteAssignedModule">Delete Assigned Module</button>
+        <button v-if="isNewAssignedModule" class="swal2-editform swal2-styled addNewButton" :disabled="validationFormCheck === false" v-on:click="addAssignedModule">Submit Assigned Module</button>
       </div>
     </div>
 
@@ -35,13 +35,24 @@
             </model-list-select>
         </div>
         <div class="editForm-right">
-            <label class="form-custom-label" for="form-Clinic_Area">Clinic Area</label>
-            <model-list-select :list="Clinic_Area_DATA"
-                           v-model="form.model.ClinicID"
-                           option-value="clinicID"
-                           id="form-Clinic_Area"
-                           option-text="clinicID"
-                           :isError='validationClinicArea === true'
+            <label class="form-custom-label" for="form-Module">Module</label>
+            <model-list-select :list="Module_DATA"
+                           v-model="form.model.ModuleID"
+                           option-value="moduleID"
+                           id="form-Module"
+                           option-text="moduleID"
+                           :isError='validationModule === true'
+                           placeholder="select one">
+            </model-list-select>
+        </div>
+        <div class="editForm-right">
+            <label class="form-custom-label" for="form-Project">Project</label>
+            <model-list-select :list="Project_DATA"
+                           v-model="form.model.ProjectID"
+                           option-value="projectID"
+                           id="form-Project"
+                           option-text="projectID"
+                           :isError='validationProject === true'
                            placeholder="select one">
             </model-list-select>
         </div>
@@ -59,17 +70,19 @@ import { ModelListSelect } from 'vue-search-select';
 import { ModelSelect } from 'vue-search-select'
 
 export default {
-  props: ["assignedClinicAreaID"],
+  props: ["assignedModuleID"],
   data() {
     return {
-      isNewAssignedClinicArea: true,
+      isNewAssignedModule: true,
       DB_DATA: [],
       Contractor_DATA: [],
-      Clinic_Area_DATA: [],
+      Module_DATA: [],
+      Project_DATA: [],
       form: {
         model: {
           ContractorID: '',
-          ClinicID: '',
+          ModuleID: '',
+          ProjectID: '',
         },
       },
     };
@@ -86,8 +99,15 @@ export default {
         return false
       }
     },
-    validationClinicArea: function () {
-      if (this.form.model.ClinicID === ''){
+    validationModule: function () {
+      if (this.form.model.ModuleID === ''){
+        return true
+      } else {
+        return false
+      }
+    },
+    validationProject: function () {
+      if (this.form.model.ProjectID === ''){
         return true
       } else {
         return false
@@ -95,7 +115,8 @@ export default {
     },
     validationFormCheck: function () {
       if (this.validationContractor === false &&
-        this.validationClinicArea === false){
+        this.validationModule === false &&
+        this.validationProject === false){
         return true
       } else {
         return false
@@ -104,10 +125,10 @@ export default {
   },
   methods: {
     goBack(){
-      this.$router.push('/assignedclinicarea')
+      this.$router.push('/assignedmodule')
     },
     addAssignedClinicArea(){
-      axios.post(`${config.api}/api/Assigned_Clinic_Area/create`, this.form.model)
+      axios.post(`${config.api}/api/Assigned_Module/create`, this.form.model)
         .then((response) => {
           Swal.fire(
             'Done!',

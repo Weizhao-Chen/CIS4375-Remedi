@@ -59,17 +59,20 @@ export default {
       Contractor_DATA: [],
       Module_DATA: [],
       Project_DATA: [],
-      myAPI: `${config.api}/api/Assigned_Clinic_Area`,
+      myAPI: `${config.api}/api/Assigned_Module`,
       dataFields: [{
         label: 'id',
-        field: 'assignedClinicAreaID',
+        field: 'assignedModuleID',
         type: 'number'
       },{
         label: 'contractor id',
         field: 'Contractor.contractorID'
       },{
-        label: 'clinic id',
-        field: 'Clinic_Area.clinicID'
+        label: 'module id',
+        field: 'Module.moduleID'
+      },{
+        label: 'project id',
+        field: 'Project.projectID'
       }]
     };
   },
@@ -80,17 +83,17 @@ export default {
   methods: {
     onRowDoubleClick(params){
       this.$router.push({
-        name: '/assignedclinicarea/edit',
+        name: '/assignedmodule/edit',
         params: {
-          assignedClinicAreaID: params.row.assignedClinicAreaID
+          assignedModuleID: params.row.assignedModuleID
         }
       })
     },
-    addNewAssignedClinicArea(){
-      this.$router.push('/assignedclinicarea/edit')
+    addNewAssignedModule(){
+      this.$router.push('/assignedmodule/edit')
     },
     loadData(){
-      axios.get(`${config.api}/api/Assigned_Clinic_Area/find`)
+      axios.get(`${config.api}/api/Assigned_Module/find`)
         .then((response) => {
           this.DB_DATA = response.data;
         })
