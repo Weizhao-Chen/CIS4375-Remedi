@@ -77,7 +77,8 @@ export default {
       this.$router.push({
         name: '/assignedclinicarea/edit',
         params: {
-          contractorID: params.row.contractorID
+          contractorID: params.row.contractorID,
+          clinicID: params.row.clinicID
         }
       })
     },

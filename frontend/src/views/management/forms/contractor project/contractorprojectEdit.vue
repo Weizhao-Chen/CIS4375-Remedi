@@ -137,7 +137,7 @@ export default {
           })
     },
     deleteContractorProject(){
-      const ContractorProjectID = this.contractorProjectID
+      // const ContractorProjectID = this.contractorProjectID
         axios.delete(`${config.api}/api/Contractor_Project/delete/` + `ContractorProjectID`)
           .then((response) => {
             Swal.fire(

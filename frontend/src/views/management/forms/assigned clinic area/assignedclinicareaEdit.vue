@@ -2,10 +2,10 @@
   <div>
     <div class="jumbotron dashboard">
       <div v-if="!isNewAssignedClinicArea" class="dashlabel">
-        Assigned Clinic Area Number: {{ this.assignedClinicAreaID }}
+        Assigned Clinic Area Number: {{ this.Contractor.contractorID }}
       </div>
       <div v-else class="dashlabel">
-        Adding New Clinic Area
+        Adding New Assigned Clinic Area
       </div>
     </div>
 
@@ -59,7 +59,7 @@ import { ModelListSelect } from 'vue-search-select';
 import { ModelSelect } from 'vue-search-select'
 
 export default {
-  props: ["assignedClinicAreaID"],
+  props: ["Contractor.contractorID"],
   data() {
     return {
       isNewAssignedClinicArea: true,
@@ -121,9 +121,7 @@ export default {
         })
     },
     updateAssignedClinicArea(){
-      const ContractorID = this.contractorID
-      const ClinicID = this.clinicID
-        axios.put(`${config.api}/api/Assigned_Clinic_Area/update/` + ContractorID, this.form.model)
+        axios.put(`${config.api}/api/Assigned_Clinic_Area/update/`, this.form.model)
           .then((response) => {
             this.loadData()
             Swal.fire(
@@ -138,9 +136,7 @@ export default {
           })
     },
     deleteAssignedClinicArea(){
-      const ContractorID = this.contractorID
-      const ClinicID = this.clinicID
-        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/` + ContractorID + ClinicID)
+        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/`, this.form.model)
           .then((response) => {
             Swal.fire(
               'Done!',
@@ -154,7 +150,7 @@ export default {
           })
     },
     loadData(){
-      axios.get(`${config.api}/api/Assigned_Clinic_Area/find/` + this.assignedClinicAreaID)
+      axios.get(`${config.api}/api/Assigned_Clinic_Area/find/` + this.Contractor.contractorID)
         .then((response) => {
           this.DB_DATA = response.data;
             this.form.model.ContractorID = response.data.contractorID,
@@ -183,7 +179,7 @@ export default {
   },
   beforeMount() {
     this.loadFields()
-    if (this.assignedClinicAreaID !== undefined){
+    if (this.Contractor.contractorID !== undefined){
       this.isNewAssignedClinicArea = false
       this.loadData()
     }

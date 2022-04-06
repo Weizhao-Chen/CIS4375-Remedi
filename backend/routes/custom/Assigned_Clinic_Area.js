@@ -15,12 +15,13 @@ router.get('/find', (req, res, next) => {
             return res.send(err)
         });
 })
-router.get('/find/:assignedclinicareaid', (req, res, next) => {
+router.get('/find/:ContractorID/ClinicID', (req, res, next) => {
     const db = req.app.get('db')
 
     return db.Assigned_Clinic_Area.find({
         where: {
-            assignedClinicAreaID:req.params.assignedclinicareaid,
+            contractorID:req.params.ContractorID,
+            clinicID:req.params.ClinicID,
         }
     })
         .then((Assigned_Clinic_Area) => {
@@ -33,7 +34,8 @@ router.get('/find/:assignedclinicareaid', (req, res, next) => {
 })
 router.post('/create', (req, res, next) => {
     const db = req.app.get('db')
-    db.Assigned_Clinic_Area.create({
+    
+    return db.Assigned_Clinic_Area.create({
         contractorID: req.body.ContractorID,
         clinicID: req.body.ClinicID
     })
@@ -63,7 +65,7 @@ router.put('/update/:assignedclinicareaid', (req, res, next) => {
            return res.send(err)
    })
 })
-router.delete('/delete/:ContractorID/ClinicID', (req, res, next) => {
+router.delete('/delete/:ContractorID/:ClinicID', (req, res, next) => {
     const db = req.app.get('db')
     const ContractorIDs = req.params.ContractorID
     const ClinicIDs = req.params.ClinicID
