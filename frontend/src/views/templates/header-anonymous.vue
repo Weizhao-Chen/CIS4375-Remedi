@@ -1,71 +1,41 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <span class="navbar-brand">Frontend</span>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/home">Home</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/about">About</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/emr">EMR</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/hospital">Hospital</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/rental-car-co"
-          >Rental Car Company</router-link
-        >
-        <router-link class="nav-link" to="/projectstatus"
-          >Project Status</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/contractorstatus"
-          >Contractor Status</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/module">Module</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/airline">Airline</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/contractor">Contractor</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/project">Project</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/contractorproject">Contractor Project</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/clinicarea">Clinic Area</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/assignedclinicarea">Assigned Clinic Area</router-link>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <router-link class="nav-link" to="/auth/login">Login</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/auth/register">Register</router-link>
-      </li>
-    </ul>
-  </nav>
+  <div>
+    <b-button v-b-toggle.sidebar-variant>Menu</b-button>
+    <b-sidebar
+      id="sidebar-variant"
+      title="Menu"
+      bg-variant="dark"
+      text-variant="light"
+      shadow
+    >
+      <nav class="mb-3">
+        <b-nav vertical>
+          <!-- <b-nav-item active @click="hide">Active</b-nav-item> -->
+          <b-nav-item href="/home" @click="hide">Home</b-nav-item>
+          <b-nav-item href="/hospital" @click="hide">Hospital</b-nav-item>
+          <b-nav-item href="/rental-car-co" @click="hide"
+            >Rental Car Company</b-nav-item
+          >
+          <b-nav-item href="/emr" @click="hide">EMR</b-nav-item>
+          <b-nav-item href="/projectstatus" @click="hide"
+            >Project Status</b-nav-item
+          >
+          <b-nav-item href="/contractorstatus" @click="hide"
+            >Contractor Status</b-nav-item
+          >
+          <b-nav-item href="/module" @click="hide">Module</b-nav-item>
+          <b-nav-item href="/airline" @click="hide">Airline</b-nav-item>
+          <b-nav-item href="/contractor" @click="hide">Contractor</b-nav-item>
+          <b-nav-item href="/project" @click="hide">Project</b-nav-item>
+          <b-nav-item href="/contractorproject" @click="hide"
+            >Contractor Project</b-nav-item
+          >
+          <b-nav-item href="/clinicarea" @click="hide">Clinic Area</b-nav-item>
+          <b-nav-item href="/assignedclinicarea" @click="hide"
+            >Assigned Clinic Area</b-nav-item
+          >
+        </b-nav>
+      </nav>
+    </b-sidebar>
+  </div>
 </template>
-
-<script>
-export default {
-  name: 'HeaderTemplateAnonymous',
-}
-</script>
-
-<style lang="stylus"></style>
