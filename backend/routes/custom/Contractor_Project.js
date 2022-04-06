@@ -63,11 +63,12 @@ router.put('/update/:contractorProjectID', (req, res, next) => {
            return res.send(err)
    })
 })
-router.delete('/delete/:ContractorProjectID', (req, res, next) => {
+router.delete('/delete/:ContractorProjectID/:ProjectID', (req, res, next) => {
     const db = req.app.get('db')
     
     db.Contractor_Project.destroy({
-        where: { contractorProjectID: req.params.ContractorProjectID}
+        where: { contractorProjectID: req.params.ContractorProjectID,
+                projectID: req.params.ProjectID}
     }).then(() => {
         res.status(200).send('The record has been deleted!');
     }).catch(err => {

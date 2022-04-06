@@ -2,7 +2,7 @@
   <div>
     <div class="jumbotron dashboard">
       <div v-if="!isNewContractorProject" class="dashlabel">
-        Assigned Contractor Project Number: {{ this.contractorProjectID }}
+        Assigned Contractor Project Number: {{ this.contractorID }}
       </div>
       <div v-else class="dashlabel">
         Adding New Contractor Project
@@ -121,8 +121,8 @@ export default {
         })
     },
     updateContractorProject(){
-      const ContractorProjectID = this.contractorProjectID
-        axios.put(`${config.api}/api/Contractor_Project/update/` + ContractorProjectID, this.form.model)
+      const ContractorID = this.contractorIDID
+        axios.put(`${config.api}/api/Contractor_Project/update/` + ContractorID, this.form.model)
           .then((response) => {
             this.loadData()
             Swal.fire(
@@ -137,8 +137,9 @@ export default {
           })
     },
     deleteContractorProject(){
-      // const ContractorProjectID = this.contractorProjectID
-        axios.delete(`${config.api}/api/Contractor_Project/delete/` + `ContractorProjectID`)
+      const ContractorID = this.contractorID
+      const ProjectID = this.projectID
+        axios.delete(`${config.api}/api/Contractor_Project/delete/` + ContractorID + ProjectID)
           .then((response) => {
             Swal.fire(
               'Done!',
@@ -152,7 +153,7 @@ export default {
           })
     },
     loadData(){
-      axios.get(`${config.api}/api/Contractor_Project/find/` + this.contractorProjectID)
+      axios.get(`${config.api}/api/Contractor_Project/find/`)
         .then((response) => {
           this.DB_DATA = response.data;
             this.form.model.ContractorID = response.data.contractorID,
@@ -181,7 +182,7 @@ export default {
   },
   beforeMount() {
     this.loadFields()
-    if (this.contractorProjectID !== undefined){
+    if (this.Contractor.contractorID !== undefined && this.Project.projectID !== undefined){
       this.isNewContractorProject = false
       this.loadData()
     }
