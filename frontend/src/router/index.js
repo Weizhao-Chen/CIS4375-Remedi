@@ -37,6 +37,12 @@ import clinicareaadmin from '../views/management/forms/clinic area/clinicareaadm
 import projectEdit from '../views/management/forms/project/projectEdit.vue'
 import projectadmin from '../views/management/forms/project/projectadmin.vue'
 
+import contractorprojectList from '../views/management/popups/contractorprojectList.vue'
+
+import cpedit from '../views/management/forms/contractor project/cpedit.vue'
+import cpadmin from '../views/management/forms/contractor project/cpadmin.vue'
+
+import cpreport from '../views/management/reports/cpreport.vue'
 
 vue.use(VueRouter)
 
@@ -72,6 +78,20 @@ const router = new VueRouter({
     {
       path: '/projectstatus',
       component: projectstatusList,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/cpreport',
+      component: cpreport,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/contractorproject',
+      component: contractorprojectList,
       meta: {
         isOpen: true,
       },
@@ -130,6 +150,23 @@ const router = new VueRouter({
       name: '/clinicarea/edit',
       component: clinicareaEdit,
       props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/cp',
+      component: cpadmin,
+      // props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/cp/edit',
+      name: '/cp/edit',
+      component: cpedit,
+      // props: true,
       meta: {
         isOpen: true,
       },

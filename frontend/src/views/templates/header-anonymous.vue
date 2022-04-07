@@ -36,6 +36,15 @@
         <router-link class="nav-link" to="/contractor">Contractor</router-link>
       </li>
       <li class="nav-item">
+        <router-link class="nav-link" to="/contractorproject">Contractor Project</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/cpreport">Contractor Project Report</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/cp">Contractor Project Test</router-link>
+      </li>
+      <li class="nav-item">
         <router-link class="nav-link" to="/project">Project</router-link>
       </li>
       <li class="nav-item">
