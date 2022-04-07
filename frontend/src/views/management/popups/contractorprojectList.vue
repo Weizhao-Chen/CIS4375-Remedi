@@ -212,8 +212,8 @@ export default {
           Swal.fire('Error', 'Something went wrong Project', 'error')
         })
     },
-    deleteItem(){
-      axios.delete(`${config.api}/api/Contractor_Project/delete/` + this.form.model.ContractorID, this.form.model)
+    deleteItem(){ //this.form.model.ContractorID + after delete below
+      axios.delete(`${config.api}/api/Contractor_Project/delete/`, this.form.model)
         .then((response) => {
           this.loadData()
           Swal.fire(

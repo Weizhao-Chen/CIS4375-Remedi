@@ -33,6 +33,10 @@ router.get('/find', (req, res, next) => {
 // })
 router.post('/create', (req, res, next) => {
     const db = req.app.get('db')
+    console.log(req.params.ContractorID)
+    console.log(req.params.ProjectID)
+    console.log(req.body.ContractorID)
+    console.log(req.body.ProjectID)
     db.Contractor_Project.create({
         contractorID: req.body.ContractorID,
         projectID: req.body.ProjectID
@@ -83,9 +87,14 @@ router.put('/update/:ProjectID', (req, res, next) => {
 })
 router.put('/update/:ContractorID', (req, res, next) => {
     const db = req.app.get('db')
+    console.log(req.params.ContractorID)
+    console.log(req.params.ProjectID)
+    console.log(req.body.ContractorID)
+    console.log(req.body.ProjectID)
     db.Contractor_Project.update({
         contractorID: req.body.ContractorID,
         projectID: req.body.ProjectID
+        
         }, {
             where: {
                 contractorProjectID: contractorProjectID
@@ -99,13 +108,17 @@ router.put('/update/:ContractorID', (req, res, next) => {
            return res.send(err)
    })
 })
-router.delete('/delete/:ContractorID', (req, res, next) => {
+router.delete('/delete', (req, res, next) => {
     const db = req.app.get('db')
-    
+    console.log(req.params.ContractorID)
+    console.log(req.params.ProjectID)
+    console.log(req.body.ContractorID)
+    console.log(req.body.ProjectID)
     db.Contractor_Project.destroy({
+        
         where: { 
             contractorID: req.params.ContractorID,
-            projectID: req.params.ProjectID
+            projectID: req.params.projectID
         }
     }).then(() => {
         res.status(200).send('The record has been deleted!');
