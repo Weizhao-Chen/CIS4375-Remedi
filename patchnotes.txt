@@ -1,0 +1,5 @@
+Version Notes
+
+Alpha
+v1.0 successfully created all reasonable tables with the exceptions of airlines and rental cars.
+v1.1 relink EMR to the corrected position and remove any non-reasonable tables with the exception of rental_car_company (not working anyways)
