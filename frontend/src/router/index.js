@@ -126,8 +126,17 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/contractor/edit',
+      path: '/contractor/edit/:contractorID',
       name: '/contractor/edit',
+      component: contractorEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/contractor/create',
+      name: '/contractor/create',
       component: contractorEdit,
       props: true,
       meta: {
@@ -285,14 +294,14 @@ router.beforeEach((to, from, next) => {
   if (store.getters.isAuthenticated) {
     if (to.path === '/auth/logout') {
       store.dispatch('logout')
-    } else if (to.matched.some(record => record.meta.skipIfAuthorized)) {
+    } else if (to.matched.some((record) => record.meta.skipIfAuthorized)) {
       next({
         path: '/home',
       })
     } else {
       next()
     }
-  } else if (to.matched.some(record => record.meta.isOpen)) {
+  } else if (to.matched.some((record) => record.meta.isOpen)) {
     next()
   } else {
     next({

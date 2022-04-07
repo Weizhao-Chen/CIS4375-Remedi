@@ -5,13 +5,17 @@
         <span class="tableHeading-text">Contractor List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewContractor">Add New Contractor List</button>
+        <button
+          class="swal2-editform swal2-styled"
+          v-on:click="addNewContractor"
+        >
+          Add New Contractor List
+        </button>
       </div>
     </div>
 
     <div>
-      <div slot="table-actions">
-      </div>
+      <div slot="table-actions"></div>
       <vue-good-table
         :columns="dataFields"
         :rows="DB_DATA"
@@ -23,7 +27,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'contractorID', type: 'asc'}
+          initialSortBy: { field: 'contractorID', type: 'asc' },
         }"
         :pagination-options="{
           enabled: true,
@@ -42,14 +46,13 @@
       />
     </div>
   </div>
-
 </template>
 
 <script>
 import axios from '../../../../utilities/axios'
 import config from '../../../../config'
 import 'vue-good-table/dist/vue-good-table.css'
-import { VueGoodTable } from 'vue-good-table';
+import { VueGoodTable } from 'vue-good-table'
 import Swal from 'sweetalert2'
 
 export default {
@@ -58,100 +61,122 @@ export default {
       DB_DATA: [],
       Contractor_Status_DATA: [],
       myAPI: `${config.api}/api/Contractor`,
-      dataFields: [{
-        label: 'id',
-        field: 'contractorID',
-        type: 'number'
-      },{
-        label: 'Onsite',
-        field: 'virtualOnsite'
-      },{
-        label: 'Last Name',
-        field: 'lastName'
-      },{
-        label: 'First Name',
-        field: 'firstName'
-      },{
-        label: 'Preferred Name',
-        field: 'preferredName'
-      },{
-        label: 'Street',
-        field: 'addressLineOne'
-      },{
-        label: 'Street 2',
-        field: 'addressLineTwo'
-      },{
-        label: 'city',
-        field: 'city'
-      },{
-        label: 'state',
-        field: 'state'
-      },{
-        label: 'zip',
-        field: 'zipCode'
-      },{
-        label: 'phone number',
-        field: 'phoneNumber'
-      },{
-        label: 'email',
-        field: 'email'
-      },{
-        label: 'history',
-        field: 'remediHistory'
-      },{
-        label: 'wisdom',
-        field: 'supportWisdom'
-      },{
-        label: 'GoLives',
-        field: 'numberOfGoLives'
-      },{
-        label: 'Epic Project',
-        field: 'numberofEpicProjects'
-      },{
-        label: 'Support Epic',
-        field: 'yearsOfSupportEpic'
-      },{
-        label: 'Virtual Epic',
-        field: 'supportVirtualEpic'
-      },{
-        label: 'credit card',
-        field: 'creditCardHotel'
-      },{
-        label: 'type',
-        field: 'Contractor_Status.contractorStatusType'
-      }]
-    };
+      dataFields: [
+        {
+          label: 'id',
+          field: 'contractorID',
+          type: 'number',
+        },
+        {
+          label: 'Onsite',
+          field: 'virtualOnsite',
+        },
+        {
+          label: 'Last Name',
+          field: 'lastName',
+        },
+        {
+          label: 'First Name',
+          field: 'firstName',
+        },
+        {
+          label: 'Preferred Name',
+          field: 'preferredName',
+        },
+        {
+          label: 'Street',
+          field: 'addressLineOne',
+        },
+        {
+          label: 'Street 2',
+          field: 'addressLineTwo',
+        },
+        {
+          label: 'city',
+          field: 'city',
+        },
+        {
+          label: 'state',
+          field: 'state',
+        },
+        {
+          label: 'zip',
+          field: 'zipCode',
+        },
+        {
+          label: 'phone number',
+          field: 'phoneNumber',
+        },
+        {
+          label: 'email',
+          field: 'email',
+        },
+        {
+          label: 'history',
+          field: 'remediHistory',
+        },
+        {
+          label: 'wisdom',
+          field: 'supportWisdom',
+        },
+        {
+          label: 'GoLives',
+          field: 'numberOfGoLives',
+        },
+        {
+          label: 'Epic Project',
+          field: 'numberofEpicProjects',
+        },
+        {
+          label: 'Support Epic',
+          field: 'yearsOfSupportEpic',
+        },
+        {
+          label: 'Virtual Epic',
+          field: 'supportVirtualEpic',
+        },
+        {
+          label: 'credit card',
+          field: 'creditCardHotel',
+        },
+        {
+          label: 'type',
+          field: 'Contractor_Status.contractorStatusType',
+        },
+      ],
+    }
   },
 
   components: {
-    'vue-good-table': VueGoodTable
+    'vue-good-table': VueGoodTable,
   },
   methods: {
-    onRowDoubleClick(params){
+    onRowDoubleClick(params) {
       this.$router.push({
         name: '/contractor/edit',
         params: {
-          contractorID: params.row.contractorID
-        }
+          contractorID: params.row.contractorID,
+        },
       })
     },
-    addNewContractor(){
-      this.$router.push('/contractor/edit')
+    addNewContractor() {
+      this.$router.push('/contractor/create')
     },
-    loadData(){
-      axios.get(`${config.api}/api/Contractor/find`)
+    loadData() {
+      axios
+        .get(`${config.api}/api/Contractor/find`)
         .then((response) => {
-          this.DB_DATA = response.data;
+          this.DB_DATA = response.data
         })
         .catch(() => {
           Swal.fire('Error', 'Something went wrong', 'error')
         })
-    }
+    },
   },
   beforeMount() {
-    this.loadData();
-  }
-};
+    this.loadData()
+  },
+}
 </script>
 
 <style scoped>
