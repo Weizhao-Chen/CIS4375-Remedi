@@ -4,6 +4,7 @@ Alpha
 v1.0 successfully created all reasonable tables with the exceptions of airlines and rental cars.
 v1.1 relink EMR to the corrected position and remove any non-reasonable tables with the exception of rental_car_company (not working anyways)
 v1.2 Added Contractor Project form, Contractor Project Test popups and Contractor Project Reports (cpreport). Updated patch note file.
+v1.2.1 Added the ability to view more details in Contractor Project form without the ability to edit the extra stuff. (added this to show the client only else its going back to id/ids)
 
 
 

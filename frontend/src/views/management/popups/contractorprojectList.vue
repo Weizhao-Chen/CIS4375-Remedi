@@ -124,8 +124,17 @@ export default {
         label: 'Contractor ID',
         field: 'Contractor.contractorID'
       },{
+        label: 'Contractor last name',
+        field: 'Contractor.lastName'
+      },{
+        label: 'Contractor first name',
+        field: 'Contractor.firstName'
+      },{
         label: 'Project ID',
         field: 'Project.projectID'
+      },{
+        label: 'Project name',
+        field: 'Project.projectName'
       }]
     };
   },
