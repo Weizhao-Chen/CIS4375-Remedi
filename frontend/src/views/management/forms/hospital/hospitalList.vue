@@ -63,7 +63,7 @@ export default {
         type: 'number'
       },{
         label: 'name',
-        field: 'hostpitalName'
+        field: 'hospitalName'
       },{
         label: 'Street',
         field: 'hospitalAddressLineOne'

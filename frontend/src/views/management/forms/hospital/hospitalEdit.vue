@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="jumbotron dashboard">
-      <div v-if="!isNewHostpital" class="dashlabel">
-        Hostpital Number: {{ this.hospitalID }}
+      <div v-if="!isNewHospital" class="dashlabel">
+        Hospital Number: {{ this.hospitalID }}
       </div>
       <div v-else class="dashlabel">
-        Adding New Hostpital
+        Adding New Hospital
       </div>
     </div>
 
@@ -14,9 +14,9 @@
         <button class="swal2-editform swal2-styled goBackButton" v-on:click="goBack">Go Back</button>
       </div>
       <div class="editFormFooter-right">
-        <button v-if="!isNewHostpital" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateHostpital">Update Hostpital</button>
-        <button v-if="!isNewHostpital" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteHostpital">Delete Hostpital</button>
-        <button v-if="isNewHostpital" class="swal2-editform swal2-styled addNewButton" :disabled="validationFormCheck === false" v-on:click="addHostpital">Submit New Hostpital</button>
+        <button v-if="!isNewHospital" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateHospital">Update Hospital</button>
+        <button v-if="!isNewHospital" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteHospital">Delete Hospital</button>
+        <button v-if="isNewHospital" class="swal2-editform swal2-styled addNewButton" :disabled="validationFormCheck === false" v-on:click="addHospital">Submit New Hospital</button>
       </div>
     </div>
 
@@ -27,11 +27,11 @@
             <FormulateInput
                 @validation="validationName = $event"
                 type="text"
-                name="hostpitalName"
-                label="Hostpital Name"
+                name="hospitalName"
+                label="Hospital Name"
                 validation="required"
-                v-model="form.model.HostpitalName"
-                :validation-messages="{required: 'The Hostpital Name is required'}"
+                v-model="form.model.HospitalName"
+                :validation-messages="{required: 'The Hospital Name is required'}"
             />
         </div>
         <div class="editForm-left">
@@ -88,13 +88,13 @@
         </div>
         <div class="editForm-left">
             <FormulateInput
-                @validation="validationNumber = $event"
+                @validation="validationHName = $event"
                 type="text"
                 name="hospitalContactName"
-                label="phone number"
+                label="contact name"
                 validation="required"
                 v-model="form.model.HospitalContactName"
-                :validation-messages="{required: 'The phone number is required'}"
+                :validation-messages="{required: 'The contact name is required'}"
             />
         </div>
         <div class="editForm-left">
@@ -142,32 +142,22 @@ export default {
       validationCity: {},
       validationState: {},
       validationZip: {},
-      validationNumber: {},
+      validationHName: {},
       validationPhone: {},
       validationEmail: {},
       DB_DATA: [],
       form: {
         model: {
           HospitalID: '',
-          VirtualOnsite: '',
-          LastName: '',
-          FirstName: '',
-          PreferredName: '',
-          AddressLineOne: '',
-          AddressLineTwo: '',
-          City: 'Houston',
-          State: 'Texas',
-          ZipCode: '',
-          PhoneNumber: '',
-          Email: '',
-          RemediHistory: '',
-          SupportWisdom: '',
-          NumberOfGoLives: '',
-          NumberofEpicProjects: '',
-          YearsOfSupportEpic: '',
-          SupportVirtualEpic: '',
-          CreditCardHotel: '',
-          ContractorStatusID: '',
+          HospitalName: '',
+          HospitalAddressLineOne: '',
+          HospitalAddressLineTwo: '',
+          HospitalCity: 'Houston',
+          HospitalState: 'Texas',
+          HospitalZipCode: '',
+          HospitalContactName: '',
+          HospitalContactPhone: '',
+          HospitalContactEmail: ''
         },
       },
     };
@@ -177,32 +167,15 @@ export default {
     ModelListSelect
   },
   computed:{
-    validationContractorStatus: function () {
-      if (this.form.model.ContractorStatusID === ''){
-        return true
-      } else {
-        return false
-      }
-    },
     validationFormCheck: function () {
-      if (this.validationOnsite.hasErrors === false &&
-        this.validationLName.hasErrors === false &&
-        this.validationFName.hasErrors === false &&
-        this.validationPName.hasErrors === false &&
-        this.validationStreet.hasErrors === false &&
-        // this.validationCity.hasErrors === false && need to remove cause giving
-        // this.validationState.hasErrors === false && error for defaults
-        this.validationZip.hasErrors === false &&
-        this.validationNumber.hasErrors === false &&
-        this.validationEmail.hasErrors === false &&
-        this.validationHistory.hasErrors === false &&
-        this.validationWisdom.hasErrors === false &&
-        this.validationGolives.hasErrors === false &&
-        this.validationEpicProjects.hasErrors === false &&
-        this.validationYearSupportEpic.hasErrors === false &&
-        this.validationSupportVirtualEpic.hasErrors === false &&
-        this.validationCreditCard.hasErrors === false &&
-        this.validationContractorStatus === false){
+      if (this.validationName.hasErrors === false &&
+        // this.validationStreet.hasErrors === false &&
+        // // this.validationCity.hasErrors === false &&
+        // // this.validationState.hasErrors === false &&
+        // this.validationZip.hasErrors === false &&
+        // this.validationNumber.hasErrors === false &&
+        // this.validationPhone.hasErrors === false &&
+        this.validationEmail.hasErrors === false){
         return true
       } else {
         return false
@@ -211,10 +184,10 @@ export default {
   },
   methods: {
     goBack(){
-      this.$router.push('/contractor')
+      this.$router.push('/hospital')
     },
-    addContractor(){
-      axios.post(`${config.api}/api/Contractor/create`, this.form.model)
+    addHospital(){
+      axios.post(`${config.api}/api/Hospital/create`, this.form.model)
         .then((response) => {
           Swal.fire(
             'Done!',
@@ -224,82 +197,62 @@ export default {
           this.goBack()
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong (creating Contractor)', 'error')
+          Swal.fire('Error', 'Something went wrong (creating Hospital)', 'error')
         })
     },
-    updateContractor(){
-      const ContractorID = this.contractorID
-        axios.put(`${config.api}/api/Contractor/update/` + ContractorID, this.form.model)
+    updateHospital(){
+      const HospitalID = this.hospitalID
+        axios.put(`${config.api}/api/Hospital/update/` + HospitalID, this.form.model)
           .then((response) => {
             this.loadData()
             Swal.fire(
               'Done!',
-              'The Contractor has been updated.',
+              'The Hospital has been updated.',
               'success'
             )
             this.goBack()
           })
           .catch(() => {
-            Swal.fire('Error', 'Something went wrong (updating Contractor)', 'error')
+            Swal.fire('Error', 'Something went wrong (updating Hospital)', 'error')
           })
     },
-    deleteContractor(){
-      const ContractorID = this.contractorID
-        axios.delete(`${config.api}/api/Contractor/delete/` + ContractorID)
+    deleteHospital(){
+      const HospitalID = this.hospitalID
+        axios.delete(`${config.api}/api/Hospital/delete/` + HospitalID)
           .then((response) => {
             Swal.fire(
               'Done!',
-              'The Contractor has been deleted.',
+              'The Hospital has been deleted.',
               'success'
             )
             this.goBack()
           })
           .catch(() => {
-            Swal.fire('Error', 'Something went wrong (deleting Contractor)', 'error')
+            Swal.fire('Error', 'Something went wrong (deleting Hospital)', 'error')
           })
     },
     loadData(){
-      axios.get(`${config.api}/api/Contractor/find/` + this.contractorID)
+      axios.get(`${config.api}/api/Hospital/find/` + this.hospitalID)
         .then((response) => {
           this.DB_DATA = response.data;
-          this.form.model.VirtualOnsite = response.data.virtualOnsite,
-          this.form.model.LastName = response.data.lastName,
-          this.form.model.FirstName = response.data.firstName,
-          this.form.model.PreferredName = response.data.preferredName,
-          this.form.model.AddressLineOne = response.data.addressLineOne,
-          this.form.model.AddressLineTwo = response.data.addressLineTwo,
-          this.form.model.City = response.data.city,
-          this.form.model.State = response.data.state,
-          this.form.model.ZipCode = response.data.zipCode,
-          this.form.model.PhoneNumber = response.data.phoneNumber,
-          this.form.model.Email = response.data.email,
-          this.form.model.RemediHistory = response.data.remediHistory,
-          this.form.model.SupportWisdom = response.data.supportWisdom,
-          this.form.model.NumberOfGoLives = response.data.numberOfGoLives,
-          this.form.model.NumberofEpicProjects = response.data.numberofEpicProjects,
-          this.form.model.YearsOfSupportEpic = response.data.yearsOfSupportEpic,
-          this.form.model.SupportVirtualEpic = response.data.supportVirtualEpic,
-          this.form.model.CreditCardHotel = response.data.creditCardHotel,
-          this.form.model.ContractorStatusID = response.data.contractorStatusID
+          this.form.model.HospitalName = response.data.hospitalName,
+          this.form.model.HospitalAddressLineOne = response.data.hospitalAddressLineOne,
+          this.form.model.HospitalAddressLineTwo = response.data.hospitalAddressLineTwo,
+          this.form.model.HospitalCity = response.data.hospitalCity,
+          this.form.model.HospitalState = response.data.hospitalState,
+          this.form.model.HospitalZipCode = response.data.hospitalZipCode,
+          this.form.model.HospitalContactName = response.data.hospitalContactName,
+          this.form.model.HospitalContactPhone = response.data.hospitalContactPhone,
+          this.form.model.HospitalContactEmail = response.data.hospitalContactEmail
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong (finding Contractor)', 'error')
-        })
-    },
-    loadFields(){
-      axios.get(`${config.api}/api/Contractor_Status/find`)
-        .then((response) => {
-          this.Contractor_Status_DATA = response.data;
-        })
-        .catch(() => {
-          Swal.fire('Error', 'Something went wrong (loading Contractor Status)', 'error')
+          Swal.fire('Error', 'Something went wrong (finding Hospital)', 'error')
         })
     }
   },
   beforeMount() {
-    this.loadFields()
-    if (this.contractorID !== undefined){
-      this.isNewContractor = false
+    if (this.hospitalID !== undefined){
+      this.isNewHospital = false
       this.loadData()
     }
   }

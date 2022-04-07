@@ -25,7 +25,9 @@ import contractorstatusList from '../views/management/contractorstatusList.vue'
 import airlineEdit from '../views/management/airlineEdit.vue'
 import airlineadmin from '../views/management/airlineadmin.vue'
 
-import hospitalList from '../views/management/popups/hospitalList.vue'
+import hospitalEdit from '../views/management/forms/hospital/hospitalEdit.vue'
+import hospitaladmin from '../views/management/forms/hospital/hospitaladmin.vue'
+
 import rentalCarCompany from '../views/management/popups/rentalCarCompanyList.vue'
 
 import moduleEdit from '../views/management/forms/module/moduleEdit.vue'
@@ -219,7 +221,17 @@ const router = new VueRouter({
     },
     {
       path: '/hospital',
-      component: hospitalList,
+      component: hospitaladmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/hospital/edit',
+      name: '/hospital/edit',
+      component: hospitalEdit,
+      props: true,
       meta: {
         isOpen: true,
       },
