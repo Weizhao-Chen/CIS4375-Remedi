@@ -2,10 +2,10 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Assigned Clinic Area List</span>
+        <span class="tableHeading-text">Hospital List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewAssignedClinicArea">Add Assigned Clinic Area List</button>
+        <button class="swal2-editform swal2-styled" v-on:click="addNewHospital">Add New Hospital List</button>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'contractorID', type: 'asc'}
+          initialSortBy: {field: 'hospitalID', type: 'asc'}
         }"
         :pagination-options="{
           enabled: true,
@@ -56,15 +56,38 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      Contractor_DATA: [],
-      Clinic_Area_DATA: [],
-      myAPI: `${config.api}/api/Assigned_Clinic_Area`,
+      myAPI: `${config.api}/api/Hospital`,
       dataFields: [{
-        label: 'contractor id',
-        field: 'contractorID'
+        label: 'id',
+        field: 'hospitalID',
+        type: 'number'
       },{
-        label: 'clinic id',
-        field: 'Clinic_Area.clinicID'
+        label: 'name',
+        field: 'hostpitalName'
+      },{
+        label: 'Street',
+        field: 'hospitalAddressLineOne'
+      },{
+        label: 'Street 2',
+        field: 'hospitalAddressLineTwo'
+      },{
+        label: 'city',
+        field: 'hospitalCity'
+      },{
+        label: 'state',
+        field: 'hospitalState'
+      },{
+        label: 'zip',
+        field: 'hospitalZipCode'
+      },{
+        label: 'contact name',
+        field: 'hospitalContactName'
+      },{
+        label: 'phone number',
+        field: 'hospitalContactPhone'
+      },{
+        label: 'email',
+        field: 'hospitalContactEmail'
       }]
     };
   },
@@ -75,17 +98,17 @@ export default {
   methods: {
     onRowDoubleClick(params){
       this.$router.push({
-        name: '/assignedclinicarea/edit',
+        name: '/hospital/edit',
         params: {
-          ContractorID: params.row.contractorID
+          hospitalID: params.row.hospitalID
         }
       })
     },
-    addNewAssignedClinicArea(){
-      this.$router.push('/assignedclinicarea/edit')
+    addNewHospital(){
+      this.$router.push('/hospital/edit')
     },
     loadData(){
-      axios.get(`${config.api}/api/Assigned_Clinic_Area/find`)
+      axios.get(`${config.api}/api/Hospital/find`)
         .then((response) => {
           this.DB_DATA = response.data;
         })

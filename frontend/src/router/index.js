@@ -37,14 +37,9 @@ import contractoradmin from '../views/management/forms/contractor/contractoradmi
 import clinicareaEdit from '../views/management/forms/clinic area/clinicareaEdit.vue'
 import clinicareaadmin from '../views/management/forms/clinic area/clinicareaadmin.vue'
 
-import assignedclinicareaEdit from '../views/management/forms/assigned clinic area/assignedclinicareaEdit.vue'
-import assignedclinicareaadmin from '../views/management/forms/assigned clinic area/assignedclinicareaadmin.vue'
-
 import projectEdit from '../views/management/forms/project/projectEdit.vue'
 import projectadmin from '../views/management/forms/project/projectadmin.vue'
 
-import contractorprojectEdit from '../views/management/forms/contractor project/contractorprojectEdit.vue'
-import contractorprojectadmin from '../views/management/forms/contractor project/contractorprojectadmin.vue'
 
 vue.use(VueRouter)
 
@@ -152,23 +147,6 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/contractorproject',
-      component: contractorprojectadmin,
-      props: true,
-      meta: {
-        isOpen: true,
-      },
-    },
-    {
-      path: '/contractorproject/edit',
-      name: '/contractorproject/edit',
-      component: contractorprojectEdit,
-      props: true,
-      meta: {
-        isOpen: true,
-      },
-    },
-    {
       path: '/clinicarea',
       component: clinicareaadmin,
       props: true,
@@ -180,23 +158,6 @@ const router = new VueRouter({
       path: '/clinicarea/edit',
       name: '/clinicarea/edit',
       component: clinicareaEdit,
-      props: true,
-      meta: {
-        isOpen: true,
-      },
-    },
-    {
-      path: '/assignedclinicarea',
-      component: assignedclinicareaadmin,
-      props: true,
-      meta: {
-        isOpen: true,
-      },
-    },
-    {
-      path: '/assignedclinicarea/edit',
-      name: '/assignedclinicarea/edit',
-      component: assignedclinicareaEdit,
       props: true,
       meta: {
         isOpen: true,
