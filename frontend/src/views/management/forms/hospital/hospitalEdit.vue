@@ -169,12 +169,14 @@ export default {
   computed:{
     validationFormCheck: function () {
       if (this.validationName.hasErrors === false &&
-        // this.validationStreet.hasErrors === false &&
-        // // this.validationCity.hasErrors === false &&
-        // // this.validationState.hasErrors === false &&
-        // this.validationZip.hasErrors === false &&
-        // this.validationNumber.hasErrors === false &&
-        // this.validationPhone.hasErrors === false &&
+        this.validationStreet.hasErrors === false &&
+        // this.validationCity.hasErrors === false &&
+        // this.validationState.hasErrors === false &&
+        this.form.model.HospitalCity !== '' &&
+        this.form.model.HospitalState !== '' &&
+        this.validationZip.hasErrors === false &&
+        this.validationHName.hasErrors === false &&
+        this.validationPhone.hasErrors === false &&
         this.validationEmail.hasErrors === false){
         return true
       } else {
