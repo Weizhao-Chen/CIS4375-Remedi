@@ -23,7 +23,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'Contractor.contractorID', type: 'asc'}
+          initialSortBy: {field: 'contractorID', type: 'asc'}
         }"
         :pagination-options="{
           enabled: true,
@@ -61,7 +61,7 @@ export default {
       myAPI: `${config.api}/api/Assigned_Clinic_Area`,
       dataFields: [{
         label: 'contractor id',
-        field: 'Contractor.contractorID'
+        field: 'contractorID'
       },{
         label: 'clinic id',
         field: 'Clinic_Area.clinicID'
@@ -77,8 +77,7 @@ export default {
       this.$router.push({
         name: '/assignedclinicarea/edit',
         params: {
-          contractorID: params.row.contractorID,
-          clinicID: params.row.clinicID
+          ContractorID: params.row.contractorID
         }
       })
     },

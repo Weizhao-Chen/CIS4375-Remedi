@@ -40,8 +40,6 @@ function initModels(sequelize) {
   var accountType = _accountType(sequelize, DataTypes);
   var login = _login(sequelize, DataTypes);
 
-  Flight.belongsTo(Airline, { as: "airline", foreignKey: "airlineID"});
-  Airline.hasMany(Flight, { as: "Flights", foreignKey: "airlineID"});
   Contractor.belongsTo(Contractor_Status, { as: "contractorStatus", foreignKey: "contractorStatusID"});
   Contractor_Status.hasMany(Contractor, { as: "Contractors", foreignKey: "contractorStatusID"});
   Module.belongsTo(EMR, { as: "emr", foreignKey: "emrID"});

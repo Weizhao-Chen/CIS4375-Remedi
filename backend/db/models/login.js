@@ -18,10 +18,6 @@ module.exports = function(sequelize, DataTypes) {
     accountTypeId: {
       type: DataTypes.INTEGER,
       allowNull: true
-    },
-    account_type_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true
     }
   }, {
     sequelize,

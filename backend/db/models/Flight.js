@@ -44,14 +44,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: true
     },
-    airlineID: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Airline',
-        key: 'airlineID'
-      }
-    },
     flightCost: {
       type: DataTypes.INTEGER,
       allowNull: false

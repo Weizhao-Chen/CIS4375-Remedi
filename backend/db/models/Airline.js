@@ -26,12 +26,12 @@ module.exports = function(sequelize, DataTypes) {
     airlineCity: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Houston"
+      defaultValue: "(NHouston"
     },
     airlineState: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Texas"
+      defaultValue: "(NTexas"
     },
     airlineCountry: {
       type: DataTypes.STRING,
@@ -55,6 +55,13 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: false,
     deletedAt: false,
     indexes: [
+      {
+        name: "PK__Airline__D04734A916CE8DA2",
+        unique: true,
+        fields: [
+          { name: "airlineID" },
+        ]
+      },
       {
         name: "PK__Airline__D04734A96C640C6B",
         unique: true,

@@ -2,7 +2,7 @@
   <div>
     <div class="jumbotron dashboard">
       <div v-if="!isNewAssignedClinicArea" class="dashlabel">
-        Assigned Clinic Area Number: {{ this.Contractor.contractorID }}
+        Assigned Clinic Area Number: {{ this.contractorID }}
       </div>
       <div v-else class="dashlabel">
         Adding New Assigned Clinic Area
@@ -59,7 +59,7 @@ import { ModelListSelect } from 'vue-search-select';
 import { ModelSelect } from 'vue-search-select'
 
 export default {
-  props: ["Contractor.contractorID"],
+  props: ["contractorID"],
   data() {
     return {
       isNewAssignedClinicArea: true,
@@ -68,7 +68,7 @@ export default {
       Clinic_Area_DATA: [],
       form: {
         model: {
-          ContractorID: '',
+          contractorID: '',
           ClinicID: '',
         },
       },
@@ -121,7 +121,9 @@ export default {
         })
     },
     updateAssignedClinicArea(){
-        axios.put(`${config.api}/api/Assigned_Clinic_Area/update/`, this.form.model)
+      const ContractorID = this.contractorID
+      const ClinicID = this.clinicID
+        axios.put(`${config.api}/api/Assigned_Clinic_Area/update/` + ContractorID + ClinicID, this.form.model)
           .then((response) => {
             this.loadData()
             Swal.fire(
@@ -136,7 +138,9 @@ export default {
           })
     },
     deleteAssignedClinicArea(){
-        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/`, this.form.model)
+            const ContractorID = this.contractorID
+      const ClinicID = this.clinicID
+        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/` + ContractorID + ClinicID)
           .then((response) => {
             Swal.fire(
               'Done!',
@@ -150,7 +154,7 @@ export default {
           })
     },
     loadData(){
-      axios.get(`${config.api}/api/Assigned_Clinic_Area/find/` + this.Contractor.contractorID)
+      axios.get(`${config.api}/api/Assigned_Clinic_Area/find/` + this.contractorID + this.clinicID)
         .then((response) => {
           this.DB_DATA = response.data;
             this.form.model.ContractorID = response.data.contractorID,
@@ -179,7 +183,7 @@ export default {
   },
   beforeMount() {
     this.loadFields()
-    if (this.Contractor.contractorID !== undefined){
+    if (this.contractorID !== undefined){
       this.isNewAssignedClinicArea = false
       this.loadData()
     }

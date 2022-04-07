@@ -15,7 +15,7 @@ router.get('/find', (req, res, next) => {
             return res.send(err)
         });
 })
-router.get('/find/:ContractorID/ClinicID', (req, res, next) => {
+router.get('/find/:ContractorID/:ClinicID', (req, res, next) => {
     const db = req.app.get('db')
 
     return db.Assigned_Clinic_Area.find({
@@ -47,16 +47,13 @@ router.post('/create', (req, res, next) => {
         return res.send(err)
     })
 })
-router.put('/update/:assignedclinicareaid', (req, res, next) => {
+router.put('/update/:contractorid/:clinicid', (req, res, next) => {
     const db = req.app.get('db')
     db.Assigned_Clinic_Area.update({
-        contractorID: req.body.ContractorID,
-        clinicID: req.body.ClinicID
-        }, {
-            where: {
-                assignedClinicAreaID: assignedclinicareaid
-            }
-        })
+        contractorID: req.body.contractorid,
+        clinicID: req.body.clinicid
+        }
+        )
         .then(() => {
             res.status(200).send('OK');
         })
