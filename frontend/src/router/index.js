@@ -152,7 +152,7 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/project/edit',
+      path: '/project/edit/:projectID',
       name: '/project/edit',
       component: projectEdit,
       props: true,

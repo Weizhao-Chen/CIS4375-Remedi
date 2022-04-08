@@ -242,12 +242,31 @@
         />
       </div>
       <!-- {{ this.ContractorProjects }} -->
-      Current Projects:
-      <ul id="example-1">
+      <div>
+        Current Projects:
+        <!-- <ul id="example-1">
         <li v-for="item in ContractorProjects" :key="item.contractorID">
           {{ item.Project.projectName }}
         </li>
-      </ul>
+      </ul> -->
+        <b-card-body
+          id="nav-scroller"
+          ref="content"
+          style="position: relative; height: 150px; overflow-y: scroll"
+        >
+          <b-list-group>
+            <b-list-group-item
+              v-for="item in ContractorProjects"
+              :key="item.contractorID"
+              :href="'/project/edit/' + item.projectID"
+              >{{ item.Project.projectName }}
+              <!-- <b-button variant="primary">View</b-button>
+
+              <b-button variant="primary">Remove</b-button> -->
+            </b-list-group-item>
+          </b-list-group>
+        </b-card-body>
+      </div>
 
       <div class="editForm-right">
         <label class="form-custom-label" for="form-Contractor_Status"
@@ -289,9 +308,9 @@
 
         <b-list-group>
           <b-list-group-item
-            v-for="item in AssignedModules"
+            v-for="item in PreferredModules"
             :key="item.moduleID"
-            >{{ item.Project.projectName + ' - ' + item.Module.moduleName }}
+            >{{ item.Module.moduleName }}
             <!-- <b-button variant="primary">View</b-button>
 
               <b-button variant="primary">Remove</b-button> -->
@@ -300,6 +319,7 @@
       </div>
 
       <!-- {{ this.AssignedModules }} -->
+      {{ this.PreferredModules }}
     </form>
   </div>
 </template>
@@ -504,6 +524,10 @@ export default {
       axios
         .get(`${config.api}/api/Assigned_Module/find/` + this.contractorID)
         .then((response) => (this.AssignedModules = response.data))
+        .then(console.log('testing'))
+      axios
+        .get(`${config.api}/api/Preferred_Module/find/` + this.contractorID)
+        .then((response) => (this.PreferredModules = response.data))
         .then(console.log('testing'))
     },
     loadFields() {

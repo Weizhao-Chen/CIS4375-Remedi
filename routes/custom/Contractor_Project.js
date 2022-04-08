@@ -17,12 +17,12 @@ router.get('/find', (req, res, next) => {
 })
 
 //finds by contractorID and gets all projects associated with contractor
-router.get('/find/:contractorProjectID', (req, res, next) => {
+router.get('/find/:contractorID', (req, res, next) => {
   const db = req.app.get('db')
 
   return db.Contractor_Project.findAll({
     where: {
-      contractorID: req.params.contractorProjectID,
+      contractorID: req.params.contractorID,
     },
     include: [db.Contractor, db.Project],
   })
@@ -100,12 +100,12 @@ router.put('/update/:contractorProjectID', (req, res, next) => {
       return res.send(err)
     })
 })
-router.delete('/delete/:ContractorProjectID/:ProjectID', (req, res, next) => {
+router.delete('/delete/:ContractorID/:ProjectID', (req, res, next) => {
   const db = req.app.get('db')
 
   db.Contractor_Project.destroy({
     where: {
-      contractorProjectID: req.params.ContractorProjectID,
+      contractorID: req.params.ContractorID,
       projectID: req.params.ProjectID,
     },
   })

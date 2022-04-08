@@ -6,7 +6,7 @@ router.get('/find', (req, res, next) => {
   return db.Assigned_Module.findAll({
     include: [db.Contractor, db.Module, db.Project],
   })
-    .then((Preferred_Module) => res.send(Preferred_Module))
+    .then((Assigned_Module) => res.send(Assigned_Module))
     .catch((err) => {
       console.log(
         'There was an error querying Contractor Project 1',
@@ -45,9 +45,10 @@ router.get('/find/:contractorID', (req, res, next) => {
 })
 router.post('/create', (req, res, next) => {
   const db = req.app.get('db')
-  db.Module.create({
-    emrID: req.body.EMRID,
-    moduleName: req.body.ModuleName,
+  db.Assigned_Module.create({
+    contractorID: req.body.contractorID,
+    moduleID: req.body.moduleID,
+    projectID: req.body.projectID,
   })
     .then(() => {
       res.status(200).send('OK')
@@ -57,33 +58,54 @@ router.post('/create', (req, res, next) => {
       return res.send(err)
     })
 })
-router.put('/update/:moduleid', (req, res, next) => {
+// router.put('/update/:moduleid', (req, res, next) => {
+//   const db = req.app.get('db')
+
+//   db.Module.update(
+//     {
+//       emrID: req.body.EMRID,
+//       moduleName: req.body.ModuleName,
+//     },
+//     {
+//       where: {
+//         moduleID: req.params.moduleid,
+//       },
+//     },
+//   )
+//     .then(() => {
+//       res.status(200).send('OK')
+//     })
+//     .catch((err) => {
+//       console.log('There was an error updating Module', JSON.stringify(err))
+//       return res.send(err)
+//     })
+// })
+
+router.delete('/delete/:contractorID/:projectID', (req, res, next) => {
   const db = req.app.get('db')
 
-  db.Module.update(
-    {
-      emrID: req.body.EMRID,
-      moduleName: req.body.ModuleName,
+  db.Assigned_Module.destroy({
+    where: {
+      contractorID: req.params.contractorID,
+      projectID: req.params.projectID,
     },
-    {
-      where: {
-        moduleID: req.params.moduleid,
-      },
-    },
-  )
+  })
     .then(() => {
-      res.status(200).send('OK')
+      res.status(200).send('The record has been deleted!')
     })
     .catch((err) => {
-      console.log('There was an error updating Module', JSON.stringify(err))
+      console.log('There was an error deleting Module', JSON.stringify(err))
       return res.send(err)
     })
 })
-router.delete('/delete/:moduleid', (req, res, next) => {
+
+router.delete('/delete/:moduleID', (req, res, next) => {
   const db = req.app.get('db')
 
-  db.Module.destroy({
-    where: { moduleID: req.params.moduleid },
+  db.Assigned_Module.destroy({
+    where: {
+      moduleID: req.params.moduleID,
+    },
   })
     .then(() => {
       res.status(200).send('The record has been deleted!')

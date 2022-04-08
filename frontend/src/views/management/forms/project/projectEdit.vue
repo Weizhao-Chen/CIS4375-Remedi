@@ -137,9 +137,12 @@
               :key="item.contractorID"
               :href="'/contractor/edit/' + item.contractorID"
               >{{ item.Contractor.firstName + ' ' + item.Contractor.lastName }}
-              <!-- <b-button variant="primary">View</b-button>
 
-              <b-button variant="primary">Remove</b-button> -->
+              <b-button
+                v-on:click="removeContractor($event, item.contractorID)"
+                variant="primary"
+                >Remove</b-button
+              >
             </b-list-group-item>
           </b-list-group>
         </b-card-body>
@@ -175,7 +178,7 @@
               <model-list-select
                 v-model="currentModule"
                 :list="Modules"
-                option-value="moduleID"
+                option-value="Module"
                 id="moduleID"
                 option-text="Module"
                 :isError="validationContractor === true"
@@ -192,7 +195,7 @@
           </form>
         </b-card>
       </b-collapse>
-      <!-- {{ this.Modules }} -->
+      <!-- {{ this.currentModule }} -->
     </form>
   </div>
 </template>
@@ -331,23 +334,61 @@ export default {
         ContractorID: this.currentContractor.contractorID,
         ProjectID: this.projectID,
       }
-      axios
-        .post(`${config.api}/api/Contractor_Project/create`, payLoad)
-        .then((response) => {
-          this.Contractors.push({
-            contractorID: this.currentContractor.contractorID,
-            projectID: this.projectID,
-            Contractor: {
-              firstName: this.currentContractor.firstName,
-              lastName: this.currentContractor.lastName,
-            },
-          })
-        })
-        .catch(() => {
-          Swal.fire('Error', 'Something went wrong updating Project', 'error')
-        })
+      const assignedModulePayLoad = {
+        projectID: this.projectID,
+        moduleID: this.currentModule.moduleID,
+        contractorID: this.currentModule.contractorID,
+      }
 
-      console.log('test')
+      if (!this.currentContractor.contractorID) {
+        Swal.fire('Error', 'Must add Contractor', 'error')
+      } else if (!this.currentModule.contractorID) {
+        Swal.fire('Error', 'Must add Module', 'error')
+      } else
+        axios
+          .post(`${config.api}/api/Contractor_Project/create`, payLoad)
+          .then((response) => {
+            this.Contractors.push({
+              contractorID: this.currentContractor.contractorID,
+              projectID: this.projectID,
+              Contractor: {
+                firstName: this.currentContractor.firstName,
+                lastName: this.currentContractor.lastName,
+              },
+            })
+          })
+          .catch(() => {
+            Swal.fire('Error', 'Something went wrong updating Project', 'error')
+          })
+
+      axios.post(
+        `${config.api}/api/Assigned_Module/create`,
+        assignedModulePayLoad,
+      )
+
+      // console.log(assignedModulePayLoad)
+    },
+    removeContractorFromList(contractorID) {
+      for (let i = 0; i < this.Contractors.length; i++) {
+        if (this.Contractors[i].contractorID === contractorID) {
+          this.Contractors.splice(i, 1)
+        }
+      }
+
+      console.log('im running')
+    },
+    removeContractor(event, contractorID) {
+      event.preventDefault()
+
+      axios
+        .delete(
+          `${config.api}/api/Contractor_Project/delete/${contractorID}/${this.projectID}`,
+        )
+        .then(this.removeContractorFromList(contractorID))
+
+      axios.delete(
+        `${config.api}/api/Assigned_Module/delete/${contractorID}/${this.projectID}`,
+      )
     },
     loadData() {
       axios
