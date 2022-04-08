@@ -19,32 +19,32 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     createdAt: false,
     updatedAt: false,
-    deletedAt: false,
-    indexes: [
-      {
-        name: "PK__Contract__FF57E0CD5D3B895B",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "projectID" },
-        ]
-      },
-      {
-        name: "PK__Contract__FF57E0CD6F0567AD",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "projectID" },
-        ]
-      },
-      {
-        name: "PK__Contract__FF57E0CDF6ED3BF8",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "projectID" },
-        ]
-      },
-    ]
+    deletedAt: false
+    // indexes: [
+    //   {
+    //     name: "PK__Contract__FF57E0CD5D3B895B",
+    //     unique: true,
+    //     fields: [
+    //       { name: "contractorID" },
+    //       { name: "projectID" },
+    //     ]
+    //   },
+    //   {
+    //     name: "PK__Contract__FF57E0CD6F0567AD",
+    //     unique: true,
+    //     fields: [
+    //       { name: "contractorID" },
+    //       { name: "projectID" },
+    //     ]
+    //   },
+    //   {
+    //     name: "PK__Contract__FF57E0CDF6ED3BF8",
+    //     unique: true,
+    //     fields: [
+    //       { name: "contractorID" },
+    //       { name: "projectID" },
+    //     ]
+    //   },
+    // ]
   });
 };

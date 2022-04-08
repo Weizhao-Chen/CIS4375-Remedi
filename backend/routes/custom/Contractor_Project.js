@@ -33,10 +33,6 @@ router.get('/find', (req, res, next) => {
 // })
 router.post('/create', (req, res, next) => {
     const db = req.app.get('db')
-    console.log(req.params.ContractorID)
-    console.log(req.params.ProjectID)
-    console.log(req.body.ContractorID)
-    console.log(req.body.ProjectID)
     db.Contractor_Project.create({
         contractorID: req.body.ContractorID,
         projectID: req.body.ProjectID
@@ -49,46 +45,44 @@ router.post('/create', (req, res, next) => {
         return res.send(err)
     })
 })
-router.put('/update', (req, res, next) => {
+// router.put('/update', (req, res, next) => {
+//     const db = req.app.get('db')
+//     db.Contractor_Project.update({
+//         contractorID: req.body.ContractorID,
+//         projectID: req.body.ProjectID
+//         }, {
+//             where: {
+//                 contractorProjectID: contractorProjectID
+//             }
+//         })
+//         .then(() => {
+//             res.status(200).send('OK');
+//         })
+//         .catch(err => {
+//            console.log('There was an error updating Contractor Project', JSON.stringify(err))
+//            return res.send(err)
+//    })
+// })
+router.put('/updateproject/:ProjectID', (req, res, next) => {
     const db = req.app.get('db')
     db.Contractor_Project.update({
         contractorID: req.body.ContractorID,
         projectID: req.body.ProjectID
         }, {
             where: {
-                contractorProjectID: contractorProjectID
+                projectID: req.params.ProjectID
             }
         })
         .then(() => {
             res.status(200).send('OK');
         })
         .catch(err => {
-           console.log('There was an error updating Contractor Project', JSON.stringify(err))
+           console.log('There was an error updating Contractor Project - project', JSON.stringify(err))
            return res.send(err)
    })
 })
-router.put('/update/:ProjectID', (req, res, next) => {
+router.put('/updatecontractor/:ContractorID', (req, res, next) => {
     const db = req.app.get('db')
-    db.Contractor_Project.update({
-        contractorID: req.body.ContractorID,
-        projectID: req.body.ProjectID
-        }, {
-            where: {
-                projectID: projectID
-            }
-        })
-        .then(() => {
-            res.status(200).send('OK');
-        })
-        .catch(err => {
-           console.log('There was an error updating Contractor Project', JSON.stringify(err))
-           return res.send(err)
-   })
-})
-router.put('/update/:ContractorID', (req, res, next) => {
-    const db = req.app.get('db')
-    console.log(req.params.ContractorID)
-    console.log(req.params.ProjectID)
     console.log(req.body.ContractorID)
     console.log(req.body.ProjectID)
     db.Contractor_Project.update({
@@ -97,33 +91,29 @@ router.put('/update/:ContractorID', (req, res, next) => {
         
         }, {
             where: {
-                contractorProjectID: contractorProjectID
+                contractorID: req.params.ContractorID
             }
         })
         .then(() => {
             res.status(200).send('OK');
         })
         .catch(err => {
-           console.log('There was an error updating Contractor Project', JSON.stringify(err))
+           console.log('There was an error updating Contractor Project - contractor', JSON.stringify(err))
            return res.send(err)
    })
 })
-router.delete('/delete', (req, res, next) => {
+router.delete('/delete/:contractorid/:projectid', (req, res, next) => {
+    
     const db = req.app.get('db')
-    console.log(req.params.ContractorID)
-    console.log(req.params.ProjectID)
-    console.log(req.body.ContractorID)
-    console.log(req.body.ProjectID)
     db.Contractor_Project.destroy({
-        
         where: { 
-            contractorID: req.params.ContractorID,
-            projectID: req.params.projectID
+            contractorID: req.params.contractorid,
+            projectID: req.params.projectid
         }
     }).then(() => {
         res.status(200).send('The record has been deleted!');
     }).catch(err => {
-        console.log('There was an error deleting Contractor Project', JSON.stringify(err))
+        console.log('There was an error deleting Contractor Project or is still active', JSON.stringify(err))
         return res.send(err)
     });
 })

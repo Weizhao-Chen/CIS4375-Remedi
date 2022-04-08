@@ -21,7 +21,9 @@
               <button type="button" class="swal2-editform swal2-styled deleteButton btn-delete" @click="deleteme">DELETE</button>
             </div>
             <div class="editFormFooter-right">
-              <button type="button" class="swal2-editform swal2-styled" @click="submit">SUBMIT</button>
+              <button type="button" class="swal2-editform swal2-styled" @click="create">CREATE</button>
+              <button type="button" class="swal2-editform swal2-styled" @click="updateleft">UPDATE LEFT</button>
+              <button type="button" class="swal2-editform swal2-styled" @click="updateright">UPDATE RIGHT</button>
               <button type="button" class="swal2-editform swal2-styled" @click="close">CLOSE</button>
             </div>
           </div>
@@ -42,11 +44,17 @@ export default {
     close() {
       this.$emit('close');
     },
-    submit() {
-      this.$emit('submit');
+    create() {
+      this.$emit('create');
     },
     deleteme() {
       this.$emit('delete');
+    },
+    updateleft() {
+      this.$emit('updateleft');
+    },
+    updateright() {
+      this.$emit('updateright');
     }
   },
 };

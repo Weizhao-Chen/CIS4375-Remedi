@@ -8,7 +8,10 @@
         <button class="swal2-editform swal2-styled" v-on:click="addNewContractorProject">Add New Contractor Project</button>
       </div>
     </div>
-
+        <!-- :sort-options="{
+          enabled: true,
+          initialSortBy: {field: form.model.ContractorID, type: 'asc'}
+        }" -->
     <div>
       <div slot="table-actions">
       </div>
@@ -20,10 +23,6 @@
           enabled: true,
           skipDiacritics: true,
           placeholder: 'Search this table',
-        }"
-        :sort-options="{
-          enabled: true,
-          initialSortBy: {field: 'Contractor.contractorID', type: 'asc'}
         }"
         :pagination-options="{
           enabled: true,
@@ -45,26 +44,17 @@
     <ModalWithDelete
       v-show="isModalVisible"
       @close="modalClose"
-      @submit="modalSubmit"
+      @create="modalCreate"
+      @updateleft="modalUpdateLeft"
+      @updateright="modalUpdateRight"
       @delete="deleteItem"
     >
       <template v-slot:header>
         <span v-if="form.model.ContractorID">Edit ContractorID </span>
         <span v-if="!form.model.ContractorID">Add ContractorID </span>
-        <span v-if="form.model.ProjectID">Edit ProjectID </span>
-        <span v-if="!form.model.ProjectID">Add ProjectID </span>
       </template>
 
       <template v-slot:body>
-        <!-- <FormulateInput
-          @validation="validation1 = $event"
-          type="text"
-          name="incidentTypeName"
-          label="Incident Type Name"
-          validation="required"
-          v-model="form.model.incidentTypeName"
-          :validation-messages="{required: 'The Incident Type Name is required'}"
-        /> -->
         <label class="form-custom-label" for="form-contractorlist">Contractor</label>
         <model-list-select :list="Contractor_DATA"
                            v-model="form.model.ContractorID"
@@ -109,7 +99,6 @@ export default {
   data() {
     return {
       isModalVisible: false,
-      // validation1: {},
       DB_DATA: [],
       Contractor_DATA: [],
       Project_DATA: [],
@@ -123,19 +112,23 @@ export default {
       dataFields: [{
         label: 'Contractor ID',
         field: 'Contractor.contractorID'
-      },{
-        label: 'Contractor last name',
-        field: 'Contractor.lastName'
-      },{
-        label: 'Contractor first name',
-        field: 'Contractor.firstName'
-      },{
+      },
+      // ,{
+      //   label: 'Contractor last name',
+      //   field: 'Contractor.lastName'
+      // },{
+      //   label: 'Contractor first name',
+      //   field: 'Contractor.firstName'
+      // },
+      {
         label: 'Project ID',
         field: 'Project.projectID'
-      },{
-        label: 'Project name',
-        field: 'Project.projectName'
-      }]
+      }
+      // ,{
+      //   label: 'Project name',
+      //   field: 'Project.projectName'
+      // }
+      ]
     };
   },
   components: {
@@ -160,9 +153,7 @@ export default {
       }
     },
     validationFormCheck: function () {
-      if (
-        // this.validation1.hasErrors === false && 
-      this.validationContractor === false && 
+      if (this.validationContractor === false && 
       this.validationProject === false){
         return true
       } else {
@@ -212,8 +203,8 @@ export default {
           Swal.fire('Error', 'Something went wrong Project', 'error')
         })
     },
-    deleteItem(){ //this.form.model.ContractorID + after delete below
-      axios.delete(`${config.api}/api/Contractor_Project/delete/`, this.form.model)
+    deleteItem(){
+      axios.delete(`${config.api}/api/Contractor_Project/delete/` + this.form.model.ContractorID, this.form.model.ProjectID)
         .then((response) => {
           this.loadData()
           Swal.fire(
@@ -228,32 +219,39 @@ export default {
           Swal.fire('Error', 'Something went wrong', 'error')
         })
     },
-    modalSubmit(){
+    modalCreate(){
       if(!this.validationFormCheck) {
-        Swal.fire('Error', 'Please fix the errors', 'error')
+        Swal.fire('Error', 'Please fix the errors. If the input text box are red then there is no input', 'error')
       } else {
-        if(!this.form.model.ContractorID && this.form.model.ProjectID) {
-          console.log(this.form.model.ContractorID + '1')
-          console.log(this.form.model.ProjectID + '2')
-          axios.put(`${config.api}/api/Contractor_Project/update/` + this.form.model.ProjectID, this.form.model)
+        if(this.form.model.ContractorID != '' && this.form.model.ProjectID != '') {
+          console.log(1)
+          axios.post(`${config.api}/api/Contractor_Project/create`, this.form.model)
             .then((response) => {
+              this.loadData()
               Swal.fire(
                 'Done!',
-                'The record has been updated. (If duplicate inputs are sent, no new data wouold be added)',
+                'The record has been created. (If duplicate inputs are sent, no new data wouold be added)',
                 'success'
               )
               this.loadData();
               this.modalClose()
             })
             .catch(() => {
-              Swal.fire('Error', 'Something went wrong (update project)', 'error')
+              Swal.fire('Error', 'Something went wrong (create)', 'error')
             })
-        } else if(!this.form.model.ProjectID && this.form.model.ContractorID)
+        }
+      }
+    },
+    modalUpdateLeft(){
+      if(!this.validationContractor) {
+        Swal.fire('Error', 'Please fix the errors. If the input text box are red then there is no input', 'error')
+      } else {
+        if(this.form.model.ProjectID != '')
         {
-          console.log(this.form.model.ContractorID + '3')
-          console.log(this.form.model.ProjectID + '4')
-          axios.put(`${config.api}/api/Contractor_Project/update` + this.form.model.ContractorID, this.form.model)
+          console.log(2)
+          axios.put(`${config.api}/api/Contractor_Project/updatecontractor/` + this.form.model.ContractorID, this.form.model)
             .then((response) => {
+              this.loadData()
               Swal.fire(
                 'Done!',
                 'The record has been updated. (If duplicate inputs are sent, no new data wouold be added)',
@@ -266,23 +264,30 @@ export default {
             .catch(() => {
               Swal.fire('Error', 'Something went wrong (update contractor)', 'error')
             })
-        } else{
-          console.log(this.form.model.ContractorID + '5')
-          console.log(this.form.model.ProjectID + '6')
-          axios.post(`${config.api}/api/Contractor_Project/create`, this.form.model)
+        }
+      }
+    },
+    modalUpdateRight(){
+      if(this.validationProject) {
+        console.log(this.validationProject)
+        Swal.fire('Error', 'Please fix the errors. If the input text box are red then there is no input', 'error')
+      } else {
+        if(this.form.model.ProjectID != '')
+        {
+          console.log(3)
+          axios.put(`${config.api}/api/Contractor_Project/updateproject/` + this.form.model.ProjectID, this.form.model)
             .then((response) => {
               Swal.fire(
                 'Done!',
-                'The record has been created. (If duplicate inputs are sent, no new data wouold be added)',
-                'success'
+                'The record has been updated. (If duplicate inputs are sent, no new data wouold be added)',
+                'success',
+                
               )
               this.loadData();
               this.modalClose()
             })
             .catch(() => {
-              console.log(this.form.model.ContractorID + '5.5')
-              console.log(this.form.model.ProjectID + '6.5')
-              Swal.fire('Error', 'Something went wrong (create)', 'error')
+              Swal.fire('Error', 'Something went wrong (update project)', 'error')
             })
         }
       }
