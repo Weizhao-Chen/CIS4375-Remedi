@@ -264,6 +264,42 @@
         >
         </model-list-select>
       </div>
+
+      <div class="editForm-right">
+        <label class="form-custom-label" for="form-Project_Status"
+          >Assigned Modules:</label
+        >
+
+        <b-list-group>
+          <b-list-group-item
+            v-for="item in AssignedModules"
+            :key="item.moduleID"
+            >{{ item.Project.projectName + ' - ' + item.Module.moduleName }}
+            <!-- <b-button variant="primary">View</b-button>
+
+              <b-button variant="primary">Remove</b-button> -->
+          </b-list-group-item>
+        </b-list-group>
+      </div>
+
+      <div class="editForm-right">
+        <label class="form-custom-label" for="form-Project_Status"
+          >Preferred Modules:</label
+        >
+
+        <b-list-group>
+          <b-list-group-item
+            v-for="item in AssignedModules"
+            :key="item.moduleID"
+            >{{ item.Project.projectName + ' - ' + item.Module.moduleName }}
+            <!-- <b-button variant="primary">View</b-button>
+
+              <b-button variant="primary">Remove</b-button> -->
+          </b-list-group-item>
+        </b-list-group>
+      </div>
+
+      <!-- {{ this.AssignedModules }} -->
     </form>
   </div>
 </template>
@@ -302,6 +338,8 @@ export default {
       DB_DATA: [],
       Contractor_Status_DATA: [],
       ContractorProjects: [],
+      AssignedModules: [],
+      PreferredModules: [],
       form: {
         model: {
           ContractorID: '',
@@ -462,10 +500,15 @@ export default {
       axios
         .get(`${config.api}/api/Contractor_Project/find/` + this.contractorID)
         .then((response) => (this.ContractorProjects = response.data))
+
+      axios
+        .get(`${config.api}/api/Assigned_Module/find/` + this.contractorID)
+        .then((response) => (this.AssignedModules = response.data))
+        .then(console.log('testing'))
     },
     loadFields() {
       axios
-        .get(`${config.api}/api/Contractor_Status/find`)
+        .get(`${config.api}/api/Contractor_Status/find/`)
         .then((response) => {
           this.Contractor_Status_DATA = response.data
         })

@@ -126,7 +126,6 @@
           >Contractors on Project:</label
         >
 
-        <!-- {{ this.Contractors }} -->
         <b-card-body
           id="nav-scroller"
           ref="content"
@@ -137,13 +136,63 @@
               v-for="item in Contractors"
               :key="item.contractorID"
               :href="'/contractor/edit/' + item.contractorID"
-              >{{
-                item.Contractor.firstName + ' ' + item.Contractor.lastName
-              }}</b-list-group-item
-            >
+              >{{ item.Contractor.firstName + ' ' + item.Contractor.lastName }}
+              <!-- <b-button variant="primary">View</b-button>
+
+              <b-button variant="primary">Remove</b-button> -->
+            </b-list-group-item>
           </b-list-group>
         </b-card-body>
       </div>
+      <br />
+      <b-button v-b-toggle="'collapse-2'" class="m-1" variant="primary"
+        >Add Contractor</b-button
+      >
+
+      <!-- Element to collapse -->
+      <b-collapse id="collapse-2">
+        <b-card>
+          <form class="swal2-form mainForm">
+            <div class="editForm-right">
+              <label class="form-custom-label" for="form-Contractor">
+                Contractor</label
+              >
+              <model-list-select
+                v-model="currentContractor"
+                :list="AllContractors"
+                option-value="contractorID"
+                id="contractorID"
+                option-text="firstName"
+                :isError="validationContractor === true"
+                placeholder="select one"
+              >
+              </model-list-select>
+
+              <!-- {{ this.Modules }} -->
+              <label class="form-custom-label" for="form-Contractor"
+                >Assign Module:</label
+              >
+              <model-list-select
+                v-model="currentModule"
+                :list="Modules"
+                option-value="moduleID"
+                id="moduleID"
+                option-text="Module"
+                :isError="validationContractor === true"
+                placeholder="select one"
+              >
+              </model-list-select>
+            </div>
+            <button
+              class="swal2-editform swal2-styled"
+              v-on:click="addContractor($event)"
+            >
+              Add
+            </button>
+          </form>
+        </b-card>
+      </b-collapse>
+      <!-- {{ this.Modules }} -->
     </form>
   </div>
 </template>
@@ -170,6 +219,10 @@ export default {
       Hospital_DATA: [],
       Project_Status_DATA: [],
       Contractors: [],
+      AllContractors: [],
+      currentContractor: {},
+      Modules: [],
+      currentModule: {},
       form: {
         model: {
           ProjectID: '',
@@ -186,6 +239,20 @@ export default {
   components: {
     ModelSelect,
     ModelListSelect,
+  },
+  watch: {
+    currentContractor() {
+      if (this.currentContractor) {
+        console.log('running')
+        axios
+          .get(
+            `${config.api}/api/Preferred_Module/find/${this.currentContractor.contractorID}`,
+          )
+          .then((response) => {
+            this.Modules = response.data
+          })
+      }
+    },
   },
   computed: {
     validationHospital: function () {
@@ -257,6 +324,31 @@ export default {
           Swal.fire('Error', 'Something went wrong (deleting Project)', 'error')
         })
     },
+    addContractor(event) {
+      event.preventDefault()
+      const ProjectID = this.projectID
+      const payLoad = {
+        ContractorID: this.currentContractor.contractorID,
+        ProjectID: this.projectID,
+      }
+      axios
+        .post(`${config.api}/api/Contractor_Project/create`, payLoad)
+        .then((response) => {
+          this.Contractors.push({
+            contractorID: this.currentContractor.contractorID,
+            projectID: this.projectID,
+            Contractor: {
+              firstName: this.currentContractor.firstName,
+              lastName: this.currentContractor.lastName,
+            },
+          })
+        })
+        .catch(() => {
+          Swal.fire('Error', 'Something went wrong updating Project', 'error')
+        })
+
+      console.log('test')
+    },
     loadData() {
       axios
         .get(`${config.api}/api/Project/find/` + this.projectID)
@@ -278,6 +370,10 @@ export default {
           `${config.api}/api/Contractor_Project/find_project/` + this.projectID,
         )
         .then((response) => (this.Contractors = response.data))
+
+      axios.get(`${config.api}/api/Contractor/find`).then((response) => {
+        this.AllContractors = response.data
+      })
     },
     loadFields() {
       axios
