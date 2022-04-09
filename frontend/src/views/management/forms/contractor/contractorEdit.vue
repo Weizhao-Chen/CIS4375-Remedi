@@ -49,12 +49,16 @@
       <div class="editForm-left">
         <FormulateInput
           @validation="validationOnsite = $event"
-          type="text"
+          type="select"
           name="virtualOnsite"
           label="Onsite"
           validation="required"
           v-model="form.model.VirtualOnsite"
           :validation-messages="{ required: 'The onsite is required' }"
+          :options="[
+            { value: 'virtual', label: 'virtual' },
+            { value: 'on-site', label: 'on-site' },
+          ]"
         />
       </div>
       <div class="editForm-left">
@@ -167,23 +171,31 @@
       <div class="editForm-left">
         <FormulateInput
           @validation="validationHistory = $event"
-          type="text"
+          type="select"
           name="remediHistory"
-          label="history"
+          label="Have History with Remedi"
           validation="required"
           v-model="form.model.RemediHistory"
           :validation-messages="{ required: 'The history is required' }"
+          :options="[
+            { value: true, label: 'yes' },
+            { value: false, label: 'no' },
+          ]"
         />
       </div>
       <div class="editForm-left">
         <FormulateInput
           @validation="validationWisdom = $event"
-          type="text"
-          name="supportWisdom"
-          label="wisdom"
+          type="select"
+          name="SupportWisdom"
+          label="Support Wisdom"
           validation="required"
           v-model="form.model.SupportWisdom"
           :validation-messages="{ required: 'The wisdom is required' }"
+          :options="[
+            { value: true, label: 'yes' },
+            { value: false, label: 'no' },
+          ]"
         />
       </div>
       <div class="editForm-left">
@@ -191,7 +203,7 @@
           @validation="validationGolives = $event"
           type="text"
           name="numberofGoLives"
-          label="GoLives"
+          label="Number of GoLives"
           validation="required"
           v-model="form.model.NumberOfGoLives"
           :validation-messages="{ required: 'The GoLives is required' }"
@@ -202,7 +214,7 @@
           @validation="validationEpicProjects = $event"
           type="text"
           name="numberofEpicProjects"
-          label="Epic Project"
+          label="Number of Epic Projects"
           validation="required"
           v-model="form.model.NumberofEpicProjects"
           :validation-messages="{ required: 'The Epic Project is required' }"
@@ -213,7 +225,7 @@
           @validation="validationYearSupportEpic = $event"
           type="text"
           name="yearsOfSupportEpic"
-          label="Support Epic"
+          label="Years of Support Epic"
           validation="required"
           v-model="form.model.YearsOfSupportEpic"
           :validation-messages="{ required: 'The Support Epic is required' }"
@@ -221,28 +233,35 @@
       </div>
       <div class="editForm-left">
         <FormulateInput
-          @validation="validationSupportVirtualEpic = $event"
-          type="text"
+          type="select"
           name="supportVirtualEpic"
-          label="Virtual Epic"
+          label="Support Virtual Epic"
           validation="required"
           v-model="form.model.SupportVirtualEpic"
           :validation-messages="{ required: 'The Virtual Epic is required' }"
+          :placeholder="form.model.SupportVirtualEpic"
+          :options="[
+            { value: true, label: 'yes' },
+            { value: false, label: 'no' },
+          ]"
         />
       </div>
       <div class="editForm-left">
         <FormulateInput
           @validation="validationCreditCard = $event"
-          type="text"
-          name="creditCardHotel"
-          label="credit card"
+          type="select"
+          label="credit card hotel"
           validation="required"
-          v-model="form.model.CreditCardHotel"
+          v-model="form.model.ContractorID"
           :validation-messages="{ required: 'The credit card is required' }"
+          :options="[
+            { value: true, label: 'yes' },
+            { value: false, label: 'no' },
+          ]"
         />
       </div>
-      <!-- {{ this.ContractorProjects }} -->
-      <div>
+      <!-- {{ this.form.model }} -->
+      <div v-if="!isNewContractor">
         Current Projects:
         <!-- <ul id="example-1">
         <li v-for="item in ContractorProjects" :key="item.contractorID">
@@ -258,11 +277,14 @@
             <b-list-group-item
               v-for="item in ContractorProjects"
               :key="item.contractorID"
-              :href="'/project/edit/' + item.projectID"
               >{{ item.Project.projectName }}
-              <!-- <b-button variant="primary">View</b-button>
 
-              <b-button variant="primary">Remove</b-button> -->
+              <b-button
+                class="button-style"
+                :href="'/project/edit/' + item.projectID"
+                variant="primary"
+                >View</b-button
+              >
             </b-list-group-item>
           </b-list-group>
         </b-card-body>
@@ -284,7 +306,7 @@
         </model-list-select>
       </div>
 
-      <div class="editForm-right">
+      <div v-if="!isNewContractor" class="editForm-right">
         <label class="form-custom-label" for="form-Project_Status"
           >Assigned Modules:</label
         >
@@ -301,7 +323,7 @@
         </b-list-group>
       </div>
 
-      <div class="editForm-right">
+      <div v-if="!isNewContractor" class="editForm-right">
         <label class="form-custom-label" for="form-Project_Status"
           >Preferred Modules:</label
         >
@@ -311,15 +333,55 @@
             v-for="item in PreferredModules"
             :key="item.moduleID"
             >{{ item.Module.moduleName }}
-            <!-- <b-button variant="primary">View</b-button>
 
-              <b-button variant="primary">Remove</b-button> -->
+            <b-button
+              v-on:click="removePreferredModule($event, item.moduleID)"
+              class="button-style"
+              variant="primary"
+              >Remove</b-button
+            >
           </b-list-group-item>
         </b-list-group>
       </div>
 
-      <!-- {{ this.AssignedModules }} -->
-      {{ this.PreferredModules }}
+      <b-button
+        v-if="!isNewContractor"
+        v-b-toggle="'collapse-2'"
+        class="m-1"
+        variant="primary"
+        >Add</b-button
+      >
+      <br />
+      <!-- Element to collapse -->
+      <b-collapse id="collapse-2">
+        <b-card>
+          <form class="swal2-form mainForm">
+            <div class="editForm-right">
+              <label class="form-custom-label" for="form-Contractor"
+                >Modules:</label
+              >
+              <model-list-select
+                v-model="currentModule"
+                :list="AllModules"
+                option-value="moduleName"
+                id="moduleID"
+                option-text="moduleName"
+                :isError="validationContractor === true"
+                placeholder="select one"
+              >
+              </model-list-select>
+            </div>
+            <button
+              class="swal2-editform swal2-styled"
+              v-on:click="addModule($event)"
+            >
+              Add
+            </button>
+          </form>
+        </b-card>
+      </b-collapse>
+
+      <!-- {{ this.PreferredModules }} -->
     </form>
   </div>
 </template>
@@ -360,6 +422,8 @@ export default {
       ContractorProjects: [],
       AssignedModules: [],
       PreferredModules: [],
+      AllModules: [],
+      currentModule: {},
       form: {
         model: {
           ContractorID: '',
@@ -416,7 +480,7 @@ export default {
         this.validationEpicProjects.hasErrors === false &&
         this.validationYearSupportEpic.hasErrors === false &&
         this.validationSupportVirtualEpic.hasErrors === false &&
-        this.validationCreditCard.hasErrors === false &&
+        // this.validationCreditCard.hasErrors === false &&
         this.validationContractorStatus === false
       ) {
         return true
@@ -443,6 +507,8 @@ export default {
             'error',
           )
         })
+
+      // console.log(this.form.model)
     },
     updateContractor() {
       const ContractorID = this.contractorID
@@ -479,6 +545,42 @@ export default {
             'error',
           )
         })
+    },
+    addModule(event) {
+      event.preventDefault()
+
+      const modulePayLoad = {
+        contractorID: this.contractorID,
+        moduleID: this.currentModule.moduleID,
+      }
+      axios
+        .post(`${config.api}/api/Preferred_Module/create`, modulePayLoad)
+        .then((response) => console.log(response))
+        .then(
+          this.PreferredModules.push({
+            moduleID: this.currentModule.moduleID,
+            Module: {
+              moduleName: this.currentModule.moduleName,
+            },
+          }),
+        )
+    },
+    removePreferredModuleFromList(moduleID) {
+      for (let i = 0; i < this.PreferredModules.length; i++) {
+        if (this.PreferredModules[i].moduleID === moduleID) {
+          this.PreferredModules.splice(i, 1)
+        }
+      }
+    },
+
+    removePreferredModule(event, moduleID) {
+      event.preventDefault()
+
+      axios
+        .delete(
+          `${config.api}/api/Preferred_Module/delete/${moduleID}/${this.contractorID}`,
+        )
+        .then(this.removePreferredModuleFromList(moduleID))
     },
     loadData() {
       axios
@@ -529,7 +631,13 @@ export default {
         .get(`${config.api}/api/Preferred_Module/find/` + this.contractorID)
         .then((response) => (this.PreferredModules = response.data))
         .then(console.log('testing'))
+
+      axios
+        .get(`${config.api}/api/Module/find`)
+        .then((response) => (this.AllModules = response.data))
+        .then(console.log('testing'))
     },
+
     loadFields() {
       axios
         .get(`${config.api}/api/Contractor_Status/find/`)

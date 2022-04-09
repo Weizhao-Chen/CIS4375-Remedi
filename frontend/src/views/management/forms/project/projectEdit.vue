@@ -121,7 +121,7 @@
         </model-list-select>
       </div>
 
-      <div class="editForm-right">
+      <div v-if="!isNewProject" class="editForm-right">
         <label class="form-custom-label" for="form-Project_Status"
           >Contractors on Project:</label
         >
@@ -135,20 +135,30 @@
             <b-list-group-item
               v-for="item in Contractors"
               :key="item.contractorID"
-              :href="'/contractor/edit/' + item.contractorID"
               >{{ item.Contractor.firstName + ' ' + item.Contractor.lastName }}
 
               <b-button
+                class="button-style"
                 v-on:click="removeContractor($event, item.contractorID)"
                 variant="primary"
                 >Remove</b-button
+              >
+              <b-button
+                class="button-style"
+                :href="'/contractor/edit/' + item.contractorID"
+                variant="primary"
+                >View</b-button
               >
             </b-list-group-item>
           </b-list-group>
         </b-card-body>
       </div>
       <br />
-      <b-button v-b-toggle="'collapse-2'" class="m-1" variant="primary"
+      <b-button
+        v-if="!isNewProject"
+        v-b-toggle="'collapse-2'"
+        class="m-1"
+        variant="primary"
         >Add Contractor</b-button
       >
 
@@ -208,6 +218,7 @@ import Swal from 'sweetalert2'
 import { mapActions } from 'vuex'
 import { ModelListSelect } from 'vue-search-select'
 import { ModelSelect } from 'vue-search-select'
+import '../../../../assets/css/styles.css'
 
 export default {
   props: ['projectID'],

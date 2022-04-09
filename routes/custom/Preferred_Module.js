@@ -45,9 +45,9 @@ router.get('/find/:contractorID', (req, res, next) => {
 })
 router.post('/create', (req, res, next) => {
   const db = req.app.get('db')
-  db.Module.create({
-    emrID: req.body.EMRID,
-    moduleName: req.body.ModuleName,
+  db.Preferred_Module.create({
+    contractorID: req.body.contractorID,
+    moduleID: req.body.moduleID,
   })
     .then(() => {
       res.status(200).send('OK')
@@ -60,7 +60,7 @@ router.post('/create', (req, res, next) => {
 router.put('/update/:moduleid', (req, res, next) => {
   const db = req.app.get('db')
 
-  db.Module.update(
+  db.Preferred_Module.update(
     {
       emrID: req.body.EMRID,
       moduleName: req.body.ModuleName,
@@ -79,11 +79,14 @@ router.put('/update/:moduleid', (req, res, next) => {
       return res.send(err)
     })
 })
-router.delete('/delete/:moduleid', (req, res, next) => {
+router.delete('/delete/:moduleID/:contractorID', (req, res, next) => {
   const db = req.app.get('db')
 
-  db.Module.destroy({
-    where: { moduleID: req.params.moduleid },
+  db.Preferred_Module.destroy({
+    where: {
+      moduleID: req.params.moduleID,
+      contractorID: req.params.contractorID,
+    },
   })
     .then(() => {
       res.status(200).send('The record has been deleted!')

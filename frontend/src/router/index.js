@@ -161,6 +161,14 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/project/create',
+      component: projectEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
       path: '/contractorproject',
       component: contractorprojectadmin,
       props: true,
