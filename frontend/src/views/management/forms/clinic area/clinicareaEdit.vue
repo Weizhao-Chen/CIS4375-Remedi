@@ -62,7 +62,7 @@
                 type="text"
                 name="clinicAreaLeadEmail"
                 label="email"
-                validation="required"
+                validation="email"
                 v-model="form.model.ClinicAreaLeadEmail"
                 :validation-messages="{required: 'The Email is required'}"
             />

@@ -163,7 +163,7 @@
           type="text"
           name="email"
           label="email"
-          validation="required"
+          validation="email"
           v-model="form.model.Email"
           :validation-messages="{ required: 'The email is required' }"
         />

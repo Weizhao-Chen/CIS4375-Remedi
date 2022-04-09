@@ -52,7 +52,7 @@
           type="text"
           name="projectName"
           label="project Name"
-          validation="required"
+          validation="required:trim|max:100,length"
           v-model="form.model.ProjectName"
           :validation-messages="{ required: 'The project Name is required' }"
         />
@@ -63,7 +63,8 @@
           type="text"
           name="projectStartDate"
           label="Start Date"
-          validation="required"
+          validation="bail|required|date:YYYY-MM-DD"
+          validation-name="Start Date"
           v-model="form.model.ProjectStartDate"
           :validation-messages="{ required: 'The Start Date is required' }"
         />
@@ -74,7 +75,8 @@
           type="text"
           name="projectEndDate"
           label="End Date"
-          validation="required"
+          validation="bail|required|date:YYYY-MM-DD"
+          validation-name="End Date"
           v-model="form.model.ProjectEndDate"
           :validation-messages="{ required: 'The End Date is required' }"
         />
@@ -82,10 +84,11 @@
       <div class="editForm-left">
         <FormulateInput
           @validation="validationNotes = $event"
-          type="text"
+          type="textarea"
           name="projectNotes"
           label="project Notes"
-          validation="required"
+          validation="bail|required:trim|max:500,length"
+          error-behavior="live"
           v-model="form.model.ProjectNotes"
           :validation-messages="{ required: 'The project Notes is required' }"
         />
@@ -406,10 +409,12 @@ export default {
         .get(`${config.api}/api/Project/find/` + this.projectID)
         .then((response) => {
           this.DB_DATA = response.data
-          ;(this.form.model.ProjectName = response.data.projectName),
-            (this.form.model.ProjectStartDate = response.data.projectStartDate),
-            (this.form.model.ProjectEndDate = response.data.projectEndDate),
-            (this.form.model.ProjectNotes = response.data.projectNotes)
+          this.form.model.ProjectName = response.data.projectName
+          if(response.data.projectStartDate){this.this.form.model.ProjectStartDate = response.data.projectStartDate.split('T')[0]}
+          // this.form.model.ProjectStartDate = response.data.projectStartDate
+          if(response.data.projectEndDate){this.this.form.model.ProjectEndDate = response.data.projectEndDate.split('T')[0]}
+          // this.form.model.ProjectEndDate = response.data.projectEndDate
+          this.form.model.ProjectNotes = response.data.projectNotes
           this.form.model.HospitalID = response.data.HospitalID
           this.form.model.ProjectStatusID = response.data.projectStatusID
         })

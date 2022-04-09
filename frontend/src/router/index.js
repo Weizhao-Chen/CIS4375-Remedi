@@ -151,8 +151,8 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
-    {
-      path: '/project/edit/:projectID',
+    { //path: '/project/edit/:projectID',
+      path: '/project/edit',
       name: '/project/edit',
       component: projectEdit,
       props: true,
