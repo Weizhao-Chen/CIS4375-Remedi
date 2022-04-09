@@ -26,12 +26,12 @@ module.exports = function(sequelize, DataTypes) {
     rentalCity: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Houston"
+      defaultValue: "(NHouston"
     },
     rentalState: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Texas"
+      defaultValue: "(NTexas"
     },
     rentalZipCode: {
       type: DataTypes.CHAR,
@@ -56,6 +56,13 @@ module.exports = function(sequelize, DataTypes) {
       },
       {
         name: "PK__Rental_C__85E5EF9FC4ECBF0E",
+        unique: true,
+        fields: [
+          { name: "rentalCompanyID" },
+        ]
+      },
+      {
+        name: "PK__Rental_C__85E5EF9FCEE962EF",
         unique: true,
         fields: [
           { name: "rentalCompanyID" },
