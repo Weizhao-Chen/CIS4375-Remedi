@@ -51,6 +51,13 @@ module.exports = {
       foreignKey: 'projectID',
     })
 
+    models.Assigned_Rental_Car.belongsTo(models.Contractor, {
+      foreignKey: 'contractorID',
+    })
+    models.Assigned_Rental_Car.belongsTo(models.Rental_Car, {
+      foreignKey: 'rentalCarID',
+    })
+
     // models.Contractor_Project.hasMany(models.Contractor, {foreignKey: "projectStatusID"});
     // models.Contractor_Project.hasMany(models.Project, {foreignKey: "projectStatusID"});
   },

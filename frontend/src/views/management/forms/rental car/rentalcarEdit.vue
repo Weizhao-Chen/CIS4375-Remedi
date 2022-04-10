@@ -54,7 +54,9 @@
           label="Model"
           validation="required"
           v-model="form.model.RentalCarModel"
-          :validation-messages="{ required: 'The Rental Car Model is required' }"
+          :validation-messages="{
+            required: 'The Rental Car Model is required',
+          }"
         />
       </div>
       <div class="editForm-left">
@@ -79,128 +81,91 @@
           :validation-messages="{ required: 'The Rental License is required' }"
         />
       </div>
-      <!-- {{ this.form.model }} -->
-      <!-- <div v-if="!isNewContractor">
-        Current Projects:
-        <! <ul id="example-1">
-        <li v-for="item in ContractorProjects" :key="item.contractorID">
-          {{ item.Project.projectName }}
-        </li>
-      </ul> -->
-        <!-- <b-card-body
+      <!-- {{ this.AssignedContractors }} -->
+      <div v-if="!isNewProject" class="editForm-right">
+        <label class="form-custom-label" for="form-Project_Status"
+          >Contractors :</label
+        >
+        {{ this.currentContractor }}
+        <b-card-body
           id="nav-scroller"
           ref="content"
           style="position: relative; height: 150px; overflow-y: scroll"
         >
           <b-list-group>
             <b-list-group-item
-              v-for="item in ContractorProjects"
+              v-for="item in AssignedContractors"
               :key="item.contractorID"
-              >{{ item.Project.projectName }}
+              >{{
+                item.Contractor.firstName +
+                ' ' +
+                item.Contractor.lastName +
+                ' (' +
+                item.driverPassenger +
+                ')'
+              }}
 
               <b-button
                 class="button-style"
-                :href="'/project/edit/' + item.projectID"
+                v-on:click="removeContractor($event, item.contractorID)"
                 variant="primary"
-                >View</b-button
+                >Remove</b-button
               >
             </b-list-group-item>
           </b-list-group>
         </b-card-body>
-      </div> -->
-
-      <!-- <div class="editForm-right">
-        <label class="form-custom-label" for="form-Contractor_Status"
-          >Contractor Status</label
-        >
-        <model-list-select
-          :list="Contractor_Status_DATA"
-          v-model="form.model.ContractorStatusID"
-          option-value="contractorStatusID"
-          id="form-Contractor_Status"
-          option-text="contractorStatusType"
-          :isError="validationContractorStatus === true"
-          placeholder="select one"
-        >
-        </model-list-select>
-      </div>
-
-      <div v-if="!isNewContractor" class="editForm-right">
-        <label class="form-custom-label" for="form-Project_Status"
-          >Assigned Modules:</label
-        >
-
-        <b-list-group>
-          <b-list-group-item
-            v-for="item in AssignedModules"
-            :key="item.moduleID"
-            >{{ item.Project.projectName + ' - ' + item.Module.moduleName }}
-            <! <b-button variant="primary">View</b-button>
-
-              <b-button variant="primary">Remove</b-button> -->
-          <!-- </b-list-group-item>
-        </b-list-group>
-      </div>
-
-      <div v-if="!isNewContractor" class="editForm-right">
-        <label class="form-custom-label" for="form-Project_Status"
-          >Preferred Modules:</label
-        >
-
-        <b-list-group>
-          <b-list-group-item
-            v-for="item in PreferredModules"
-            :key="item.moduleID"
-            >{{ item.Module.moduleName }}
-
-            <b-button
-              v-on:click="removePreferredModule($event, item.moduleID)"
-              class="button-style"
-              variant="primary"
-              >Remove</b-button
-            >
-          </b-list-group-item>
-        </b-list-group>
       </div>
 
       <b-button
-        v-if="!isNewContractor"
+        v-if="!isNewProject"
         v-b-toggle="'collapse-2'"
         class="m-1"
         variant="primary"
-        >Add</b-button
+        >Assign Contractor</b-button
       >
-      <br />
-      <! Element to collapse -->
-      <!-- <b-collapse id="collapse-2">
+
+      <!-- Element to collapse -->
+      <b-collapse id="collapse-2">
         <b-card>
           <form class="swal2-form mainForm">
             <div class="editForm-right">
-              <label class="form-custom-label" for="form-Contractor"
-                >Modules:</label
+              <label class="form-custom-label" for="form-Contractor">
+                Contractor</label
               >
+              <!-- {{ this.AssignedContractors }} -->
               <model-list-select
-                v-model="currentModule"
-                :list="AllModules"
-                option-value="moduleName"
-                id="moduleID"
-                option-text="moduleName"
-                :isError="validationContractor === true"
+                v-model="currentContractor"
+                :list="Contractors"
+                option-value="fullName"
+                id="contractorID"
+                option-text="fullName"
+                placeholder="select one"
+              >
+              </model-list-select>
+              <!--                 :isError="validationContractor === true" -->
+              <!-- {{ this.Modules }} -->
+
+              <model-list-select
+                v-model="currentMode"
+                :list="DriverOrPassanger"
+                option-value="mode"
+                id="driverpassID"
+                option-text="mode"
                 placeholder="select one"
               >
               </model-list-select>
             </div>
             <button
               class="swal2-editform swal2-styled"
-              v-on:click="addModule($event)"
+              v-on:click="addContractor($event)"
             >
               Add
             </button>
           </form>
         </b-card>
-      </b-collapse> -->
+      </b-collapse>
 
-      <!-- {{ this.PreferredModules }} -->
+      <!-- <input v-model="currentContractor" placeholder="edit me" /> -->
     </form>
   </div>
 </template>
@@ -223,12 +188,17 @@ export default {
       validationMake: {},
       validationPlate: {},
       DB_DATA: [],
-    //   Contractor_Status_DATA: [],
-    //   ContractorProjects: [],
-    //   AssignedModules: [],
-    //   PreferredModules: [],
-    //   AllModules: [],
-    //   currentModule: {},
+      currentContractor: {},
+      currentMode: {},
+      Contractors: [],
+      AssignedContractors: [],
+      DriverOrPassanger: [{ mode: 'Driver' }, { mode: 'Passenger' }],
+      //   Contractor_Status_DATA: [],
+      //   ContractorProjects: [],
+      //   AssignedModules: [],
+      //   PreferredModules: [],
+      //   AllModules: [],
+      //   currentModule: {},
       form: {
         model: {
           RentalCarID: '',
@@ -248,7 +218,7 @@ export default {
       if (
         this.validationModel.hasErrors === false &&
         this.validationMake.hasErrors === false &&
-        this.validationPlate.hasErrors === false 
+        this.validationPlate.hasErrors === false
       ) {
         return true
       } else {
@@ -353,10 +323,10 @@ export default {
       axios
         .get(`${config.api}/api/Rental_Car/find/` + this.rentalCarID)
         .then((response) => {
-            this.DB_DATA = response.data;
-            this.form.model.RentalCarModel = response.data.rentalCarModel
-            this.form.model.RentalCarMake = response.data.rentalCarMake
-            this.form.model.RentalLicense = response.data.rentalLicense
+          this.DB_DATA = response.data
+          this.form.model.RentalCarModel = response.data.rentalCarModel
+          this.form.model.RentalCarMake = response.data.rentalCarMake
+          this.form.model.RentalLicense = response.data.rentalLicense
         })
         .catch(() => {
           Swal.fire(
@@ -365,6 +335,69 @@ export default {
             'error',
           )
         })
+
+      axios.get(`${config.api}/api/Contractor/find/`).then((response) => {
+        this.formatContractorData(response.data)
+      })
+
+      axios
+        .get(`${config.api}/api/Assigned_Rental_Car/find/${this.rentalCarID}`)
+        .then((response) => {
+          this.AssignedContractors = response.data
+        })
+    },
+    formatContractorData(data) {
+      for (let i = 0; i < data.length; i++) {
+        // console.log(data[i].firstName)
+        this.Contractors.push({
+          contractorID: data[i].contractorID,
+          fullName: data[i].firstName + ' ' + data[i].lastName,
+          firstName: data[i].firstName,
+          lastName: data[i].lastName,
+        })
+      }
+    },
+    addContractor(event) {
+      event.preventDefault()
+      const addContractorPayload = {
+        rentalCarID: this.rentalCarID,
+        contractorID: this.currentContractor.contractorID,
+        driverPassenger: this.currentMode.mode,
+      }
+
+      axios
+        .post(
+          `${config.api}/api/Assigned_Rental_Car/create`,
+          addContractorPayload,
+        )
+        .then((response) => console.log(response))
+
+      this.AssignedContractors.push({
+        driverPassenger: this.currentMode.mode,
+        Contractor: {
+          lastName: this.currentContractor.lastName,
+          firstName: this.currentContractor.firstName,
+        },
+      })
+    },
+    removeContractorFromList(contractorID) {
+      for (let i = 0; i < this.AssignedContractors.length; i++) {
+        if (this.AssignedContractors[i].contractorID === contractorID) {
+          this.AssignedContractors.splice(i, 1)
+        }
+      }
+    },
+    removeContractor(event, contractorID) {
+      event.preventDefault()
+      console.log(
+        'rentalID:' + this.rentalCarID + 'contractorID:' + contractorID,
+      )
+      axios
+        .delete(
+          `${config.api}/api/Assigned_Rental_Car/delete/${this.rentalCarID}/${contractorID}`,
+        )
+        .then(this.removeContractorFromList(contractorID))
+        .then((response) => console.log(response))
     },
   },
   beforeMount() {

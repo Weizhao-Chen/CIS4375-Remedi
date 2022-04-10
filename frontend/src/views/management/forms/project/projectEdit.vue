@@ -100,7 +100,7 @@
           :validation-messages="{ required: 'The End Date is required' }"
         />
       </div> -->
-                <!-- @validation="validationNotes = $event" 
+      <!-- @validation="validationNotes = $event" 
                           :validation-messages="{ required: 'The project Notes is required' }"-->
       <div class="editForm-left">
         <FormulateInput
@@ -111,7 +111,6 @@
           validation="bail|max:500,length"
           error-behavior="live"
           v-model="form.model.ProjectNotes"
-
         />
       </div>
       <div class="editForm-right">
@@ -200,12 +199,11 @@
                 option-value="contractorID"
                 id="contractorID"
                 option-text="firstName"
-
                 placeholder="select one"
               >
               </model-list-select>
-<!--                 :isError="validationContractor === true" -->
-              <!-- {{ this.Modules }} -->
+              <!--                 :isError="validationContractor === true" -->
+              {{ this.currentModule }}
               <label class="form-custom-label" for="form-Contractor"
                 >Assign Module:</label
               >
@@ -215,7 +213,6 @@
                 option-value="Module"
                 id="moduleID"
                 option-text="Module"
-
                 placeholder="select one"
               >
               </model-list-select>
@@ -328,13 +325,13 @@ export default {
     },
     addProject() {
       if (!this.form.model.ProjectStartDate) {
-        Swal.fire('Error','Must add Start Date','error',)
+        Swal.fire('Error', 'Must add Start Date', 'error')
       } else if (!this.form.model.ProjectEndDate) {
-        Swal.fire('Error','Must add End Date','error',)
+        Swal.fire('Error', 'Must add End Date', 'error')
       } else if (
         this.form.model.ProjectEndDate < this.form.model.ProjectStartDate
       ) {
-        Swal.fire('Error','End Date Cant Be Before Start Date','error',)
+        Swal.fire('Error', 'End Date Cant Be Before Start Date', 'error')
       } else
         axios
           .post(`${config.api}/api/Project/create`, this.form.model)
@@ -353,13 +350,13 @@ export default {
     updateProject() {
       const ProjectID = this.projectID
       if (!this.form.model.ProjectStartDate) {
-        Swal.fire('Error','Must add Start Date','error')
+        Swal.fire('Error', 'Must add Start Date', 'error')
       } else if (!this.form.model.ProjectEndDate) {
-        Swal.fire('Error','Must add End Date','error')
+        Swal.fire('Error', 'Must add End Date', 'error')
       } else if (
         this.form.model.ProjectEndDate < this.form.model.ProjectStartDate
       ) {
-        Swal.fire('Error','End Date Cant Be Before Start Date','error')
+        Swal.fire('Error', 'End Date Cant Be Before Start Date', 'error')
       } else
         axios
           .put(`${config.api}/api/Project/update/` + ProjectID, this.form.model)

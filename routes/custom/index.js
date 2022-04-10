@@ -20,6 +20,7 @@ const Preferred_Module = require('./Preferred_Module')
 const Assigned_Module = require('./Assigned_Module')
 const Flight = require('./Flight')
 const Rental_Car = require('./Rental_Car')
+const Assigned_Rental_Car = require('./Assigned_Rental_Car')
 
 router.use('/api/home', home)
 router.use('/api/account', account)
@@ -39,5 +40,6 @@ router.use('/api/Preferred_Module', Preferred_Module)
 router.use('/api/Assigned_Module', Assigned_Module)
 router.use('/api/Flight', Flight)
 router.use('/api/Rental_Car', Rental_Car)
+router.use('/api/Assigned_Rental_Car', Assigned_Rental_Car)
 
 module.exports = router
