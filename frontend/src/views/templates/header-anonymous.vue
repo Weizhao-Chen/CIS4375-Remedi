@@ -45,6 +45,9 @@
           <b-nav-item href="/rentalcar" @click="hide">Rental Car</b-nav-item>
           <br>
           <b-nav-item href="/hospital" @click="hide">Hospital</b-nav-item>
+          <br>
+          <b-nav-item href="/cpreport" @click="hide">Contractor Project Report</b-nav-item>
+          <b-nav-item href="/cwreport" @click="hide">Contractor Wisdom Report</b-nav-item>
         </b-nav>
       </nav>
     </b-sidebar>
