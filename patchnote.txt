@@ -9,7 +9,8 @@ v1.3 Add CRUD for Flight without validations and merge codes with jj2
 v1.4 Added CRUD for Rental Car without validations.
 v1.4.1 fixed console warnings for contractorproject. Merge codes from jj2 and fixed validations errors for project notes for Project. Implemented Date UI and applied onto flight. Rearranged Flight tables from models.
 v1.5 remove unwanted vues into old stuff for future improvement. Switch Hospital table from popup into form based.
-
+v1.6 merge code from jj2 and removed unused vues and js from project.
+v1.6.1 Removed code in v1.6 from routes and models
 
 
 TodoList:

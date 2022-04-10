@@ -23,13 +23,6 @@ import projectstatusList from '../views/management/projectstatusList.vue'
 import contractorstatusList from '../views/management/contractorstatusList.vue'
 
 
-
-// old stuff
-// import hospitalList from '../views/management/old stuff/hospitalList.vue'
-// import rentalCarCompany from '../views/management/old stuff/rentalCarCompanyList.vue'
-// import airlineEdit from '../views/management/old stuff/airlineEdit.vue'
-// import airlineadmin from '../views/management/old stuff/airlineadmin.vue'
-
 import moduleEdit from '../views/management/forms/module/moduleEdit.vue'
 import moduleadmin from '../views/management/forms/module/moduleadmin.vue'
 
@@ -119,24 +112,6 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
-    //airline? need to be removed
-    // {
-    //   path: '/airline',
-    //   component: airlineadmin,
-    //   props: true,
-    //   meta: {
-    //     isOpen: true,
-    //   },
-    // },
-    // {
-    //   path: '/airline/edit',
-    //   name: '/airline/edit',
-    //   component: airlineEdit,
-    //   props: true,
-    //   meta: {
-    //     isOpen: true,
-    //   },
-    // },
     //contractor
     {
       path: '/contractor',
