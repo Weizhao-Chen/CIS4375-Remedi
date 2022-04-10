@@ -82,11 +82,10 @@
         />
       </div>
       <!-- {{ this.AssignedContractors }} -->
-      <div v-if="!isNewProject" class="editForm-right">
+      <div v-if="!isNewRentalCar" class="editForm-right">
         <label class="form-custom-label" for="form-Project_Status"
           >Contractors :</label
         >
-        {{ this.currentContractor }}
         <b-card-body
           id="nav-scroller"
           ref="content"
@@ -117,7 +116,7 @@
       </div>
 
       <b-button
-        v-if="!isNewProject"
+        v-if="!isNewRentalCar"
         v-b-toggle="'collapse-2'"
         class="m-1"
         variant="primary"
