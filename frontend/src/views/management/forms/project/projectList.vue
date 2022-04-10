@@ -11,6 +11,8 @@
       </div>
     </div>
 
+    <!-- {{ this.DB_DATA }} -->
+
     <div>
       <div slot="table-actions"></div>
       <vue-good-table
@@ -59,6 +61,7 @@ export default {
       Project_Status_DATA: [],
       Hospital_DATA: [],
       myAPI: `${config.api}/api/Project`,
+      Dates: [],
       dataFields: [
         {
           label: 'id',
@@ -83,11 +86,11 @@ export default {
         },
         {
           label: 'hospital name',
-          field: 'Hospital.hospitalName',
+          field: 'hospitalName',
         },
         {
-          label: 'projectStatusType',
-          field: 'Project_Status.projectStatusType',
+          label: 'Project Status',
+          field: 'projectStatus',
         },
       ],
     }
@@ -108,12 +111,27 @@ export default {
     addNewProject() {
       this.$router.push('/project/create')
     },
+
+    formatDate(data) {
+      for (let i = 0; i < data.length; i++) {
+        this.DB_DATA.push({
+          projectID: data[i].projectID,
+          projectName: data[i].projectName,
+          projectStartDate: data[i].projectStartDate.split('T')[0],
+          projectEndDate: data[i].projectEndDate.split('T')[0],
+          projectNotes: data[i].projectNotes,
+          hospitalName: data[i].Hospital.hospitalName,
+          projectStatus: data[i].Project_Status.projectStatusType,
+        })
+      }
+    },
     loadData() {
       axios
         .get(`${config.api}/api/Project/find`)
         .then((response) => {
-          this.DB_DATA = response.data
+          this.formatDate(response.data)
         })
+        .then(this.formatDate(this.DB_DATA))
         .catch(() => {
           Swal.fire('Error', 'Something went wrong', 'error')
         })

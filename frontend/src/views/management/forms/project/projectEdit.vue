@@ -57,7 +57,7 @@
           :validation-messages="{ required: 'The project Name is required' }"
         />
       </div>
-      <div class="editForm-left">
+      <!-- <div class="editForm-left">
         <FormulateInput
           @validation="validationStartDate = $event"
           type="text"
@@ -68,8 +68,27 @@
           v-model="form.model.ProjectStartDate"
           :validation-messages="{ required: 'The Start Date is required' }"
         />
+      </div> -->
+
+      <div>
+        <label for="example-datepicker">Start Date</label>
+        <b-form-datepicker
+          id="start-date"
+          v-model="form.model.ProjectStartDate"
+          class="mb-2"
+        ></b-form-datepicker>
       </div>
-      <div class="editForm-left">
+
+      <div>
+        <label for="example-datepicker">End Date</label>
+        <b-form-datepicker
+          id="end-date"
+          v-model="form.model.ProjectEndDate"
+          class="mb-2"
+        ></b-form-datepicker>
+      </div>
+
+      <!-- <div class="editForm-left">
         <FormulateInput
           @validation="validationEndDate = $event"
           type="text"
@@ -80,7 +99,7 @@
           v-model="form.model.ProjectEndDate"
           :validation-messages="{ required: 'The End Date is required' }"
         />
-      </div>
+      </div> -->
       <div class="editForm-left">
         <FormulateInput
           @validation="validationNotes = $event"
@@ -289,8 +308,8 @@ export default {
     validationFormCheck: function () {
       if (
         this.validationName.hasErrors === false &&
-        this.validationStartDate.hasErrors === false &&
-        this.validationEndDate.hasErrors === false &&
+        // this.validationStartDate.hasErrors === false &&
+        // this.validationEndDate.hasErrors === false &&
         this.validationNotes.hasErrors === false &&
         this.validationHospital === false &&
         this.validationProjectStatus === false
@@ -306,28 +325,54 @@ export default {
       this.$router.push('/project')
     },
     addProject() {
-      axios
-        .post(`${config.api}/api/Project/create`, this.form.model)
-        .then((response) => {
-          Swal.fire('Done!', 'The record has been created.', 'success')
-          this.goBack()
-        })
-        .catch(() => {
-          Swal.fire('Error', 'Something went wrong (creating Project)', 'error')
-        })
+      if (!this.form.model.ProjectStartDate) {
+        Swal.fire('Must add StartDate')
+      } else if (!this.form.model.ProjectEndDate) {
+        Swal.fire('Must add End Date')
+      } else if (
+        this.form.model.ProjectEndDate < this.form.model.ProjectStartDate
+      ) {
+        Swal.fire('End Date Cant Be Before Start Date')
+      } else
+        axios
+          .post(`${config.api}/api/Project/create`, this.form.model)
+          .then((response) => {
+            Swal.fire('Done!', 'The record has been created.', 'success')
+            this.goBack()
+          })
+          .catch(() => {
+            Swal.fire(
+              'Error',
+              'Something went wrong (creating Project)',
+              'error',
+            )
+          })
     },
     updateProject() {
       const ProjectID = this.projectID
-      axios
-        .put(`${config.api}/api/Project/update/` + ProjectID, this.form.model)
-        .then((response) => {
-          this.loadData()
-          Swal.fire('Done!', 'The Project has been updated.', 'success')
-          this.goBack()
-        })
-        .catch(() => {
-          Swal.fire('Error', 'Something went wrong (updating Project)', 'error')
-        })
+      if (!this.form.model.ProjectStartDate) {
+        Swal.fire('Must add StartDate')
+      } else if (!this.form.model.ProjectEndDate) {
+        Swal.fire('Must add End Date')
+      } else if (
+        this.form.model.ProjectEndDate < this.form.model.ProjectStartDate
+      ) {
+        Swal.fire('End Date Cant Be Before Start Date')
+      } else
+        axios
+          .put(`${config.api}/api/Project/update/` + ProjectID, this.form.model)
+          .then((response) => {
+            this.loadData()
+            Swal.fire('Done!', 'The Project has been updated.', 'success')
+            this.goBack()
+          })
+          .catch(() => {
+            Swal.fire(
+              'Error',
+              'Something went wrong (updating Project)',
+              'error',
+            )
+          })
     },
     deleteProject() {
       const ProjectID = this.projectID
