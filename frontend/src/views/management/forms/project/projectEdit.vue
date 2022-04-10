@@ -102,6 +102,7 @@
       </div> -->
       <div class="editForm-left">
         <FormulateInput
+          id="text-area"
           @validation="validationNotes = $event"
           type="textarea"
           name="projectNotes"

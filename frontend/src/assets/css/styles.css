@@ -2,3 +2,7 @@
   float: right;
   margin: 2px;
 }
+#text-area {
+  width: 400px;
+  height: 150px;
+}
