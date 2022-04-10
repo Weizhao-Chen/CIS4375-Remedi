@@ -54,7 +54,7 @@
           label="project Name"
           validation="required:trim|max:100,length"
           v-model="form.model.ProjectName"
-          :validation-messages="{ required: 'The project Name is required' }"
+          :validation-messages="{ required: 'The Project Name is required' }"
         />
       </div>
       <!-- <div class="editForm-left">
@@ -100,17 +100,18 @@
           :validation-messages="{ required: 'The End Date is required' }"
         />
       </div> -->
+                <!-- @validation="validationNotes = $event" 
+                          :validation-messages="{ required: 'The project Notes is required' }"-->
       <div class="editForm-left">
         <FormulateInput
           id="text-area"
-          @validation="validationNotes = $event"
           type="textarea"
           name="projectNotes"
           label="project Notes"
-          validation="bail|required:trim|max:500,length"
+          validation="bail|max:500,length"
           error-behavior="live"
           v-model="form.model.ProjectNotes"
-          :validation-messages="{ required: 'The project Notes is required' }"
+
         />
       </div>
       <div class="editForm-right">
@@ -199,11 +200,11 @@
                 option-value="contractorID"
                 id="contractorID"
                 option-text="firstName"
-                :isError="validationContractor === true"
+
                 placeholder="select one"
               >
               </model-list-select>
-
+<!--                 :isError="validationContractor === true" -->
               <!-- {{ this.Modules }} -->
               <label class="form-custom-label" for="form-Contractor"
                 >Assign Module:</label
@@ -214,7 +215,7 @@
                 option-value="Module"
                 id="moduleID"
                 option-text="Module"
-                :isError="validationContractor === true"
+
                 placeholder="select one"
               >
               </model-list-select>
@@ -251,7 +252,7 @@ export default {
       validationName: {},
       validationStartDate: {},
       validationEndDate: {},
-      validationNotes: {},
+      // validationNotes: {}, nullable
       DB_DATA: [],
       Hospital_DATA: [],
       Project_Status_DATA: [],
@@ -311,7 +312,7 @@ export default {
         this.validationName.hasErrors === false &&
         // this.validationStartDate.hasErrors === false &&
         // this.validationEndDate.hasErrors === false &&
-        this.validationNotes.hasErrors === false &&
+        // this.validationNotes.hasErrors === false && this is nullable
         this.validationHospital === false &&
         this.validationProjectStatus === false
       ) {
@@ -327,13 +328,13 @@ export default {
     },
     addProject() {
       if (!this.form.model.ProjectStartDate) {
-        Swal.fire('Must add StartDate')
+        Swal.fire('Error','Must add Start Date','error',)
       } else if (!this.form.model.ProjectEndDate) {
-        Swal.fire('Must add End Date')
+        Swal.fire('Error','Must add End Date','error',)
       } else if (
         this.form.model.ProjectEndDate < this.form.model.ProjectStartDate
       ) {
-        Swal.fire('End Date Cant Be Before Start Date')
+        Swal.fire('Error','End Date Cant Be Before Start Date','error',)
       } else
         axios
           .post(`${config.api}/api/Project/create`, this.form.model)
@@ -352,13 +353,13 @@ export default {
     updateProject() {
       const ProjectID = this.projectID
       if (!this.form.model.ProjectStartDate) {
-        Swal.fire('Must add StartDate')
+        Swal.fire('Error','Must add Start Date','error')
       } else if (!this.form.model.ProjectEndDate) {
-        Swal.fire('Must add End Date')
+        Swal.fire('Error','Must add End Date','error')
       } else if (
         this.form.model.ProjectEndDate < this.form.model.ProjectStartDate
       ) {
-        Swal.fire('End Date Cant Be Before Start Date')
+        Swal.fire('Error','End Date Cant Be Before Start Date','error')
       } else
         axios
           .put(`${config.api}/api/Project/update/` + ProjectID, this.form.model)

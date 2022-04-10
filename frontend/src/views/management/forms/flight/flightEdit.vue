@@ -46,7 +46,7 @@
     <br />
 
     <form class="swal2-form mainForm">
-      <div class="editForm-left">
+      <!-- <div class="editForm-left">
         <FormulateInput
           @validation="validationFDate = $event"
           type="text"
@@ -56,8 +56,16 @@
           v-model="form.model.FlightDate"
           :validation-messages="{ required: 'The Flight Date is required' }"
         />
+      </div> -->
+      <div>
+        <label for="example-datepicker">Flight Date</label>
+        <b-form-datepicker
+          id="Flight-Time"
+          v-model="form.model.FlightDate"
+          class="mb-2"
+        ></b-form-datepicker>
       </div>
-      <div class="editForm-left">
+      <!-- <div class="editForm-left">
         <FormulateInput
           @validation="validationDTime = $event"
           type="text"
@@ -67,6 +75,14 @@
           v-model="form.model.DepartTime"
           :validation-messages="{ required: 'The depart time is required needs validation' }"
         />
+      </div> -->
+      <div>
+        <label for="example-timepicker">Depart Time</label>
+        <b-form-timepicker
+          id="Depart-Time"
+          v-model="form.model.DepartTime"
+          class="mb-2"
+        ></b-form-timepicker>
       </div>
       <div class="editForm-left">
         <FormulateInput
@@ -91,7 +107,7 @@
           :validation-messages="{ required: 'The arrival location is required needs validation' }"
         />
       </div>
-      <div class="editForm-left">
+      <!-- <div class="editForm-left">
         <FormulateInput
           @validation="validationATime = $event"
           type="text"
@@ -102,6 +118,14 @@
           v-model="form.model.ArrivalTime"
           :validation-messages="{ required: 'The arrival time is required needs validation' }"
         />
+      </div> -->
+      <div>
+        <label for="example-timepicker">Arrival Time</label>
+        <b-form-timepicker
+          id="Arrival-Time"
+          v-model="form.model.ArrivalTime"
+          class="mb-2"
+        ></b-form-timepicker>
       </div>
       <div class="editForm-left">
         <FormulateInput
@@ -151,7 +175,7 @@
           :validation-messages="{ required: 'The approval name is required' }"
         />
       </div>
-      <div class="editForm-left">
+      <!-- <div class="editForm-left">
         <FormulateInput
           @validation="validationSDate = $event"
           type="text"
@@ -162,6 +186,14 @@
           v-model="form.model.ApprovalDate"
           :validation-messages="{ required: 'The approval date is required' }"
         />
+      </div> -->
+        <div>
+        <label for="example-datepicker">Approval Date</label>
+        <b-form-datepicker
+          id="Approval-Time"
+          v-model="form.model.ApprovalDate"
+          class="mb-2"
+        ></b-form-datepicker>
       </div>
       
       <!-- need edits starting here -->
@@ -300,16 +332,17 @@ export default {
   data() {
     return {
       isNewFlight: true,
-      validationFDate: {},
-      validationDTime: {},
+      // validationFDate: {},
+      // validationDTime: {},
       validationDLocation: {},
       validationALocation: {},
-      validationATime: {},
+      // validationATime: {},
       validationSNumber: {},
+      validationflightcost: {},
       validationSID: {},
       validationSName: {},
-      validationSDate: {},
-      validationflightcost: {},
+      // validationSDate: {},
+
       DB_DATA: [],
     //   Hospital_DATA: [],
     //   Project_Status_DATA: [],
@@ -372,16 +405,16 @@ export default {
     // ,
     validationFormCheck: function () {
       if (
-        this.validationFDate.hasErrors === false &&
-        this.validationDTime.hasErrors === false &&
+        // this.validationFDate.hasErrors === false &&
+        // this.validationDTime.hasErrors === false &&
         this.validationDLocation.hasErrors === false &&
         this.validationALocation.hasErrors === false &&
-        this.validationATime.hasErrors === false &&
+        // this.validationATime.hasErrors === false &&
         this.validationSNumber.hasErrors === false &&
         this.validationflightcost.hasErrors === false &&
         this.validationSID.hasErrors === false &&
-        this.validationSName.hasErrors === false &&
-        this.validationSDate.hasErrors === false
+        this.validationSName.hasErrors === false
+        // this.validationSDate.hasErrors === false
         //  && this.validationHospital === false &&
         // this.validationProjectStatus === false
       ) {
@@ -396,6 +429,16 @@ export default {
       this.$router.push('/flight')
     },
     addFlight() {
+      //hmmm debating on removing these
+      if (!this.form.model.DepartTime) {
+        Swal.fire('Error','Must add Depart Time','error',)
+      } else if (!this.form.model.ArrivalTime) {
+        Swal.fire('Error','Must add Arrival Time','error',)
+      } else if (
+        this.form.model.ArrivalTime < this.form.model.DepartTime
+      ) {
+        Swal.fire('Error','Arrival Time Cant Be Before Depart Time','error',)
+      } else
       axios
         .post(`${config.api}/api/Flight/create`, this.form.model)
         .then((response) => {
@@ -408,6 +451,15 @@ export default {
     },
     updateFlight() {
       const FlightID = this.flightID
+      if (!this.form.model.DepartTime) {
+        Swal.fire('Error','Must add Depart Time','error',)
+      } else if (!this.form.model.ArrivalTime) {
+        Swal.fire('Error','Must add Arrival Time','error',)
+      } else if (
+        this.form.model.ArrivalTime < this.form.model.DepartTime
+      ) {
+        Swal.fire('Error','Arrival Time Cant Be Before Depart Time','error',)
+      } else
       axios
         .put(`${config.api}/api/Flight/update/` + FlightID, this.form.model)
         .then((response) => {

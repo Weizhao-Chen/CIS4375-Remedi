@@ -31,6 +31,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    flightCost: {
+      type: DataTypes.DECIMAL(5,2),
+      allowNull: false
+    },
     specialApprovalGranted: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -43,10 +47,6 @@ module.exports = function(sequelize, DataTypes) {
     specialApprovalDate: {
       type: DataTypes.DATEONLY,
       allowNull: true
-    },
-    flightCost: {
-      type: DataTypes.DECIMAL(5,2),
-      allowNull: false
     }
   }, {
     sequelize,
