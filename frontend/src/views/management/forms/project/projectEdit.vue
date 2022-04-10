@@ -208,7 +208,7 @@
           </form>
         </b-card>
       </b-collapse>
-      <!-- {{ this.currentModule }} -->
+      <!-- {{ this.form.model }} -->
     </form>
   </div>
 </template>
@@ -410,9 +410,15 @@ export default {
         .then((response) => {
           this.DB_DATA = response.data
           this.form.model.ProjectName = response.data.projectName
-          if(response.data.projectStartDate){this.this.form.model.ProjectStartDate = response.data.projectStartDate.split('T')[0]}
+          if (response.data.projectStartDate) {
+            this.form.model.ProjectStartDate =
+              response.data.projectStartDate.split('T')[0]
+          }
           // this.form.model.ProjectStartDate = response.data.projectStartDate
-          if(response.data.projectEndDate){this.this.form.model.ProjectEndDate = response.data.projectEndDate.split('T')[0]}
+          if (response.data.projectEndDate) {
+            this.form.model.ProjectEndDate =
+              response.data.projectEndDate.split('T')[0]
+          }
           // this.form.model.ProjectEndDate = response.data.projectEndDate
           this.form.model.ProjectNotes = response.data.projectNotes
           this.form.model.HospitalID = response.data.HospitalID

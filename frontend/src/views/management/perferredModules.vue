@@ -2,17 +2,15 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Assigned Contractor Project List</span>
+        <span class="tableHeading-text">Airline List</span>
       </div>
       <div class="tableHeading-right">
-        <button
-          class="swal2-editform swal2-styled"
-          v-on:click="addNewContractorProject"
-        >
-          Add Contractor Project List
+        <button class="swal2-editform swal2-styled" v-on:click="addNewAirline">
+          Add New Airline
         </button>
       </div>
     </div>
+
     <div>
       <div slot="table-actions"></div>
       <vue-good-table
@@ -26,7 +24,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: { field: 'Contractor.contractorID', type: 'asc' },
+          initialSortBy: { field: 'moduleID', type: 'asc' },
         }"
         :pagination-options="{
           enabled: true,
@@ -48,8 +46,8 @@
 </template>
 
 <script>
-import axios from '../../../../utilities/axios'
-import config from '../../../../config'
+import axios from '../../utilities/axios'
+import config from '../../config'
 import 'vue-good-table/dist/vue-good-table.css'
 import { VueGoodTable } from 'vue-good-table'
 import Swal from 'sweetalert2'
@@ -58,16 +56,15 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      Contractor_DATA: [],
-      Project_DATA: [],
-      myAPI: `${config.api}/api/Contractor_Project`,
+      myAPI: `${config.api}/api/Airline`,
       dataFields: [
         {
-          label: 'contractor id',
-          field: 'Contractor.contractorID',
+          label: 'ModuleID',
+          field: 'moduleID',
+          type: 'number',
         },
         {
-          label: 'First Name id',
+          label: 'First Name',
           field: 'Contractor.firstName',
         },
         {
@@ -75,8 +72,8 @@ export default {
           field: 'Contractor.lastName',
         },
         {
-          label: 'Project Name',
-          field: 'Project.projectName',
+          label: 'Perferred Module',
+          field: 'Module.moduleName',
         },
       ],
     }
@@ -88,23 +85,23 @@ export default {
   methods: {
     onRowDoubleClick(params) {
       this.$router.push({
-        name: '/contractorproject/edit',
+        name: '/airline/edit',
         params: {
-          contractorProjectID: params.row.contractorProjectID,
+          airlineID: params.row.airlineID,
         },
       })
     },
-    addNewContractorProject() {
-      this.$router.push('/contractorproject/edit')
+    addNewAirline() {
+      this.$router.push('/airline/edit')
     },
     loadData() {
       axios
-        .get(`${config.api}/api/Contractor_Project/find`)
+        .get(`${config.api}/api/Preferred_Module/find`)
         .then((response) => {
           this.DB_DATA = response.data
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong', 'error')
+          Swal.fire('Error 2', 'Something went wrong', 'error')
         })
     },
   },
@@ -114,9 +111,4 @@ export default {
 }
 </script>
 
-<style scoped>
-button {
-  margin-right: 15px;
-  height: 100%;
-}
-</style>
+<style scoped></style>

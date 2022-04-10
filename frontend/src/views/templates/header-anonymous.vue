@@ -34,6 +34,9 @@
           <b-nav-item href="/assignedclinicarea" @click="hide"
             >Assigned Clinic Area</b-nav-item
           >
+          <b-nav-item href="/perferred_modules" @click="hide"
+            >Perferred Modules</b-nav-item
+          >
         </b-nav>
       </nav>
     </b-sidebar>

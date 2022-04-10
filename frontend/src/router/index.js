@@ -46,6 +46,7 @@ import projectadmin from '../views/management/forms/project/projectadmin.vue'
 import contractorprojectEdit from '../views/management/forms/contractor project/contractorprojectEdit.vue'
 import contractorprojectadmin from '../views/management/forms/contractor project/contractorprojectadmin.vue'
 
+import perferredModulesList from '../views/management/perferredModules.vue'
 vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -55,6 +56,13 @@ const router = new VueRouter({
     {
       path: '/',
       redirect: '/home',
+    },
+    {
+      path: '/perferred_modules',
+      component: perferredModulesList,
+      meta: {
+        isOpen: true,
+      },
     },
     {
       path: '/home',
@@ -151,8 +159,9 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
-    { //path: '/project/edit/:projectID',
-      path: '/project/edit',
+    {
+      path: '/project/edit/:projectID',
+
       name: '/project/edit',
       component: projectEdit,
       props: true,

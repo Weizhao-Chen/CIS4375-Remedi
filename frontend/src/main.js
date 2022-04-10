@@ -26,8 +26,9 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 //Vue.use(VeeValidate)
-Vue.use(VueFormulate)
-// eslint-disable-next-line
+Vue.use(VueFormulate, {
+  useInputDecorators: true,
+}) // eslint-disable-next-line
 new Vue({
   el: '#app',
   store,

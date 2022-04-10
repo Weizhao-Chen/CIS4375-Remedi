@@ -169,7 +169,7 @@
         />
       </div>
       <div class="editForm-left">
-        <FormulateInput
+        <!-- <FormulateInput
           @validation="validationHistory = $event"
           type="select"
           name="remediHistory"
@@ -178,13 +178,31 @@
           v-model="form.model.RemediHistory"
           :validation-messages="{ required: 'The history is required' }"
           :options="[
-            { value: true, label: 'yes' },
-            { value: false, label: 'no' },
+            { value: true, label: 'Yes' },
+            { value: false, label: 'No' },
           ]"
-        />
+          :placeholder="`${!{ isNewContractor } ? 'No' : 'Please Select One'}`"
+        /> -->
+        <b-form-group label="History with Remedi" v-slot="{ ariaDescribedby }">
+          <b-form-radio
+            v-model="form.model.RemediHistory"
+            :aria-describedby="ariaDescribedby"
+            name="remediHistory"
+            :value="true"
+            >Yes</b-form-radio
+          >
+          <b-form-radio
+            v-model="form.model.RemediHistory"
+            :aria-describedby="ariaDescribedby"
+            name="remediHistory"
+            :value="false"
+            >No</b-form-radio
+          >
+        </b-form-group>
+        <!-- {{ this.form.model }} -->
       </div>
       <div class="editForm-left">
-        <FormulateInput
+        <!-- <FormulateInput
           @validation="validationWisdom = $event"
           type="select"
           name="SupportWisdom"
@@ -193,10 +211,28 @@
           v-model="form.model.SupportWisdom"
           :validation-messages="{ required: 'The wisdom is required' }"
           :options="[
-            { value: true, label: 'yes' },
-            { value: false, label: 'no' },
+            { value: true, label: 'Yes' },
+            { value: false, label: 'No' },
           ]"
-        />
+          :placeholder="`${!{ isNewContractor } ? 'No' : 'Please Select One'}`"
+        /> -->
+
+        <b-form-group label="Support Wisdom" v-slot="{ ariaDescribedby }">
+          <b-form-radio
+            v-model="form.model.SupportWisdom"
+            :aria-describedby="ariaDescribedby"
+            name="supportWisdom"
+            :value="true"
+            >Yes</b-form-radio
+          >
+          <b-form-radio
+            v-model="form.model.SupportWisdom"
+            :aria-describedby="ariaDescribedby"
+            name="supporWisdom"
+            :value="false"
+            >No</b-form-radio
+          >
+        </b-form-group>
       </div>
       <div class="editForm-left">
         <FormulateInput
@@ -232,33 +268,68 @@
         />
       </div>
       <div class="editForm-left">
-        <FormulateInput
+        <!-- <FormulateInput
           type="select"
           name="supportVirtualEpic"
           label="Support Virtual Epic"
           validation="required"
           v-model="form.model.SupportVirtualEpic"
           :validation-messages="{ required: 'The Virtual Epic is required' }"
-          :placeholder="form.model.SupportVirtualEpic"
           :options="[
-            { value: true, label: 'yes' },
-            { value: false, label: 'no' },
+            { value: true, label: 'Yes' },
+            { value: false, label: 'No' },
           ]"
-        />
+          :placeholder="`${!{ isNewContractor } ? 'No' : 'Please Select One'}`"
+        /> -->
+
+        <b-form-group label="Support Virtual Epic" v-slot="{ ariaDescribedby }">
+          <b-form-radio
+            v-model="form.model.SupportVirtualEpic"
+            :aria-describedby="ariaDescribedby"
+            name="supportVirtualEpic"
+            :value="true"
+            >Yes</b-form-radio
+          >
+          <b-form-radio
+            v-model="form.model.SupportVirtualEpic"
+            :aria-describedby="ariaDescribedby"
+            name="supportVirtualEpic"
+            :value="false"
+            >No</b-form-radio
+          >
+        </b-form-group>
       </div>
       <div class="editForm-left">
-        <FormulateInput
+        <!-- <FormulateInput
           @validation="validationCreditCard = $event"
           type="select"
           label="credit card hotel"
           validation="required"
-          v-model="form.model.ContractorID"
+          v-model="form.model.CreditCardHotel"
           :validation-messages="{ required: 'The credit card is required' }"
           :options="[
-            { value: true, label: 'yes' },
-            { value: false, label: 'no' },
+            { value: true, label: 'Yes' },
+            { value: false, label: 'No' },
           ]"
-        />
+          :placeholder="`${!{ isNewContractor } ? 'No' : 'Please Select One'}`"
+        /> -->
+
+        <b-form-group label="Credit Card Hotel" v-slot="{ ariaDescribedby }">
+          <b-form-radio
+            v-model="form.model.CreditCardHotel"
+            :aria-describedby="ariaDescribedby"
+            name="creditCardHotel"
+            :value="true"
+            >Yes</b-form-radio
+          >
+          <b-form-radio
+            v-model="form.model.CreditCardHotel"
+            :aria-describedby="ariaDescribedby"
+            name="creditCardHotel"
+            :value="false"
+            >No</b-form-radio
+          >
+        </b-form-group>
       </div>
       <!-- {{ this.form.model }} -->
       <div v-if="!isNewContractor">
@@ -474,12 +545,12 @@ export default {
         this.validationZip.hasErrors === false &&
         this.validationNumber.hasErrors === false &&
         this.validationEmail.hasErrors === false &&
-        this.validationHistory.hasErrors === false &&
-        this.validationWisdom.hasErrors === false &&
+        // this.validationHistory.hasErrors === false &&
+        // this.validationWisdom.hasErrors === false &&
         this.validationGolives.hasErrors === false &&
         this.validationEpicProjects.hasErrors === false &&
         this.validationYearSupportEpic.hasErrors === false &&
-        this.validationSupportVirtualEpic.hasErrors === false &&
+        // this.validationSupportVirtualEpic.hasErrors === false &&
         // this.validationCreditCard.hasErrors === false &&
         this.validationContractorStatus === false
       ) {
@@ -610,6 +681,7 @@ export default {
             (this.form.model.CreditCardHotel = response.data.creditCardHotel),
             (this.form.model.ContractorStatusID =
               response.data.contractorStatusID)
+          this.form.model.ContractorID = response.data.contractorID
         })
         .catch(() => {
           Swal.fire(
