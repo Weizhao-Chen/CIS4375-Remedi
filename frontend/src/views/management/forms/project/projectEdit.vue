@@ -203,7 +203,7 @@
               >
               </model-list-select>
               <!--                 :isError="validationContractor === true" -->
-              {{ this.currentModule }}
+              <!-- {{ this.currentModule }} -->
               <label class="form-custom-label" for="form-Contractor"
                 >Assign Module:</label
               >

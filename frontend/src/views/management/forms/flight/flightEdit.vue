@@ -92,7 +92,9 @@
           label="depart location"
           validation="required"
           v-model="form.model.DepartLocation"
-          :validation-messages="{ required: 'The depart location is required needs validation' }"
+          :validation-messages="{
+            required: 'The depart location is required needs validation',
+          }"
         />
       </div>
       <div class="editForm-left">
@@ -104,7 +106,9 @@
           validation="bail|required:trim|max:500,length"
           error-behavior="live"
           v-model="form.model.ArrivalLocation"
-          :validation-messages="{ required: 'The arrival location is required needs validation' }"
+          :validation-messages="{
+            required: 'The arrival location is required needs validation',
+          }"
         />
       </div>
       <!-- <div class="editForm-left">
@@ -136,7 +140,9 @@
           validation="bail|required:trim|max:500,length"
           error-behavior="live"
           v-model="form.model.SeatNumber"
-          :validation-messages="{ required: 'The seat number is required needs validation' }"
+          :validation-messages="{
+            required: 'The seat number is required needs validation',
+          }"
         />
       </div>
       <div class="editForm-left">
@@ -148,7 +154,9 @@
           validation="bail|required:trim|max:500,length"
           error-behavior="live"
           v-model="form.model.FlightCost"
-          :validation-messages="{ required: 'The flight cost is required needs validation' }"
+          :validation-messages="{
+            required: 'The flight cost is required needs validation',
+          }"
         />
       </div>
       <div class="editForm-left">
@@ -160,7 +168,9 @@
           validation="bail|required:trim|max:500,length"
           error-behavior="live"
           v-model="form.model.ApprovalGranted"
-          :validation-messages="{ required: 'The approval id is required needs validation' }"
+          :validation-messages="{
+            required: 'The approval id is required needs validation',
+          }"
         />
       </div>
       <div class="editForm-left">
@@ -175,19 +185,8 @@
           :validation-messages="{ required: 'The approval name is required' }"
         />
       </div>
-      <!-- <div class="editForm-left">
-        <FormulateInput
-          @validation="validationSDate = $event"
-          type="text"
-          name="specialApprovalDate"
-          label="Approval Date"
-          validation="bail|required|date:YYYY-MM-DD"
-          error-behavior="live"
-          v-model="form.model.ApprovalDate"
-          :validation-messages="{ required: 'The approval date is required' }"
-        />
-      </div> -->
-        <div>
+
+      <div>
         <label for="example-datepicker">Approval Date</label>
         <b-form-datepicker
           id="Approval-Time"
@@ -195,42 +194,10 @@
           class="mb-2"
         ></b-form-datepicker>
       </div>
-      
-      <!-- need edits starting here -->
-      <!-- <div class="editForm-right">
-        <label class="form-custom-label" for="form-Hospital"
-          >Hospital Status</label
-        >
-        <model-list-select
-          :list="Hospital_DATA"
-          v-model="form.model.HospitalID"
-          option-value="hospitalID"
-          id="form-Hospital"
-          option-text="hospitalName"
-          :isError="validationHospital === true"
-          placeholder="select one"
-        >
-        </model-list-select>
-      </div>
-      <div class="editForm-right">
-        <label class="form-custom-label" for="form-Project_Status"
-          >Project Status Status</label
-        >
-        <model-list-select
-          :list="Project_Status_DATA"
-          v-model="form.model.ProjectStatusID"
-          option-value="projectStatusID"
-          id="form-Project_Status"
-          option-text="projectStatusType"
-          :isError="validationProjectStatus === true"
-          placeholder="select one"
-        >
-        </model-list-select>
-      </div> -->
 
-      <!-- <div v-if="!isNewFlight" class="editForm-right">
+      <div v-if="this.isAssigned" class="editForm-right">
         <label class="form-custom-label" for="form-Project_Status"
-          >Contractors on Flight:</label
+          >Contractor Assigned:</label
         >
 
         <b-card-body
@@ -240,7 +207,8 @@
         >
           <b-list-group>
             <b-list-group-item
-              v-for="item in Contractors"
+              v-model="currentContractor"
+              v-for="item in AssignedContractor"
               :key="item.contractorID"
               >{{ item.Contractor.firstName + ' ' + item.Contractor.lastName }}
 
@@ -250,69 +218,52 @@
                 variant="primary"
                 >Remove</b-button
               >
-              <b-button
-                class="button-style"
-                :href="'/contractor/edit/' + item.contractorID"
-                variant="primary"
-                >View</b-button
-              >
             </b-list-group-item>
           </b-list-group>
         </b-card-body>
-      </div> -->
-      <!-- <br /> -->
-      <!-- <b-button
-        v-if="!isNewFlight"
-        v-b-toggle="'collapse-2'"
-        class="m-1"
-        variant="primary"
-        >Add Contractor</b-button
-      > -->
+      </div>
 
-      <!-- Element to collapse -->
-      <!-- <b-collapse id="collapse-2">
-        <b-card>
-          <form class="swal2-form mainForm">
-            <div class="editForm-right">
-              <label class="form-custom-label" for="form-Contractor">
-                Contractor</label
-              >
-              <model-list-select
-                v-model="currentContractor"
-                :list="AllContractors"
-                option-value="contractorID"
-                id="contractorID"
-                option-text="firstName"
-                :isError="validationContractor === true"
-                placeholder="select one"
-              >
-              </model-list-select>
+      <div v-else>
+        <b-button
+          v-if="!isNewFlight"
+          v-b-toggle="'collapse-2'"
+          class="m-1"
+          variant="primary"
+          >Add Contractor</b-button
+        >
 
-              <! {{ this.Modules }} -->
-              <!-- <label class="form-custom-label" for="form-Contractor"
-                >Assign Module:</label
+        <!-- Element to collapse -->
+        <b-collapse id="collapse-2">
+          <b-card>
+            <form class="swal2-form mainForm">
+              <div class="editForm-right">
+                <label class="form-custom-label" for="form-Contractor">
+                  Contractor</label
+                >
+                <model-list-select
+                  v-model="currentContractor"
+                  :list="Contractors"
+                  option-value="fullName"
+                  id="contractorID"
+                  option-text="fullName"
+                  placeholder="select one"
+                >
+                </model-list-select>
+                <!--                 :isError="validationContractor === true" -->
+                <!-- {{ this.currentModule }} -->
+              </div>
+              <button
+                class="swal2-editform swal2-styled"
+                v-on:click="addContractor($event)"
               >
-              <model-list-select
-                v-model="currentModule"
-                :list="Modules"
-                option-value="Module"
-                id="moduleID"
-                option-text="Module"
-                :isError="validationContractor === true"
-                placeholder="select one"
-              >
-              </model-list-select>
-            </div>
-            <button
-              class="swal2-editform swal2-styled"
-              v-on:click="addContractor($event)"
-            >
-              Add
-            </button>
-          </form>
-        </b-card>
-      </b-collapse> --> 
-      <!-- {{ this.currentModule }} -->
+                Add
+              </button>
+            </form>
+          </b-card>
+        </b-collapse>
+      </div>
+      <!-- {{ isAssigned }}
+      {{ this.Contractors }} -->
     </form>
   </div>
 </template>
@@ -331,6 +282,7 @@ export default {
   props: ['flightID'],
   data() {
     return {
+      isAssigned: false,
       isNewFlight: true,
       // validationFDate: {},
       // validationDTime: {},
@@ -342,15 +294,18 @@ export default {
       validationSID: {},
       validationSName: {},
       // validationSDate: {},
+      AssignedContractor: {},
+      Contractors: [],
+      currentContractor: {},
 
       DB_DATA: [],
-    //   Hospital_DATA: [],
-    //   Project_Status_DATA: [],
-    //   Contractors: [],
-    //   AllContractors: [],
-    //   currentContractor: {},
-    //   Modules: [],
-    //   currentModule: {},
+      //   Hospital_DATA: [],
+      //   Project_Status_DATA: [],
+      //   Contractors: [],
+      //   AllContractors: [],
+      //   currentContractor: {},
+      //   Modules: [],
+      //   currentModule: {},
       form: {
         model: {
           FlightID: '',
@@ -372,21 +327,21 @@ export default {
     ModelSelect,
     ModelListSelect,
   },
-//   watch: {
-//     currentContractor() {
-//       if (this.currentContractor) {
-//         console.log('running')
-//         axios
-//           .get(
-//             `${config.api}/api/Preferred_Module/find/${this.currentContractor.contractorID}`,
-//           )
-//           .then((response) => {
-//             this.Modules = response.data
-//           })
-//       }
-//     },
-//   }
-//   ,
+  //   watch: {
+  //     currentContractor() {
+  //       if (this.currentContractor) {
+  //         console.log('running')
+  //         axios
+  //           .get(
+  //             `${config.api}/api/Preferred_Module/find/${this.currentContractor.contractorID}`,
+  //           )
+  //           .then((response) => {
+  //             this.Modules = response.data
+  //           })
+  //       }
+  //     },
+  //   }
+  //   ,
   computed: {
     // validationHospital: function () {
     //   if (this.form.model.HospitalID === '') {
@@ -431,45 +386,49 @@ export default {
     addFlight() {
       //hmmm debating on removing these
       if (!this.form.model.DepartTime) {
-        Swal.fire('Error','Must add Depart Time','error',)
+        Swal.fire('Error', 'Must add Depart Time', 'error')
       } else if (!this.form.model.ArrivalTime) {
-        Swal.fire('Error','Must add Arrival Time','error',)
-      } else if (
-        this.form.model.ArrivalTime < this.form.model.DepartTime
-      ) {
-        Swal.fire('Error','Arrival Time Cant Be Before Depart Time','error',)
+        Swal.fire('Error', 'Must add Arrival Time', 'error')
+      } else if (this.form.model.ArrivalTime < this.form.model.DepartTime) {
+        Swal.fire('Error', 'Arrival Time Cant Be Before Depart Time', 'error')
       } else
-      axios
-        .post(`${config.api}/api/Flight/create`, this.form.model)
-        .then((response) => {
-          Swal.fire('Done!', 'The record has been created.', 'success')
-          this.goBack()
-        })
-        .catch(() => {
-          Swal.fire('Error', 'Something went wrong (creating Flight)', 'error')
-        })
+        axios
+          .post(`${config.api}/api/Flight/create`, this.form.model)
+          .then((response) => {
+            Swal.fire('Done!', 'The record has been created.', 'success')
+            this.goBack()
+          })
+          .catch(() => {
+            Swal.fire(
+              'Error',
+              'Something went wrong (creating Flight)',
+              'error',
+            )
+          })
     },
     updateFlight() {
       const FlightID = this.flightID
       if (!this.form.model.DepartTime) {
-        Swal.fire('Error','Must add Depart Time','error',)
+        Swal.fire('Error', 'Must add Depart Time', 'error')
       } else if (!this.form.model.ArrivalTime) {
-        Swal.fire('Error','Must add Arrival Time','error',)
-      } else if (
-        this.form.model.ArrivalTime < this.form.model.DepartTime
-      ) {
-        Swal.fire('Error','Arrival Time Cant Be Before Depart Time','error',)
+        Swal.fire('Error', 'Must add Arrival Time', 'error')
+      } else if (this.form.model.ArrivalTime < this.form.model.DepartTime) {
+        Swal.fire('Error', 'Arrival Time Cant Be Before Depart Time', 'error')
       } else
-      axios
-        .put(`${config.api}/api/Flight/update/` + FlightID, this.form.model)
-        .then((response) => {
-          this.loadData()
-          Swal.fire('Done!', 'The Flight has been updated.', 'success')
-          this.goBack()
-        })
-        .catch(() => {
-          Swal.fire('Error', 'Something went wrong (updating Flight)', 'error')
-        })
+        axios
+          .put(`${config.api}/api/Flight/update/` + FlightID, this.form.model)
+          .then((response) => {
+            this.loadData()
+            Swal.fire('Done!', 'The Flight has been updated.', 'success')
+            this.goBack()
+          })
+          .catch(() => {
+            Swal.fire(
+              'Error',
+              'Something went wrong (updating Flight)',
+              'error',
+            )
+          })
     },
     deleteFlight() {
       const FlightID = this.flightID
@@ -483,125 +442,118 @@ export default {
           Swal.fire('Error', 'Something went wrong (deleting Flight)', 'error')
         })
     },
-    // addContractor(event) {
-    //   event.preventDefault()
-    //   const ProjectID = this.projectID
-    //   const payLoad = {
-    //     ContractorID: this.currentContractor.contractorID,
-    //     ProjectID: this.projectID,
-    //   }
-    //   const assignedModulePayLoad = {
-    //     projectID: this.projectID,
-    //     moduleID: this.currentModule.moduleID,
-    //     contractorID: this.currentModule.contractorID,
-    //   }
 
-    //   if (!this.currentContractor.contractorID) {
-    //     Swal.fire('Error', 'Must add Contractor', 'error')
-    //   } else if (!this.currentModule.contractorID) {
-    //     Swal.fire('Error', 'Must add Module', 'error')
-    //   } else
-    //     axios
-    //       .post(`${config.api}/api/Contractor_Project/create`, payLoad)
-    //       .then((response) => {
-    //         this.Contractors.push({
-    //           contractorID: this.currentContractor.contractorID,
-    //           projectID: this.projectID,
-    //           Contractor: {
-    //             firstName: this.currentContractor.firstName,
-    //             lastName: this.currentContractor.lastName,
-    //           },
-    //         })
-    //       })
-    //       .catch(() => {
-    //         Swal.fire('Error', 'Something went wrong updating Project', 'error')
-    //       })
+    checkIfAssigned() {
+      if (this.AssignedContractor[0]) {
+        this.isAssigned = true
+      } else {
+        axios.get(`${config.api}/api/Contractor/find`).then((response) => {
+          for (let i = 0; i < response.data.length; i++) {
+            this.Contractors.push({
+              contractorID: response.data[i].contractorID,
+              fullName:
+                response.data[i].firstName + ' ' + response.data[i].lastName,
+              firstName: response.data[i].firstName,
+              lastName: response.data[i].lastName,
+            })
+          }
+        })
+      }
+    },
+    addContractor(event) {
+      event.preventDefault()
+      const addContractorPayload = {
+        contractorID: this.currentContractor.contractorID,
+        flightID: this.flightID,
+      }
 
-    //   axios.post(
-    //     `${config.api}/api/Assigned_Module/create`,
-    //     assignedModulePayLoad,
-    //   )
+      console.log(addContractorPayload)
 
-    //   // console.log(assignedModulePayLoad)
-    // },
-    // removeContractorFromList(contractorID) {
-    //   for (let i = 0; i < this.Contractors.length; i++) {
-    //     if (this.Contractors[i].contractorID === contractorID) {
-    //       this.Contractors.splice(i, 1)
-    //     }
-    //   }
+      axios
+        .post(
+          `${config.api}/api/Contractor_Flight/create`,
+          addContractorPayload,
+        )
+        .then((response) => {
+          this.AssignedContractor.push({
+            contractorID: this.currentContractor.contractorID,
+            Contractor: {
+              firstName: this.currentContractor.firstName,
+              lastName: this.currentContractor.lastName,
+            },
+          })
+        })
+        .then((this.isAssigned = true))
+    },
+    removeContractorFromList(contractorID) {
+      for (let i = 0; i < this.AssignedContractor.length; i++) {
+        if (this.AssignedContractor[i].contractorID === contractorID) {
+          this.AssignedContractor.splice(i, 1)
+        }
+      }
 
-    //   console.log('im running')
-    // },
-    // removeContractor(event, contractorID) {
-    //   event.preventDefault()
+      console.log('im running')
+    },
+    removeContractor(event, contractorID) {
+      event.preventDefault()
+      axios
+        .delete(
+          `${config.api}/api/Contractor_Flight/delete/${this.flightID}/${contractorID}`,
+        )
+        .then(this.removeContractorFromList(contractorID))
+        .then((this.isAssigned = false))
+    },
 
-    //   axios
-    //     .delete(
-    //       `${config.api}/api/Contractor_Project/delete/${contractorID}/${this.projectID}`,
-    //     )
-    //     .then(this.removeContractorFromList(contractorID))
-
-    //   axios.delete(
-    //     `${config.api}/api/Assigned_Module/delete/${contractorID}/${this.projectID}`,
-    //   )
-    // },
     loadData() {
       axios
         .get(`${config.api}/api/Flight/find/` + this.flightID)
         .then((response) => {
-            this.DB_DATA = response.data;
-            // this.form.model.FlightDate = response.data.flightDate
-            if(response.data.flightDate){this.form.model.FlightDate = response.data.flightDate.split('T')[0]}
-         // if(response.data.projectEndDate){this.form.model.ProjectEndDate = response.data.projectEndDate.split('.')[0]}
-            this.form.model.DepartTime = response.data.departTime
-            this.form.model.DepartLocation = response.data.departLocation
-            this.form.model.ArrivalLocation = response.data.arrivalLocation
-            this.form.model.ArrivalTime = response.data.arrivalTime
-            this.form.model.SeatNumber = response.data.seatNumber
-            this.form.model.FlightCost = response.data.flightCost
-            this.form.model.ApprovalGranted = response.data.specialApprovalGranted
-            this.form.model.ApprovalName = response.data.specialApprovalName
-            //   this.form.model.ApprovalDate = response.data.specialApprovalDate
-            if(response.data.specialApprovalDate){this.form.model.ApprovalDate = response.data.specialApprovalDate.split('T')[0]}
-            
+          this.DB_DATA = response.data
+          // this.form.model.FlightDate = response.data.flightDate
+          if (response.data.flightDate) {
+            this.form.model.FlightDate = response.data.flightDate.split('T')[0]
+          }
+          // if(response.data.projectEndDate){this.form.model.ProjectEndDate = response.data.projectEndDate.split('.')[0]}
+          this.form.model.DepartTime = response.data.departTime
+          this.form.model.DepartLocation = response.data.departLocation
+          this.form.model.ArrivalLocation = response.data.arrivalLocation
+          this.form.model.ArrivalTime = response.data.arrivalTime
+          this.form.model.SeatNumber = response.data.seatNumber
+          this.form.model.FlightCost = response.data.flightCost
+          this.form.model.ApprovalGranted = response.data.specialApprovalGranted
+          this.form.model.ApprovalName = response.data.specialApprovalName
+          //   this.form.model.ApprovalDate = response.data.specialApprovalDate
+          if (response.data.specialApprovalDate) {
+            this.form.model.ApprovalDate =
+              response.data.specialApprovalDate.split('T')[0]
+          }
         })
         .catch(() => {
           Swal.fire('Error', 'Something went wrong (finding Flight)', 'error')
         })
 
-    //   axios
-    //     .get(
-    //       `${config.api}/api/Contractor_Project/find_project/` + this.projectID,
-    //     )
-    //     .then((response) => (this.Contractors = response.data))
-
-    //   axios.get(`${config.api}/api/Contractor/find`).then((response) => {
-    //     this.AllContractors = response.data
-    //   })
+      axios
+        .get(`${config.api}/api/Contractor_Flight/find/${this.flightID}`)
+        .then((response) => {
+          this.AssignedContractor = response.data
+          this.checkIfAssigned()
+        })
     },
-    // loadFields() {
-    //   axios
-    //     .get(`${config.api}/api/Hospital/find`)
-    //     .then((response) => {
-    //       this.Hospital_DATA = response.data
-    //     })
-    //     .catch(() => {
-    //       Swal.fire('Error', 'Something went wrong (loading Hospital)', 'error')
-    //     })
-    //   axios
-    //     .get(`${config.api}/api/Project_Status/find`)
-    //     .then((response) => {
-    //       this.Project_Status_DATA = response.data
-    //     })
-    //     .catch(() => {
-    //       Swal.fire(
-    //         'Error',
-    //         'Something went wrong (loading Project Status)',
-    //         'error',
-    //       )
-    //     })
-    // },
+  },
+  watch: {
+    isAssigned() {
+      axios.get(`${config.api}/api/Contractor/find`).then((response) => {
+        for (let i = 0; i < response.data.length; i++) {
+          this.Contractors.push({
+            contractorID: response.data[i].contractorID,
+            fullName:
+              response.data[i].firstName + ' ' + response.data[i].lastName,
+            firstName: response.data[i].firstName,
+            lastName: response.data[i].lastName,
+          })
+        }
+      })
+    },
   },
   beforeMount() {
     // this.loadFields()
