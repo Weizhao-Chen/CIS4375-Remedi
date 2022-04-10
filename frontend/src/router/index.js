@@ -49,6 +49,9 @@ import contractorprojectadmin from '../views/management/forms/contractor project
 import flightEdit from '../views/management/forms/flight/flightEdit.vue'
 import flightadmin from '../views/management/forms/flight/flightadmin.vue'
 
+import rentalcarEdit from '../views/management/forms/rental car/rentalcarEdit.vue'
+import rentalcaradmin from '../views/management/forms/rental car/rentalcaradmin.vue'
+
 import perferredModulesList from '../views/management/perferredModules.vue'
 vue.use(VueRouter)
 
@@ -111,6 +114,7 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //airline? need to be removed
     {
       path: '/airline',
       component: airlineadmin,
@@ -128,6 +132,7 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //contractor
     {
       path: '/contractor',
       component: contractoradmin,
@@ -154,6 +159,7 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //project
     {
       path: '/project',
       component: projectadmin,
@@ -179,6 +185,7 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //flight
     {
       path: '/flight',
       component: flightadmin,
@@ -204,6 +211,33 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //rental car
+    {
+      path: '/rentalcar',
+      component: rentalcaradmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/rentalcar/edit/:rentalCarID',
+      name: '/rentalcar/edit',
+      component: rentalcarEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/rentalcar/create',
+      component: rentalcarEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    //contractor project
     {
       path: '/contractorproject',
       component: contractorprojectadmin,
@@ -221,6 +255,7 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //clinic area
     {
       path: '/clinicarea',
       component: clinicareaadmin,
@@ -238,6 +273,7 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //assigned clinic area
     {
       path: '/assignedclinicarea',
       component: assignedclinicareaadmin,
@@ -255,6 +291,7 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //module
     {
       path: '/module',
       component: moduleadmin,
@@ -272,6 +309,7 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //future improvements
     {
       path: '/contact',
       component: contact,

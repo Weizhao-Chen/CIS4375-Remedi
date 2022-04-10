@@ -228,7 +228,7 @@
           </b-list-group>
         </b-card-body>
       </div> -->
-      <br />
+      <!-- <br /> -->
       <!-- <b-button
         v-if="!isNewFlight"
         v-b-toggle="'collapse-2'"
@@ -279,7 +279,7 @@
             </button>
           </form>
         </b-card>
-      </b-collapse> --> -->
+      </b-collapse> --> 
       <!-- {{ this.currentModule }} -->
     </form>
   </div>
@@ -320,7 +320,6 @@ export default {
     //   currentModule: {},
       form: {
         model: {
-        //FlightID maybe?
           FlightID: '',
           FlightDate: '',
           DepartTime: '',

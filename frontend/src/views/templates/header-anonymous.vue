@@ -42,6 +42,7 @@
           >
           <b-nav-item href="/flight" @click="hide">Flight</b-nav-item>
           <br>
+          <b-nav-item href="/rentalcar" @click="hide">Rental Car</b-nav-item>
         </b-nav>
       </nav>
     </b-sidebar>
