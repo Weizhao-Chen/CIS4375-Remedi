@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="jumbotron dashboard">
-      <div v-if="!isNewProject" class="dashlabel">
-        Project Number: {{ this.projectID }}
+      <div v-if="!isNewFlight" class="dashlabel">
+        Flight Number: {{ this.flightID }}
       </div>
-      <div v-else class="dashlabel">Adding New Project</div>
+      <div v-else class="dashlabel">Adding New Flight</div>
     </div>
 
     <div class="editForm">
@@ -18,7 +18,7 @@
       </div>
       <div class="editFormFooter-right">
         <button
-          v-if="!isNewProject"
+          v-if="!isNewFlight"
           class="swal2-editform swal2-styled updateButton"
           :disabled="validationFormCheck === false"
           v-on:click="updateProject"
@@ -26,14 +26,14 @@
           Update Project
         </button>
         <button
-          v-if="!isNewProject"
+          v-if="!isNewFlight"
           class="swal2-editform swal2-styled deleteButton"
           v-on:click="deleteProject"
         >
           Delete Project
         </button>
         <button
-          v-if="isNewProject"
+          v-if="isNewFlight"
           class="swal2-editform swal2-styled addNewButton"
           :disabled="validationFormCheck === false"
           v-on:click="addProject"
@@ -124,7 +124,7 @@
         </model-list-select>
       </div>
 
-      <div v-if="!isNewProject" class="editForm-right">
+      <div v-if="!isNewFlight" class="editForm-right">
         <label class="form-custom-label" for="form-Project_Status"
           >Contractors on Project:</label
         >
@@ -158,7 +158,7 @@
       </div>
       <br />
       <b-button
-        v-if="!isNewProject"
+        v-if="!isNewFlight"
         v-b-toggle="'collapse-2'"
         class="m-1"
         variant="primary"
@@ -208,7 +208,7 @@
           </form>
         </b-card>
       </b-collapse>
-      <!-- {{ this.form.model }} -->
+      <!-- {{ this.currentModule }} -->
     </form>
   </div>
 </template>
@@ -227,7 +227,7 @@ export default {
   props: ['projectID'],
   data() {
     return {
-      isNewProject: true,
+      isNewFlight: true,
       validationName: {},
       validationStartDate: {},
       validationEndDate: {},
@@ -408,17 +408,11 @@ export default {
       axios
         .get(`${config.api}/api/Project/find/` + this.projectID)
         .then((response) => {
-          this.DB_DATA = response.data
+          this.DB_DATA = response.data;
           this.form.model.ProjectName = response.data.projectName
-          if (response.data.projectStartDate) {
-            this.form.model.ProjectStartDate =
-              response.data.projectStartDate.split('T')[0]
-          }
+          if(response.data.projectStartDate){this.form.model.ProjectStartDate = response.data.projectStartDate.split('T')[0]}
           // this.form.model.ProjectStartDate = response.data.projectStartDate
-          if (response.data.projectEndDate) {
-            this.form.model.ProjectEndDate =
-              response.data.projectEndDate.split('T')[0]
-          }
+          if(response.data.projectEndDate){this.form.model.ProjectEndDate = response.data.projectEndDate.split('T')[0]}
           // this.form.model.ProjectEndDate = response.data.projectEndDate
           this.form.model.ProjectNotes = response.data.projectNotes
           this.form.model.HospitalID = response.data.hospitalID
@@ -464,7 +458,7 @@ export default {
   beforeMount() {
     this.loadFields()
     if (this.projectID !== undefined) {
-      this.isNewProject = false
+      this.isNewFlight = false
       this.loadData()
     }
   },

@@ -1,27 +1,27 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Rental_Car', {
+  return sequelize.define('Assigned_Rental_Car', {
     rentalCarID: {
-      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'Rental_Car',
+        key: 'rentalCarID'
+      }
+    },
+    contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    rentalCarModel: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    rentalCarMake: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    rentalLicense: {
+    driverPassenger: {
       type: DataTypes.STRING,
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'Rental_Car',
+    tableName: 'Assigned_Rental_Car',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -30,9 +30,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Rental_C__AA2246615FEC27B1",
+        name: "PK__Assigned__B4EAD073389B6869",
         unique: true,
         fields: [
+          { name: "contractorID" },
           { name: "rentalCarID" },
         ]
       },
