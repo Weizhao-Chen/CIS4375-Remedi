@@ -2,11 +2,11 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Project List</span>
+        <span class="tableHeading-text">Flight List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewProject">
-          Add New Project List
+        <button class="swal2-editform swal2-styled" v-on:click="addNewFlight">
+          Add New Flight List
         </button>
       </div>
     </div>
@@ -24,7 +24,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: { field: 'projectID', type: 'asc' },
+          initialSortBy: { field: 'flightID', type: 'asc' },
         }"
         :pagination-options="{
           enabled: true,
@@ -56,39 +56,55 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      Project_Status_DATA: [],
-      Hospital_DATA: [],
-      myAPI: `${config.api}/api/Project`,
+    //   Project_Status_DATA: [],
+    //   Hospital_DATA: [],
+      myAPI: `${config.api}/api/Flight`,
       dataFields: [
         {
           label: 'id',
-          field: 'projectID',
+          field: 'flightID',
           type: 'number',
         },
         {
-          label: 'Name',
-          field: 'projectName',
+          label: 'date',
+          field: 'flightDate',
         },
         {
-          label: 'Start Date',
-          field: 'projectStartDate',
+          label: 'depart Time',
+          field: 'departTime',
         },
         {
-          label: 'End Date',
-          field: 'projectEndDate',
+          label: 'depart Location',
+          field: 'departLocation',
         },
         {
-          label: 'Notes',
-          field: 'projectNotes',
+          label: 'arrival location',
+          field: 'arrivalLocation',
         },
         {
-          label: 'hospital name',
-          field: 'Hospital.hospitalName',
+          label: 'arrival Time',
+          field: 'arrivalTime',
         },
         {
-          label: 'projectStatusType',
-          field: 'Project_Status.projectStatusType',
+          label: 'seat number',
+          field: 'seatNumber',
         },
+        {
+          label: 'flight cost',
+          field: 'flightCost',
+        },
+        {
+          label: 'approval check',
+          field: 'specialApprovalGranted',
+        },
+        {
+          label: 'approval name',
+          field: 'specialApprovalName',
+        },
+        {
+          label: 'approval date',
+          field: 'specialApprovalDate',
+        }
       ],
     }
   },
@@ -99,18 +115,18 @@ export default {
   methods: {
     onRowDoubleClick(params) {
       this.$router.push({
-        name: '/project/edit',
+        name: '/flight/edit',
         params: {
-          projectID: params.row.projectID,
+          flightID: params.row.flightID,
         },
       })
     },
-    addNewProject() {
-      this.$router.push('/project/create')
+    addNewFlight() {
+      this.$router.push('/flight/create')
     },
     loadData() {
       axios
-        .get(`${config.api}/api/Project/find`)
+        .get(`${config.api}/api/Flight/find`)
         .then((response) => {
           this.DB_DATA = response.data
         })

@@ -18,6 +18,7 @@ const Project = require('./Project')
 const Contractor_Project = require('./Contractor_Project')
 const Preferred_Module = require('./Preferred_Module')
 const Assigned_Module = require('./Assigned_Module')
+const Flight = require('./Flight')
 
 router.use('/api/home', home)
 router.use('/api/account', account)
@@ -35,5 +36,6 @@ router.use('/api/Project', Project)
 router.use('/api/Contractor_Project', Contractor_Project)
 router.use('/api/Preferred_Module', Preferred_Module)
 router.use('/api/Assigned_Module', Assigned_Module)
+router.use('/api/Flight', Flight)
 
 module.exports = router

@@ -46,6 +46,9 @@ import projectadmin from '../views/management/forms/project/projectadmin.vue'
 import contractorprojectEdit from '../views/management/forms/contractor project/contractorprojectEdit.vue'
 import contractorprojectadmin from '../views/management/forms/contractor project/contractorprojectadmin.vue'
 
+import flightEdit from '../views/management/forms/flight/flightEdit.vue'
+import flightadmin from '../views/management/forms/flight/flightadmin.vue'
+
 import perferredModulesList from '../views/management/perferredModules.vue'
 vue.use(VueRouter)
 
@@ -171,6 +174,31 @@ const router = new VueRouter({
     {
       path: '/project/create',
       component: projectEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/flight',
+      component: flightadmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/flight/edit/:flightID',
+      name: '/flight/edit',
+      component: flightEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/flight/create',
+      component: flightEdit,
       props: true,
       meta: {
         isOpen: true,

@@ -2,7 +2,7 @@
   <div>
     <h2>Flight Manager</h2>
     <br>
-    <projectList-list />
+    <flightList-list />
   </div>
 </template>
 

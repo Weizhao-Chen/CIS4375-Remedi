@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    arrivalLcation: {
+    arrivalLocation: {
       type: DataTypes.STRING,
       allowNull: false
     },

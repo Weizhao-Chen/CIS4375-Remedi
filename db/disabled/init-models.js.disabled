@@ -1,7 +1,7 @@
 var DataTypes = require("sequelize").DataTypes;
-var _Airline = require("./Airline");
 var _Assigned_Clinic_Area = require("./Assigned_Clinic_Area");
 var _Assigned_Module = require("./Assigned_Module");
+var _Assigned_Rental_Car = require("./Assigned_Rental_Car");
 var _Clinic_Area = require("./Clinic_Area");
 var _Contractor = require("./Contractor");
 var _Contractor_Flight = require("./Contractor_Flight");
@@ -20,9 +20,9 @@ var _accountType = require("./accountType");
 var _login = require("./login");
 
 function initModels(sequelize) {
-  var Airline = _Airline(sequelize, DataTypes);
   var Assigned_Clinic_Area = _Assigned_Clinic_Area(sequelize, DataTypes);
   var Assigned_Module = _Assigned_Module(sequelize, DataTypes);
+  var Assigned_Rental_Car = _Assigned_Rental_Car(sequelize, DataTypes);
   var Clinic_Area = _Clinic_Area(sequelize, DataTypes);
   var Contractor = _Contractor(sequelize, DataTypes);
   var Contractor_Flight = _Contractor_Flight(sequelize, DataTypes);
@@ -40,8 +40,6 @@ function initModels(sequelize) {
   var accountType = _accountType(sequelize, DataTypes);
   var login = _login(sequelize, DataTypes);
 
-  Flight.belongsTo(Airline, { as: "airline", foreignKey: "airlineID"});
-  Airline.hasMany(Flight, { as: "Flights", foreignKey: "airlineID"});
   Contractor.belongsTo(Contractor_Status, { as: "contractorStatus", foreignKey: "contractorStatusID"});
   Contractor_Status.hasMany(Contractor, { as: "Contractors", foreignKey: "contractorStatusID"});
   Module.belongsTo(EMR, { as: "emr", foreignKey: "emrID"});
@@ -52,11 +50,13 @@ function initModels(sequelize) {
   Hospital.hasMany(Project, { as: "Projects", foreignKey: "hospitalID"});
   Project.belongsTo(Project_Status, { as: "projectStatus", foreignKey: "projectStatusID"});
   Project_Status.hasMany(Project, { as: "Projects", foreignKey: "projectStatusID"});
+  Assigned_Rental_Car.belongsTo(Rental_Car, { as: "rentalCar", foreignKey: "rentalCarID"});
+  Rental_Car.hasMany(Assigned_Rental_Car, { as: "Assigned_Rental_Cars", foreignKey: "rentalCarID"});
 
   return {
-    Airline,
     Assigned_Clinic_Area,
     Assigned_Module,
+    Assigned_Rental_Car,
     Clinic_Area,
     Contractor,
     Contractor_Flight,
