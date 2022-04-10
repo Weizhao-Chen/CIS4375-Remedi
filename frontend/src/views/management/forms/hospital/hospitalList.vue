@@ -2,10 +2,10 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Airline List</span>
+        <span class="tableHeading-text">Hospital List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewAirline">Add New Airline</button>
+        <button class="swal2-editform swal2-styled" v-on:click="addNewHospital">Add New Hospital List</button>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'airlineID', type: 'asc'}
+          initialSortBy: {field: 'hospitalID', type: 'asc'}
         }"
         :pagination-options="{
           enabled: true,
@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import axios from '../../utilities/axios';
-import config from '../../config';
+import axios from '../../../../utilities/axios'
+import config from '../../../../config'
 import 'vue-good-table/dist/vue-good-table.css'
 import { VueGoodTable } from 'vue-good-table';
 import Swal from 'sweetalert2'
@@ -56,38 +56,38 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      myAPI: `${config.api}/api/Airline`,
+      myAPI: `${config.api}/api/Hospital`,
       dataFields: [{
         label: 'id',
-        field: 'airlineID',
+        field: 'hospitalID',
         type: 'number'
       },{
         label: 'name',
-        field: 'airlineName'
+        field: 'hospitalName'
       },{
-        label: 'phone',
-        field: 'airlinePhoneNumber'
+        label: 'Street',
+        field: 'hospitalAddressLineOne'
       },{
-        label: 'street',
-        field: 'airlineAddressLineOne'
-      },{
-        label: 'street2',
-        field: 'airlineAddressLineTwo'
+        label: 'Street 2',
+        field: 'hospitalAddressLineTwo'
       },{
         label: 'city',
-        field: 'airlineCity'
+        field: 'hospitalCity'
       },{
         label: 'state',
-        field: 'airlineState'
-      },{
-        label: 'country',
-        field: 'airlineCountry'
+        field: 'hospitalState'
       },{
         label: 'zip',
-        field: 'airlineZipCode'
+        field: 'hospitalZipCode'
       },{
-        label: 'website',
-        field: 'airlineWebsite'
+        label: 'contact name',
+        field: 'hospitalContactName'
+      },{
+        label: 'phone number',
+        field: 'hospitalContactPhone'
+      },{
+        label: 'email',
+        field: 'hospitalContactEmail'
       }]
     };
   },
@@ -98,23 +98,22 @@ export default {
   methods: {
     onRowDoubleClick(params){
       this.$router.push({
-        name: '/airline/edit',
+        name: '/hospital/edit',
         params: {
-          airlineID: params.row.airlineID
+          hospitalID: params.row.hospitalID
         }
       })
     },
-    addNewAirline(){
-      this.$router.push('/airline/edit')
+    addNewHospital(){
+      this.$router.push('/hospital/edit')
     },
     loadData(){
-      axios.get(`${config.api}/api/Airline/find`)
+      axios.get(`${config.api}/api/Hospital/find`)
         .then((response) => {
           this.DB_DATA = response.data;
         })
         .catch(() => {
-          Swal.fire('Error 2', 'Something went wrong', 'error')
-
+          Swal.fire('Error', 'Something went wrong', 'error')
         })
     }
   },
@@ -125,4 +124,8 @@ export default {
 </script>
 
 <style scoped>
+button {
+  margin-right: 15px;
+  height: 100%;
+}
 </style>

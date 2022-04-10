@@ -22,11 +22,13 @@ import emrEdit from '../views/management/forms/emr/emrEdit.vue'
 import projectstatusList from '../views/management/projectstatusList.vue'
 import contractorstatusList from '../views/management/contractorstatusList.vue'
 
-import airlineEdit from '../views/management/airlineEdit.vue'
-import airlineadmin from '../views/management/airlineadmin.vue'
 
-import hospitalList from '../views/management/popups/hospitalList.vue'
-import rentalCarCompany from '../views/management/popups/rentalCarCompanyList.vue'
+
+// old stuff
+// import hospitalList from '../views/management/old stuff/hospitalList.vue'
+// import rentalCarCompany from '../views/management/old stuff/rentalCarCompanyList.vue'
+// import airlineEdit from '../views/management/old stuff/airlineEdit.vue'
+// import airlineadmin from '../views/management/old stuff/airlineadmin.vue'
 
 import moduleEdit from '../views/management/forms/module/moduleEdit.vue'
 import moduleadmin from '../views/management/forms/module/moduleadmin.vue'
@@ -51,6 +53,9 @@ import flightadmin from '../views/management/forms/flight/flightadmin.vue'
 
 import rentalcarEdit from '../views/management/forms/rental car/rentalcarEdit.vue'
 import rentalcaradmin from '../views/management/forms/rental car/rentalcaradmin.vue'
+
+import hospitalEdit from '../views/management/forms/hospital/hospitalEdit.vue'
+import hospitaladmin from '../views/management/forms/hospital/hospitaladmin.vue'
 
 import perferredModulesList from '../views/management/perferredModules.vue'
 vue.use(VueRouter)
@@ -115,23 +120,23 @@ const router = new VueRouter({
       },
     },
     //airline? need to be removed
-    {
-      path: '/airline',
-      component: airlineadmin,
-      props: true,
-      meta: {
-        isOpen: true,
-      },
-    },
-    {
-      path: '/airline/edit',
-      name: '/airline/edit',
-      component: airlineEdit,
-      props: true,
-      meta: {
-        isOpen: true,
-      },
-    },
+    // {
+    //   path: '/airline',
+    //   component: airlineadmin,
+    //   props: true,
+    //   meta: {
+    //     isOpen: true,
+    //   },
+    // },
+    // {
+    //   path: '/airline/edit',
+    //   name: '/airline/edit',
+    //   component: airlineEdit,
+    //   props: true,
+    //   meta: {
+    //     isOpen: true,
+    //   },
+    // },
     //contractor
     {
       path: '/contractor',
@@ -273,6 +278,24 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //hospital
+    {
+      path: '/hospital',
+      component: hospitaladmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/hospital/edit',
+      name: '/hospital/edit',
+      component: hospitalEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
     //assigned clinic area
     {
       path: '/assignedclinicarea',
@@ -347,21 +370,6 @@ const router = new VueRouter({
       path: '/account',
       component: account,
     },
-    {
-      path: '/hospital',
-      component: hospitalList,
-      meta: {
-        isOpen: true,
-      },
-    },
-    {
-      path: '/rental-car-co',
-      component: rentalCarCompany,
-      meta: {
-        isOpen: true,
-      },
-    },
-
     {
       path: '*',
       component: notFound,

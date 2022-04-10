@@ -8,7 +8,7 @@ v1.2.1 Added the ability to view more details in Contractor Project form without
 v1.3 Add CRUD for Flight without validations and merge codes with jj2
 v1.4 Added CRUD for Rental Car without validations.
 v1.4.1 fixed console warnings for contractorproject. Merge codes from jj2 and fixed validations errors for project notes for Project. Implemented Date UI and applied onto flight. Rearranged Flight tables from models.
-
+v1.5 remove unwanted vues into old stuff for future improvement. Switch Hospital table from popup into form based.
 
 
 
@@ -21,9 +21,9 @@ TodoList:
 
 
 
-Buglist as of Alpha v1.4
+Buglist as of Alpha v1.5
 unsure
 1. Can't delete Contractor Project or other many to many tables (or delete will delete all project associate with a specific contractor)
 2. Updating Contractor Project will not delete old one and will also create a new one.
 for sure
-1. validations of max value and entity types.
+1. validations of max value and entity types for most if not all tables.
