@@ -5,12 +5,12 @@
         <span class="tableHeading-text">Assigned Clinic Area List</span>
       </div>
       <div class="tableHeading-right">
-        <button
+        <!-- <button
           class="swal2-editform swal2-styled"
           v-on:click="addNewAssignedClinicArea"
         >
           Add Assigned Clinic Area List
-        </button>
+        </button> -->
       </div>
     </div>
 

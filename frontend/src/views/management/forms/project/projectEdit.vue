@@ -430,13 +430,15 @@ export default {
         ClinicID: this.currentClinicArea.clinicID,
       }
 
-      if (!this.currentContractor.contractorID) {
+      if (this.checkForContractor(this.currentContractor.contractorID)) {
+        Swal.fire('Error', 'Contractor Already Assigned', 'error')
+      } else if (!this.currentContractor.contractorID) {
         Swal.fire('Error', 'Must add Contractor', 'error')
       } else if (!this.currentModule.contractorID) {
         Swal.fire('Error', 'Must add Module', 'error')
       } else if (!this.currentClinicArea.clinicID) {
         Swal.fire('Error', 'Must add Clinic Area', 'error')
-      } else
+      } else {
         axios
           .post(`${config.api}/api/Contractor_Project/create`, payLoad)
           .then((response) => {
@@ -452,18 +454,30 @@ export default {
             Swal.fire('Error', 'Something went wrong updating Project', 'error')
           })
 
-      axios.post(
-        `${config.api}/api/Assigned_Module/create`,
-        assignedModulePayLoad,
-      )
+        axios.post(
+          `${config.api}/api/Assigned_Module/create`,
+          assignedModulePayLoad,
+        )
 
-      axios.post(
-        `${config.api}/api/Assigned_Clinic_Area/create`,
-        assignedClinicAreaPayLoad,
-      )
+        axios.post(
+          `${config.api}/api/Assigned_Clinic_Area/create`,
+          assignedClinicAreaPayLoad,
+        )
+      }
 
-      console.log(payLoad)
+      // console.log(payLoad)
     },
+    checkForContractor(contractorID) {
+      let isThere
+
+      isThere = this.Contractors.find(
+        (contractor) => contractor.contractorID == contractorID,
+      )
+      if (isThere) {
+        return true
+      }
+    },
+
     removeContractorFromList(contractorID) {
       for (let i = 0; i < this.Contractors.length; i++) {
         if (this.Contractors[i].contractorID === contractorID) {

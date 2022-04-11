@@ -159,7 +159,7 @@
           }"
         />
       </div>
-      <div class="editForm-left">
+      <div class="editForm-left" v-if="!isApproved">
         <FormulateInput
           @validation="validationSID = $event"
           type="text"
@@ -167,7 +167,6 @@
           label="approval granted"
           validation="bail|required:trim|max:500,length"
           error-behavior="live"
-          v-model="form.model.ApprovalGranted"
           :validation-messages="{
             required: 'The approval id is required needs validation',
           }"
@@ -262,9 +261,8 @@
           </b-card>
         </b-collapse>
       </div>
-      <!-- {{ isAssigned }}
-      {{ this.Contractors }} -->
     </form>
+    {{ this.form.model }}
   </div>
 </template>
 
@@ -282,15 +280,17 @@ export default {
   props: ['flightID'],
   data() {
     return {
+      isApproved: false,
       isAssigned: false,
+      isSignOff: 0,
       isNewFlight: true,
-      // validationFDate: {},
-      // validationDTime: {},
+      validationFDate: {},
+      validationDTime: {},
       validationDLocation: {},
       validationALocation: {},
       // validationATime: {},
       validationSNumber: {},
-      validationflightcost: {},
+      // validationflightcost: {},
       validationSID: {},
       validationSName: {},
       // validationSDate: {},
@@ -360,23 +360,37 @@ export default {
     // ,
     validationFormCheck: function () {
       if (
+        this.isApproved == true &&
+        //flight date
+
+        //depart location
+        this.validationDLocation.hasErrors === false &&
+        //arival location
+        this.validationALocation.hasErrors === false &&
+        //seat number
+        this.validationSNumber.hasErrors === false &&
+        //approval name
+        this.validationSName.hasErrors === false
+      ) {
+        return true
+      } else if (
         // this.validationFDate.hasErrors === false &&
         // this.validationDTime.hasErrors === false &&
         this.validationDLocation.hasErrors === false &&
         this.validationALocation.hasErrors === false &&
         // this.validationATime.hasErrors === false &&
         this.validationSNumber.hasErrors === false &&
-        this.validationflightcost.hasErrors === false &&
+        // this.validationflightcost.hasErrors === false &&
         this.validationSID.hasErrors === false &&
         this.validationSName.hasErrors === false
         // this.validationSDate.hasErrors === false
         //  && this.validationHospital === false &&
         // this.validationProjectStatus === false
+        // this.isApproved == true
       ) {
+        this.isSignOff = 1
         return true
-      } else {
-        return false
-      }
+      } else return false
     },
   },
   methods: {
@@ -385,7 +399,10 @@ export default {
     },
     addFlight() {
       //hmmm debating on removing these
-      if (!this.form.model.DepartTime) {
+
+      if (!this.form.model.FlightDate) {
+        Swal.fire('Error', 'Must add Flight Date', 'error')
+      } else if (!this.form.model.DepartTime) {
         Swal.fire('Error', 'Must add Depart Time', 'error')
       } else if (!this.form.model.ArrivalTime) {
         Swal.fire('Error', 'Must add Arrival Time', 'error')
@@ -460,6 +477,7 @@ export default {
         })
       }
     },
+    checkFlightPrice(price) {},
     addContractor(event) {
       event.preventDefault()
       const addContractorPayload = {
@@ -553,6 +571,16 @@ export default {
           })
         }
       })
+    },
+    'form.model.FlightCost'() {
+      if (this.form.model.FlightCost < 500) {
+        this.isApproved = true
+      } else {
+        this.isApproved = false
+      }
+    },
+    isSignOff() {
+      this.form.model.ApprovalGranted = this.isSignOff
     },
   },
   beforeMount() {

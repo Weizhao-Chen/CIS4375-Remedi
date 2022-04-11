@@ -41,9 +41,9 @@
           ofLabel: 'of',
         }"
         compactMode
-        @on-row-dblclick="onRowDoubleClick"
       />
     </div>
+    <!-- {{ this.DB_DATA }} -->
   </div>
 </template>
 
@@ -78,6 +78,14 @@ export default {
           label: 'Project Name',
           field: 'Project.projectName',
         },
+        {
+          label: ' Clinic Area Assigned',
+          field: 'Clinic_Area.clinicAreaName',
+        },
+        // {
+        //   label: ' Module Assigned',
+        //   field: 'Clinic_Area.clinicAreaName',
+        // },
       ],
     }
   },

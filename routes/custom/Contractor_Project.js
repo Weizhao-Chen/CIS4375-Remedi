@@ -77,6 +77,7 @@ router.post('/create', (req, res, next) => {
       return res.send(err)
     })
 })
+
 router.put('/update/:contractorProjectID', (req, res, next) => {
   const db = req.app.get('db')
   db.Contractor_Project.update(
