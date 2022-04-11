@@ -356,6 +356,14 @@ export default {
         })
       }
     },
+    checkForExistingContractor(contractorID) {
+      for (let i = 0; i < this.AssignedContractors.length; i++) {
+        if (this.AssignedContractors[i].contractorID === contractorID) {
+          return true
+        }
+      }
+      return false
+    },
     addContractor(event) {
       event.preventDefault()
       const addContractorPayload = {
@@ -364,20 +372,30 @@ export default {
         driverPassenger: this.currentMode.mode,
       }
 
-      axios
-        .post(
-          `${config.api}/api/Assigned_Rental_Car/create`,
-          addContractorPayload,
-        )
-        .then((response) => console.log(response))
+      if (!this.currentContractor.contractorID) {
+        Swal.fire('error', 'Must add Contractor!', 'error')
+      } else if (!this.currentMode.mode) {
+        Swal.fire('error', 'Must add Driver/Passenger!', 'error')
+      } else if (
+        this.checkForExistingContractor(this.currentContractor.contractorID)
+      ) {
+        Swal.fire('error', 'Contractor Already Assigned!', 'error')
+      } else {
+        axios
+          .post(
+            `${config.api}/api/Assigned_Rental_Car/create`,
+            addContractorPayload,
+          )
+          .then((response) => console.log(response))
 
-      this.AssignedContractors.push({
-        driverPassenger: this.currentMode.mode,
-        Contractor: {
-          lastName: this.currentContractor.lastName,
-          firstName: this.currentContractor.firstName,
-        },
-      })
+        this.AssignedContractors.push({
+          driverPassenger: this.currentMode.mode,
+          Contractor: {
+            lastName: this.currentContractor.lastName,
+            firstName: this.currentContractor.firstName,
+          },
+        })
+      }
     },
     removeContractorFromList(contractorID) {
       for (let i = 0; i < this.AssignedContractors.length; i++) {
