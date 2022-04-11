@@ -617,6 +617,16 @@ export default {
           )
         })
     },
+    anotherMethod(moduleID) {
+      for (let i = 0; i < this.PreferredModules.length; i++) {
+        if (this.PreferredModules[i].moduleID === moduleID) {
+          return true
+        }
+
+        // console.log(this.PreferredModules[i].moduleID)
+      }
+      return false
+    },
     addModule(event) {
       event.preventDefault()
 
@@ -624,17 +634,22 @@ export default {
         contractorID: this.contractorID,
         moduleID: this.currentModule.moduleID,
       }
-      axios
-        .post(`${config.api}/api/Preferred_Module/create`, modulePayLoad)
-        .then((response) => console.log(response))
-        .then(
-          this.PreferredModules.push({
-            moduleID: this.currentModule.moduleID,
-            Module: {
-              moduleName: this.currentModule.moduleName,
-            },
-          }),
-        )
+
+      if (this.anotherMethod(this.currentModule.moduleID)) {
+        Swal.fire('error', 'Module already Exists!', 'error')
+      } else {
+        axios
+          .post(`${config.api}/api/Preferred_Module/create`, modulePayLoad)
+          .then((response) => console.log(response))
+          .then(
+            this.PreferredModules.push({
+              moduleID: this.currentModule.moduleID,
+              Module: {
+                moduleName: this.currentModule.moduleName,
+              },
+            }),
+          )
+      }
     },
     removePreferredModuleFromList(moduleID) {
       for (let i = 0; i < this.PreferredModules.length; i++) {

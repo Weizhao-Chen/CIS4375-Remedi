@@ -241,8 +241,8 @@
           </form>
         </b-card>
       </b-collapse>
-      {{ this.Contractors }}
-      {{ this.currentClinicArea.clinicID }}
+      <!-- {{ this.Contractors }}
+      {{ this.currentClinicArea.clinicID }} -->
     </form>
   </div>
 </template>
