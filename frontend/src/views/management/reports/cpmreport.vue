@@ -4,11 +4,6 @@
       <div class="tableHeading-left">
         <span class="tableHeading-text">Perferred Modules List</span>
       </div>
-      <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewAirline">
-          Add New Perferred Modules
-        </button>
-      </div>
     </div>
 
     <div>
@@ -39,15 +34,14 @@
           ofLabel: 'of',
         }"
         compactMode
-        @on-row-dblclick="onRowDoubleClick"
       />
     </div>
   </div>
 </template>
 
 <script>
-import axios from '../../utilities/axios'
-import config from '../../config'
+import axios from '../../../utilities/axios';
+import config from '../../../config';
 import 'vue-good-table/dist/vue-good-table.css'
 import { VueGoodTable } from 'vue-good-table'
 import Swal from 'sweetalert2'

@@ -20,7 +20,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'contractorID', type: 'asc'}
+          initialSortBy: {field: 'supportWisdom', type: 'desc'}
         }"
         :pagination-options="{
           enabled: true,
@@ -65,8 +65,7 @@ export default {
         field: 'firstName'
       },{
         label: 'Support Wisdom',
-        field: 'supportWisdom',
-        where: "true"
+        field: 'supportWisdom'
       }]
     };
   },

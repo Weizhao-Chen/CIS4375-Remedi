@@ -22,7 +22,6 @@ import emrEdit from '../views/management/forms/emr/emrEdit.vue'
 import projectstatusList from '../views/management/projectstatusList.vue'
 import contractorstatusList from '../views/management/contractorstatusList.vue'
 
-
 import moduleEdit from '../views/management/forms/module/moduleEdit.vue'
 import moduleadmin from '../views/management/forms/module/moduleadmin.vue'
 
@@ -55,6 +54,7 @@ import perferredModulesList from '../views/management/perferredModules.vue'
 //reports
 import cpreport from '../views/management/reports/cpreport.vue'
 import cwreport from '../views/management/reports/cwreport.vue'
+import cpmreport from '../views/management/reports/cpmreport.vue'
 vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -63,7 +63,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/project',
     },
     {
       path: '/perferred_modules',
@@ -73,8 +73,8 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/home',
-      component: index,
+      path: '/project',
+      component: projectadmin,
       meta: {
         isOpen: true,
       },
@@ -97,6 +97,13 @@ const router = new VueRouter({
     {
       path: '/cwreport',
       component: cwreport,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/cpmreport',
+      component: cpmreport,
       meta: {
         isOpen: true,
       },
