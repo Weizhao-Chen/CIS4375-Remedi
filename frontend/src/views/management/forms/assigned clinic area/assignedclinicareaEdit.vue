@@ -2,7 +2,7 @@
   <div>
     <div class="jumbotron dashboard">
       <div v-if="!isNewAssignedClinicArea" class="dashlabel">
-        Assigned Clinic Area Number: {{ this.Contractor.contractorID }}
+        Assigned Clinic Area Number: {{ this.ContractorID }}
       </div>
       <div v-else class="dashlabel">
         Adding New Assigned Clinic Area
@@ -59,7 +59,7 @@ import { ModelListSelect } from 'vue-search-select';
 import { ModelSelect } from 'vue-search-select'
 
 export default {
-  props: ["Contractor.contractorID"],
+  props: ["ContractorID"],
   data() {
     return {
       isNewAssignedClinicArea: true,
@@ -136,7 +136,7 @@ export default {
           })
     },
     deleteAssignedClinicArea(){
-        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/`, this.form.model)
+        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/${this.ContractorID}/${this.ClinicID}`)
           .then((response) => {
             Swal.fire(
               'Done!',
@@ -150,7 +150,7 @@ export default {
           })
     },
     loadData(){
-      axios.get(`${config.api}/api/Assigned_Clinic_Area/find/` + this.Contractor.contractorID)
+      axios.get(`${config.api}/api/Assigned_Clinic_Area/find/` + this.ContractorID)
         .then((response) => {
           this.DB_DATA = response.data;
             this.form.model.ContractorID = response.data.contractorID,
@@ -179,7 +179,7 @@ export default {
   },
   beforeMount() {
     this.loadFields()
-    if (this.Contractor.contractorID !== undefined){
+    if (this.ContractorID !== undefined){
       this.isNewAssignedClinicArea = false
       this.loadData()
     }
