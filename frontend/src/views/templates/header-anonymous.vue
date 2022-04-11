@@ -75,17 +75,18 @@
           <br>
           <!-- Contractor and Project -->
           <b-nav-item-dropdown
-            id = "contractor/project-dropdown"
-            text="Contractor and Project"
+            id = "report-dropdown"
+            text="Reports"
             toggle-class="nav-link-custom"
             left
             >
-            <b-dropdown-item href="/contractor" @click="hide">Contractor</b-dropdown-item>
-            <b-dropdown-item href="/project" @click="hide">Project</b-dropdown-item>
+            <b-dropdown-item href="/cpreport" @click="hide">Contractor Project Report</b-dropdown-item>
+            <b-dropdown-item href="/cwreport" @click="hide">Contractor Wisdom Report</b-dropdown-item>
+            <b-dropdown-item href="/cpmreport" @click="hide">Contractor Preferred Module Report</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item href="/cpreport" @click="hide">Contractor Project Report</b-nav-item>
+          <!-- <b-nav-item href="/cpreport" @click="hide">Contractor Project Report</b-nav-item>
           <b-nav-item href="/cwreport" @click="hide">Contractor Wisdom Report</b-nav-item>
-          <b-nav-item href="/cpmreport" @click="hide">Contractor Preferred Module Report</b-nav-item>
+          <b-nav-item href="/cpmreport" @click="hide">Contractor Preferred Module Report</b-nav-item> -->
         </b-nav>
       </nav>
     </b-sidebar>
