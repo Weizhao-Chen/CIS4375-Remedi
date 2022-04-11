@@ -42,6 +42,8 @@
         @on-row-dblclick="onRowDoubleClick"
       />
     </div>
+
+    <!-- {{ this.DB_DATA }} -->
   </div>
 </template>
 
@@ -56,8 +58,8 @@ export default {
   data() {
     return {
       DB_DATA: [],
-    //   Project_Status_DATA: [],
-    //   Hospital_DATA: [],
+      //   Project_Status_DATA: [],
+      //   Hospital_DATA: [],
       myAPI: `${config.api}/api/Flight`,
       dataFields: [
         {
@@ -104,7 +106,7 @@ export default {
         {
           label: 'approval date',
           field: 'specialApprovalDate',
-        }
+        },
       ],
     }
   },
@@ -124,11 +126,33 @@ export default {
     addNewFlight() {
       this.$router.push('/flight/create')
     },
+
+    formatDate(data) {
+      for (let i = 0; i < data.length; i++) {
+        let d = new Date(data[i].departTime)
+        let d2 = new Date(data[i].arrivalTime)
+        this.DB_DATA.push({
+          flightID: data[i].flightID,
+          flightDate: data[i].flightDate.split('T')[0],
+          departLocation: data[i].departLocation,
+          departTime: data[i].departTime,
+          arrivalLocation: data[i].arrivalLocation,
+          arrivalTime: data[i].arrivalTime,
+          seatNumber: data[i].seatNumber,
+          flightCost: data[i].flightCost,
+          specialApprovalGranted: data[i].specialApprovalGranted,
+          specialApprovalName: data[i].specialApprovalName,
+          specialApprovalDate: data[i].specialApprovalDate.split('T')[0],
+        })
+
+        console.log(data[i])
+      }
+    },
     loadData() {
       axios
         .get(`${config.api}/api/Flight/find`)
         .then((response) => {
-          this.DB_DATA = response.data
+          this.formatDate(response.data)
         })
         .catch(() => {
           Swal.fire('Error', 'Something went wrong', 'error')

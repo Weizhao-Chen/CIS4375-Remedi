@@ -282,7 +282,7 @@ export default {
     return {
       isApproved: false,
       isAssigned: false,
-      isSignOff: 0,
+      isSignOff: false,
       isNewFlight: true,
       validationFDate: {},
       validationDTime: {},
@@ -408,7 +408,9 @@ export default {
         Swal.fire('Error', 'Must add Arrival Time', 'error')
       } else if (this.form.model.ArrivalTime < this.form.model.DepartTime) {
         Swal.fire('Error', 'Arrival Time Cant Be Before Depart Time', 'error')
-      } else
+      } else if (!this.form.model.ApprovalDate) {
+        Swal.fire('Error', 'Must add Approval Date', 'error')
+      } else {
         axios
           .post(`${config.api}/api/Flight/create`, this.form.model)
           .then((response) => {
@@ -422,6 +424,7 @@ export default {
               'error',
             )
           })
+      }
     },
     updateFlight() {
       const FlightID = this.flightID
@@ -580,7 +583,7 @@ export default {
       }
     },
     isSignOff() {
-      this.form.model.ApprovalGranted = this.isSignOff
+      this.form.model.ApprovalGranted = this.isSignOff ? true : false
     },
   },
   beforeMount() {

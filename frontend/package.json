@@ -14,6 +14,7 @@
     "es6-promise": "^4.2.8",
     "flatpickr": "^4.6.11",
     "lodash": "latest",
+    "moment": "^2.29.2",
     "node-sass": "latest",
     "sass-loader": "^10.0.0-rc.0",
     "snyk": "^1.895.0",
