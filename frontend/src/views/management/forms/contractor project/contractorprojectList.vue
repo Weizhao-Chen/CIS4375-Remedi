@@ -4,14 +4,14 @@
       <div class="tableHeading-left">
         <span class="tableHeading-text">Assigned Contractor Project List</span>
       </div>
-      <div class="tableHeading-right">
+      <!-- <div class="tableHeading-right">
         <button
           class="swal2-editform swal2-styled"
           v-on:click="addNewContractorProject"
         >
           Add Contractor Project List
         </button>
-      </div>
+      </div> -->
     </div>
     <div>
       <div slot="table-actions"></div>

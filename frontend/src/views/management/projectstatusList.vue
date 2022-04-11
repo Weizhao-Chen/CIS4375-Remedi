@@ -5,13 +5,17 @@
         <span class="tableHeading-text">Project Status List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewProject_Status">Add New Project Status</button>
+        <button
+          class="swal2-editform swal2-styled"
+          v-on:click="addNewProject_Status"
+        >
+          Add New Project Status
+        </button>
       </div>
     </div>
 
     <div>
-      <div slot="table-actions">
-      </div>
+      <div slot="table-actions"></div>
       <vue-good-table
         :columns="dataFields"
         :rows="DB_DATA"
@@ -23,7 +27,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'projectStatusID', type: 'asc'}
+          initialSortBy: { field: 'projectStatusID', type: 'asc' },
         }"
         :pagination-options="{
           enabled: true,
@@ -42,14 +46,13 @@
       />
     </div>
   </div>
-
 </template>
 
 <script>
-import axios from '../../utilities/axios';
-import config from '../../config';
+import axios from '../../utilities/axios'
+import config from '../../config'
 import 'vue-good-table/dist/vue-good-table.css'
-import { VueGoodTable } from 'vue-good-table';
+import { VueGoodTable } from 'vue-good-table'
 import Swal from 'sweetalert2'
 
 export default {
@@ -57,30 +60,35 @@ export default {
     return {
       DB_DATA: [],
       myAPI: `${config.api}/api/Project_Status`,
-      dataFields: [{
-        label: 'id',
-        field: 'projectStatusID',
-        type: 'number'
-      },{
-        label: 'name',
-        field: 'projectStatusType'
-      }]
-    };
+      dataFields: [
+        {
+          label: 'id',
+          field: 'projectStatusID',
+          type: 'number',
+        },
+        {
+          label: 'name',
+          field: 'projectStatusType',
+        },
+      ],
+    }
   },
 
   components: {
-    'vue-good-table': VueGoodTable
+    'vue-good-table': VueGoodTable,
   },
   methods: {
-    onRowDoubleClick(params){
+    onRowDoubleClick(params) {
       Swal.fire({
         title: 'Edit Record',
         html:
-          'Item ID: ' + params.row.projectStatusID +
+          'Item ID: ' +
+          params.row.projectStatusID +
           '<br>' +
-          '<form>Name <input id="form-name" class="swal2-input" placeholder="Name" value="' + params.row.projectStatusType + '">' +
-          '</form>'
-        ,
+          '<form>Name <input id="form-name" class="swal2-input" placeholder="Name" value="' +
+          params.row.projectStatusType +
+          '">' +
+          '</form>',
         showCancelButton: true,
         showDenyButton: true,
         focusConfirm: false,
@@ -97,36 +105,32 @@ export default {
           if (!name) {
             Swal.showValidationMessage(`Name cannot be blank`)
           }
-          return {name: name}
+          return { name: name }
         },
       }).then((result) => {
         if (result.isConfirmed) {
           const data = {
             id: params.row.projectStatusID,
-            name: result.value.name
+            name: result.value.name,
           }
-          axios.put(`${config.api}/api/Project_Status/update`, data)
+          axios
+            .put(`${config.api}/api/Project_Status/update`, data)
             .then((response) => {
               this.loadData()
-              Swal.fire(
-                'Done!',
-                'The record has been updated.',
-                'success'
-              )
+              Swal.fire('Done!', 'The record has been updated.', 'success')
             })
             .catch(() => {
               Swal.fire('Error', 'Something went wrong', 'error')
             })
-        } else if (result.isDenied){
+        } else if (result.isDenied) {
           const projectstatusid = params.row.projectStatusID
-          axios.delete(`${config.api}/api/Project_Status/delete/` + projectstatusid)
+          axios
+            .delete(
+              `${config.api}/api/Project_Status/delete/` + projectstatusid,
+            )
             .then((response) => {
               this.loadData()
-              Swal.fire(
-                'Done!',
-                'The record has been deleted.',
-                'success'
-              )
+              Swal.fire('Done!', 'The record has been deleted.', 'success')
             })
             .catch(() => {
               Swal.fire('Error', 'Something went wrong', 'error')
@@ -134,13 +138,12 @@ export default {
         }
       })
     },
-    addNewProject_Status(){
+    addNewProject_Status() {
       Swal.fire({
         title: 'Add Record',
         html:
           '<form>Name <input id="form-name" class="swal2-input" placeholder="Name">' +
-          '</form>'
-        ,
+          '</form>',
         showCancelButton: true,
         focusConfirm: false,
         confirmButtonText: 'Submit',
@@ -150,21 +153,18 @@ export default {
           if (!name) {
             Swal.showValidationMessage(`Name cannot be blank`)
           }
-          return {name: name}
+          return { name: name }
         },
       }).then((result) => {
         if (result.isConfirmed) {
           const data = {
-            name: result.value.name
+            name: result.value.name,
           }
-          axios.post(`${config.api}/api/Project_Status/create`, data)
+          axios
+            .post(`${config.api}/api/Project_Status/create`, data)
             .then((response) => {
               this.loadData()
-              Swal.fire(
-                'Done!',
-                'The record has been created.',
-                'success'
-              )
+              Swal.fire('Done!', 'The record has been created.', 'success')
             })
             .catch(() => {
               Swal.fire('Error', 'Something went wrong', 'error')
@@ -172,10 +172,11 @@ export default {
         }
       })
     },
-    loadData(){
-      axios.get(`${config.api}/api/Project_Status/find`)
+    loadData() {
+      axios
+        .get(`${config.api}/api/Project_Status/find`)
         .then((response) => {
-          this.DB_DATA = response.data;
+          this.DB_DATA = response.data
         })
         .catch(() => {
           Swal.fire('Error 2', 'Something went wrong', 'error')
@@ -183,9 +184,9 @@ export default {
     },
   },
   beforeMount() {
-    this.loadData();
-  }
-};
+    this.loadData()
+  },
+}
 </script>
 
 <style scoped>

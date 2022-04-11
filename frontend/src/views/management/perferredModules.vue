@@ -1,14 +1,12 @@
 <template>
   <div>
     <div class="tableHeading">
-      <div class="tableHeading-left">
-        <span class="tableHeading-text">Airline List</span>
-      </div>
-      <div class="tableHeading-right">
+      <div class="tableHeading-left"></div>
+      <!-- <div class="tableHeading-right">
         <button class="swal2-editform swal2-styled" v-on:click="addNewAirline">
           Add New Airline
         </button>
-      </div>
+      </div> -->
     </div>
 
     <div>
@@ -39,7 +37,6 @@
           ofLabel: 'of',
         }"
         compactMode
-        @on-row-dblclick="onRowDoubleClick"
       />
     </div>
   </div>

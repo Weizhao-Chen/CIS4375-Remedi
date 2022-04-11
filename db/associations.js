@@ -37,6 +37,9 @@ module.exports = {
     models.Contractor_Project.belongsTo(models.Contractor, {
       foreignKey: 'contractorID',
     })
+    models.Contractor_Project.belongsTo(models.Clinic_Area, {
+      foreignKey: 'clinicID',
+    })
 
     models.Preferred_Module.belongsTo(models.Module, { foreignKey: 'moduleID' })
     models.Preferred_Module.belongsTo(models.Contractor, {

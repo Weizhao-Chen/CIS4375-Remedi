@@ -5,13 +5,17 @@
         <span class="tableHeading-text">Assigned Clinic Area List</span>
       </div>
       <div class="tableHeading-right">
-        <button class="swal2-editform swal2-styled" v-on:click="addNewAssignedClinicArea">Add Assigned Clinic Area List</button>
+        <button
+          class="swal2-editform swal2-styled"
+          v-on:click="addNewAssignedClinicArea"
+        >
+          Add Assigned Clinic Area List
+        </button>
       </div>
     </div>
 
     <div>
-      <div slot="table-actions">
-      </div>
+      <div slot="table-actions"></div>
       <vue-good-table
         :columns="dataFields"
         :rows="DB_DATA"
@@ -23,7 +27,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: {field: 'Contractor.contractorID', type: 'asc'}
+          initialSortBy: { field: 'Contractor.contractorID', type: 'asc' },
         }"
         :pagination-options="{
           enabled: true,
@@ -41,15 +45,15 @@
         @on-row-dblclick="onRowDoubleClick"
       />
     </div>
+    <!-- {{ this.DB_DATA }} -->
   </div>
-
 </template>
 
 <script>
 import axios from '../../../../utilities/axios'
 import config from '../../../../config'
 import 'vue-good-table/dist/vue-good-table.css'
-import { VueGoodTable } from 'vue-good-table';
+import { VueGoodTable } from 'vue-good-table'
 import Swal from 'sweetalert2'
 
 export default {
@@ -59,46 +63,58 @@ export default {
       Contractor_DATA: [],
       Clinic_Area_DATA: [],
       myAPI: `${config.api}/api/Assigned_Clinic_Area`,
-      dataFields: [{
-        label: 'contractor id',
-        field: 'Contractor.contractorID'
-      },{
-        label: 'clinic id',
-        field: 'Clinic_Area.clinicID'
-      }]
-    };
+      dataFields: [
+        {
+          label: 'contractor id',
+          field: 'Contractor.contractorID',
+        },
+        {
+          label: 'first name',
+          field: 'Contractor.firstName',
+        },
+        {
+          label: 'last name',
+          field: 'Contractor.lastName',
+        },
+        {
+          label: 'last name',
+          field: 'Clinic_Area.clinicAreaName',
+        },
+      ],
+    }
   },
 
   components: {
-    'vue-good-table': VueGoodTable
+    'vue-good-table': VueGoodTable,
   },
   methods: {
-    onRowDoubleClick(params){
+    onRowDoubleClick(params) {
       this.$router.push({
         name: '/assignedclinicarea/edit',
         params: {
           contractorID: params.row.contractorID,
-          clinicID: params.row.clinicID
-        }
+          clinicID: params.row.clinicID,
+        },
       })
     },
-    addNewAssignedClinicArea(){
+    addNewAssignedClinicArea() {
       this.$router.push('/assignedclinicarea/edit')
     },
-    loadData(){
-      axios.get(`${config.api}/api/Assigned_Clinic_Area/find`)
+    loadData() {
+      axios
+        .get(`${config.api}/api/Assigned_Clinic_Area/find`)
         .then((response) => {
-          this.DB_DATA = response.data;
+          this.DB_DATA = response.data
         })
         .catch(() => {
           Swal.fire('Error', 'Something went wrong', 'error')
         })
-    }
+    },
   },
   beforeMount() {
-    this.loadData();
-  }
-};
+    this.loadData()
+  },
+}
 </script>
 
 <style scoped>

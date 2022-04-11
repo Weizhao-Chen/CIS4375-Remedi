@@ -158,11 +158,13 @@
             <b-list-group-item
               v-for="item in Contractors"
               :key="item.contractorID"
-              >{{ item.Contractor.firstName + ' ' + item.Contractor.lastName }}
+              >{{ item.firstName + ' ' + item.lastName }}
 
               <b-button
                 class="button-style"
-                v-on:click="removeContractor($event, item.contractorID)"
+                v-on:click="
+                  removeContractor($event, item.contractorID, item.clinicID)
+                "
                 variant="primary"
                 >Remove</b-button
               >
@@ -216,6 +218,19 @@
                 placeholder="select one"
               >
               </model-list-select>
+
+              <label class="form-custom-label" for="form-Contractor"
+                >Assign Clinic Area:</label
+              >
+              <model-list-select
+                v-model="currentClinicArea"
+                :list="ClinicArea"
+                option-value="clinicAreaName"
+                id="clinicID"
+                option-text="clinicAreaName"
+                placeholder="select one"
+              >
+              </model-list-select>
             </div>
             <button
               class="swal2-editform swal2-styled"
@@ -226,7 +241,8 @@
           </form>
         </b-card>
       </b-collapse>
-      <!-- {{ this.form.model }} -->
+      {{ this.Contractors }}
+      {{ this.currentClinicArea.clinicID }}
     </form>
   </div>
 </template>
@@ -258,6 +274,8 @@ export default {
       currentContractor: {},
       Modules: [],
       currentModule: {},
+      ClinicArea: [],
+      currentClinicArea: {},
       form: {
         model: {
           ProjectID: '',
@@ -287,6 +305,14 @@ export default {
             this.Modules = response.data
           })
       }
+    },
+
+    'form.model.HospitalID'() {
+      axios
+        .get(
+          `${config.api}/api/Clinic_Area/find_by_hospital/${this.form.model.HospitalID}`,
+        )
+        .then((response) => (this.ClinicArea = response.data))
     },
   },
   computed: {
@@ -391,6 +417,7 @@ export default {
       const payLoad = {
         ContractorID: this.currentContractor.contractorID,
         ProjectID: this.projectID,
+        ClinicID: this.currentClinicArea.clinicID,
       }
       const assignedModulePayLoad = {
         projectID: this.projectID,
@@ -398,10 +425,17 @@ export default {
         contractorID: this.currentModule.contractorID,
       }
 
+      const assignedClinicAreaPayLoad = {
+        ContractorID: this.currentContractor.contractorID,
+        ClinicID: this.currentClinicArea.clinicID,
+      }
+
       if (!this.currentContractor.contractorID) {
         Swal.fire('Error', 'Must add Contractor', 'error')
       } else if (!this.currentModule.contractorID) {
         Swal.fire('Error', 'Must add Module', 'error')
+      } else if (!this.currentClinicArea.clinicID) {
+        Swal.fire('Error', 'Must add Clinic Area', 'error')
       } else
         axios
           .post(`${config.api}/api/Contractor_Project/create`, payLoad)
@@ -409,10 +443,9 @@ export default {
             this.Contractors.push({
               contractorID: this.currentContractor.contractorID,
               projectID: this.projectID,
-              Contractor: {
-                firstName: this.currentContractor.firstName,
-                lastName: this.currentContractor.lastName,
-              },
+              clinicID: this.currentClinicArea.clinicID,
+              firstName: this.currentContractor.firstName,
+              lastName: this.currentContractor.lastName,
             })
           })
           .catch(() => {
@@ -424,7 +457,12 @@ export default {
         assignedModulePayLoad,
       )
 
-      // console.log(assignedModulePayLoad)
+      axios.post(
+        `${config.api}/api/Assigned_Clinic_Area/create`,
+        assignedClinicAreaPayLoad,
+      )
+
+      console.log(payLoad)
     },
     removeContractorFromList(contractorID) {
       for (let i = 0; i < this.Contractors.length; i++) {
@@ -435,7 +473,7 @@ export default {
 
       console.log('im running')
     },
-    removeContractor(event, contractorID) {
+    removeContractor(event, contractorID, clinicID) {
       event.preventDefault()
 
       axios
@@ -447,7 +485,24 @@ export default {
       axios.delete(
         `${config.api}/api/Assigned_Module/delete/${contractorID}/${this.projectID}`,
       )
+
+      axios.delete(
+        `${config.api}/api/Assigned_Clinic_Area/delete/${contractorID}/${clinicID}}`,
+      )
     },
+    formatContractorData(data) {
+      for (let i = 0; i < data.length; i++) {
+        this.Contractors.push({
+          firstName: data[i].Contractor.firstName,
+          lastName: data[i].Contractor.lastName,
+          contractorID: data[i].contractorID,
+          projectID: data[i].projectID,
+          clinicID: data[i].Clinic_Area.clinicID,
+        })
+        console.log(data[i].Clinic_Area.clinicID)
+      }
+    },
+
     loadData() {
       axios
         .get(`${config.api}/api/Project/find/` + this.projectID)
@@ -476,7 +531,9 @@ export default {
         .get(
           `${config.api}/api/Contractor_Project/find_project/` + this.projectID,
         )
-        .then((response) => (this.Contractors = response.data))
+        .then((response) => {
+          this.formatContractorData(response.data)
+        })
 
       axios.get(`${config.api}/api/Contractor/find`).then((response) => {
         this.AllContractors = response.data

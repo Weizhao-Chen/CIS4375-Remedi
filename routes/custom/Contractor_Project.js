@@ -4,7 +4,7 @@ const router = express.Router({ caseSensitive: true })
 router.get('/find', (req, res, next) => {
   const db = req.app.get('db')
   return db.Contractor_Project.findAll({
-    include: [db.Contractor, db.Project],
+    include: [db.Contractor, db.Project, db.Clinic_Area],
   })
     .then((Contractor_Project) => res.send(Contractor_Project))
     .catch((err) => {
@@ -46,7 +46,7 @@ router.get('/find_project/:projectID', (req, res, next) => {
     where: {
       projectID: req.params.projectID,
     },
-    include: [db.Contractor, db.Project],
+    include: [db.Contractor, db.Project, db.Clinic_Area],
   })
     .then((Contractor_Project) => {
       res.send(Contractor_Project)
@@ -64,6 +64,7 @@ router.post('/create', (req, res, next) => {
   db.Contractor_Project.create({
     contractorID: req.body.ContractorID,
     projectID: req.body.ProjectID,
+    clinicID: req.body.ClinicID,
   })
     .then(() => {
       res.status(200).send('OK')
@@ -100,13 +101,13 @@ router.put('/update/:contractorProjectID', (req, res, next) => {
       return res.send(err)
     })
 })
-router.delete('/delete/:ContractorID/:ProjectID', (req, res, next) => {
+router.delete('/delete/:contractorID/:projectID', (req, res, next) => {
   const db = req.app.get('db')
 
   db.Contractor_Project.destroy({
     where: {
-      contractorID: req.params.ContractorID,
-      projectID: req.params.ProjectID,
+      contractorID: req.params.contractorID,
+      projectID: req.params.projectID,
     },
   })
     .then(() => {
