@@ -127,7 +127,7 @@ export default {
     goBack(){
       this.$router.push('/assignedmodule')
     },
-    addAssignedClinicArea(){
+    updateAssignedModule(){
       axios.post(`${config.api}/api/Assigned_Module/create`, this.form.model)
         .then((response) => {
           Swal.fire(
@@ -141,7 +141,7 @@ export default {
           Swal.fire('Error', 'Something went wrong (creating Assigned Clinic Area)', 'error')
         })
     },
-    updateAssignedClinicArea(){
+    updateAssignedModule(){
       const AssignedClinicAreaID = this.assignedClinicAreaID
         axios.put(`${config.api}/api/Assigned_Clinic_Area/update/` + AssignedClinicAreaID, this.form.model)
           .then((response) => {
@@ -157,9 +157,9 @@ export default {
             Swal.fire('Error', 'Something went wrong (updating Assigned Clinic Area) or there is repeating data', 'error')
           })
     },
-    deleteAssignedClinicArea(){
+    deleteAssignedModule(){
       const AssignedClinicAreaID = this.assignedClinicAreaID
-        axios.delete(`${config.api}/api/Assigned_Clinic_Area/delete/` + AssignedClinicAreaID)
+        axios.delete(`${config.api}/api/Assigned_Module/delete/` + AssignedClinicAreaID)
           .then((response) => {
             Swal.fire(
               'Done!',
