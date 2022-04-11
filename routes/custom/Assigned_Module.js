@@ -99,21 +99,21 @@ router.delete('/delete/:contractorID/:projectID', (req, res, next) => {
     })
 })
 
-router.delete('/delete/:moduleID', (req, res, next) => {
-  const db = req.app.get('db')
+// router.delete('/delete/:moduleID', (req, res, next) => {
+//   const db = req.app.get('db')
 
-  db.Assigned_Module.destroy({
-    where: {
-      moduleID: req.params.moduleID,
-    },
-  })
-    .then(() => {
-      res.status(200).send('The record has been deleted!')
-    })
-    .catch((err) => {
-      console.log('There was an error deleting Module', JSON.stringify(err))
-      return res.send(err)
-    })
-})
+//   db.Assigned_Module.destroy({
+//     where: {
+//       moduleID: req.params.moduleID,
+//     },
+//   })
+//     .then(() => {
+//       res.status(200).send('The record has been deleted!')
+//     })
+//     .catch((err) => {
+//       console.log('There was an error deleting Module', JSON.stringify(err))
+//       return res.send(err)
+//     })
+// })
 
 module.exports = router

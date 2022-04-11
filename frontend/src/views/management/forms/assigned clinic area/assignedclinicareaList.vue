@@ -77,7 +77,7 @@ export default {
           field: 'Contractor.lastName',
         },
         {
-          label: 'last name',
+          label: 'Clinic Area',
           field: 'Clinic_Area.clinicAreaName',
         },
       ],

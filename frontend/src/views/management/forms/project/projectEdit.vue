@@ -476,19 +476,26 @@ export default {
     removeContractor(event, contractorID, clinicID) {
       event.preventDefault()
 
+      // console.log(this.projectID)
+
       axios
         .delete(
           `${config.api}/api/Contractor_Project/delete/${contractorID}/${this.projectID}`,
         )
         .then(this.removeContractorFromList(contractorID))
 
-      axios.delete(
-        `${config.api}/api/Assigned_Module/delete/${contractorID}/${this.projectID}`,
-      )
+      axios
+        .delete(
+          `${config.api}/api/Assigned_Module/delete/${contractorID}/` +
+            this.projectID,
+        )
+        .then((response) => console.log(response))
 
-      axios.delete(
-        `${config.api}/api/Assigned_Clinic_Area/delete/${contractorID}/${clinicID}}`,
-      )
+      axios
+        .delete(
+          `${config.api}/api/Assigned_Clinic_Area/delete/${contractorID}/${clinicID}`,
+        )
+        .then((response) => console.log(response))
     },
     formatContractorData(data) {
       for (let i = 0; i < data.length; i++) {
