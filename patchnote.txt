@@ -34,11 +34,11 @@ Validation checklist
 Assigned_Clinic_Area = finish, need read
 Assigned_Module = finish, need read
 Assigned_Rental_Car = finish, can add duplicates but only keeping the first one, need Read
-Clinic_Area = finish, need validation on phone
+Clinic_Area = finish, need validation on phone(DONE)
 Contractor_Flight = finish, can't add more than one, need read
 Contractor_Project = finish, reports system for Read
 Contractor_Status = finish
-Contractor = finish, need validation on phone, zip
+Contractor = finish, need validation on phone, zip (DONE)
 EMR = finish, pass validation but not sure about char count.
 Flight = finish, need to change approvalname to the same as approvalid
 Hospital = finish, need validation on edits
