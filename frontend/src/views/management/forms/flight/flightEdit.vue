@@ -138,7 +138,6 @@
           name="seatNumber"
           label="Seat Number"
           validation="bail|required:trim|max:500,length"
-          error-behavior="live"
           v-model="form.model.SeatNumber"
           :validation-messages="{
             required: 'The seat number is required needs validation',
@@ -152,24 +151,22 @@
           name="flightCost"
           label="Flight Cost"
           validation="bail|required:trim|max:500,length"
-          error-behavior="live"
           v-model="form.model.FlightCost"
           :validation-messages="{
             required: 'The flight cost is required needs validation',
           }"
         />
       </div>
-      <div class="editForm-left" v-if="!isApproved">
+      <div class="editForm-left">
         <FormulateInput
           @validation="validationSID = $event"
           type="text"
           name="specialApprovalGranted"
           label="Approval granted id"
-          validation="bail|required:trim|max:500,length"
+          validation="required|matches:true,false"
           error-behavior="live"
-          :validation-messages="{
-            required: 'The approval id is required needs validation',
-          }"
+          v-model="form.model.ApprovalGranted"
+
         />
       </div>
       <div class="editForm-left" v-if="!isApproved">
@@ -179,9 +176,7 @@
           name="specialApprovalName"
           label="Approval Name"
           validation="bail|required:trim|max:100,length"
-          error-behavior="live"
           v-model="form.model.ApprovalName"
-          :validation-messages="{ required: 'The approval name is required' }"
         />
       </div>
 
@@ -368,9 +363,9 @@ export default {
         //arival location
         this.validationALocation.hasErrors === false &&
         //seat number
-        this.validationSNumber.hasErrors === false &&
+        this.validationSNumber.hasErrors === false
         //approval name
-        this.validationSName.hasErrors === false
+        // this.validationSName.hasErrors === false
       ) {
         return true
       } else if (
@@ -379,9 +374,11 @@ export default {
         this.validationDLocation.hasErrors === false &&
         this.validationALocation.hasErrors === false &&
         // this.validationATime.hasErrors === false &&
-        this.validationSNumber.hasErrors === false &&
-        // this.validationflightcost.hasErrors === false &&
-        this.validationSID.hasErrors === false &&
+        this.validationSNumber.hasErrors === false 
+        // &&
+        // // this.validationflightcost.hasErrors === false &&
+        // this.validationSID.hasErrors === false 
+         &&
         this.validationSName.hasErrors === false
         // this.validationSDate.hasErrors === false
         //  && this.validationHospital === false &&
