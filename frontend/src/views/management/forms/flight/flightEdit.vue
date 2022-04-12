@@ -262,7 +262,7 @@
         </b-collapse>
       </div>
     </form>
-    {{ this.form.model }}
+    <!-- {{ this.form.model }} -->
   </div>
 </template>
 

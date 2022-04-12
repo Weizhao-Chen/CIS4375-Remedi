@@ -66,6 +66,13 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
+        name: "PK__Flight__0E0186229A676825",
+        unique: true,
+        fields: [
+          { name: "flightID" },
+        ]
+      },
+      {
         name: "PK__Flight__0E0186229B8C3AAC",
         unique: true,
         fields: [

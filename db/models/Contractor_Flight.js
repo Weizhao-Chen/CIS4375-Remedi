@@ -9,7 +9,11 @@ module.exports = function(sequelize, DataTypes) {
     flightID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references: {
+        model: 'Flight',
+        key: 'flightID'
+      }
     },
     contractorFlyerNumber: {
       type: DataTypes.STRING,
@@ -25,6 +29,14 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: false,
     deletedAt: false,
     indexes: [
+      {
+        name: "PK__Contract__8EA8EC77301CB55F",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "flightID" },
+        ]
+      },
       {
         name: "PK__Contract__8EA8EC77321EBF7C",
         unique: true,
