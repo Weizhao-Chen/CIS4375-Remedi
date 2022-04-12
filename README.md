@@ -44,4 +44,3 @@ doing minor changes you can easily switch to any database of your choice.
 
 [Build Setup](./frontend/README.md)
 
-Source codes: https://github.com/mubaidr/node-vue-template
