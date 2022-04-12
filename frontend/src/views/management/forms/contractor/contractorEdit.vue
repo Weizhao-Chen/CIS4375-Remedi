@@ -141,7 +141,7 @@
           type="text"
           name="zipCode"
           label="zip"
-          validation="required"
+          validation="required|min:5,length"
           v-model="form.model.ZipCode"
           :validation-messages="{ required: 'The zip is required' }"
         />
@@ -152,8 +152,8 @@
           type="text"
           name="phoneNumber"
           label="phone number"
-          validation="required"
           v-model="form.model.PhoneNumber"
+          validation="required|min:10,length"
           :validation-messages="{ required: 'The phone number is required' }"
         />
       </div>
