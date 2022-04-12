@@ -17,6 +17,7 @@ v1.9 added validation log inside patchnotes.
 v2.0 added views/read for the associate tables. Fixed the requirement of having approvalid as approval name for flight cost over 500 bucks.
 Beta
 v1.0 Ready for Production.
+v1.1 added remedi logo.
 
 TodoList:
 1. N/A
@@ -26,9 +27,9 @@ TodoList:
 
 
 
-Buglist as of Beta v1.0
+Buglist as of Beta v1.1
 unsure
 1. validations of max value and entity types for most tables. Especially for the names and addresses,
 
-Featurelist as of Beta v1.0
+Featurelist as of Beta v1.1
 1. No need worry too much about duplicates for Contractors on Project since it'll automatically remove duplicates.
