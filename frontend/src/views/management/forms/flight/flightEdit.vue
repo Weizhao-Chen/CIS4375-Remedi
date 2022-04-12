@@ -136,7 +136,7 @@
           @validation="validationSNumber = $event"
           type="text"
           name="seatNumber"
-          label="seat number"
+          label="Seat Number"
           validation="bail|required:trim|max:500,length"
           error-behavior="live"
           v-model="form.model.SeatNumber"
@@ -150,7 +150,7 @@
           @validation="validationflightcost = $event"
           type="text"
           name="flightCost"
-          label="flight cost"
+          label="Flight Cost"
           validation="bail|required:trim|max:500,length"
           error-behavior="live"
           v-model="form.model.FlightCost"
@@ -164,7 +164,7 @@
           @validation="validationSID = $event"
           type="text"
           name="specialApprovalGranted"
-          label="approval granted"
+          label="Approval granted id"
           validation="bail|required:trim|max:500,length"
           error-behavior="live"
           :validation-messages="{
@@ -172,12 +172,12 @@
           }"
         />
       </div>
-      <div class="editForm-left">
+      <div class="editForm-left" v-if="!isApproved">
         <FormulateInput
           @validation="validationSName = $event"
           type="text"
           name="specialApprovalName"
-          label="approval Name"
+          label="Approval Name"
           validation="bail|required:trim|max:100,length"
           error-behavior="live"
           v-model="form.model.ApprovalName"
