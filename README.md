@@ -39,3 +39,5 @@ doing minor changes you can easily switch to any database of your choice.
 * Some Vue-mixins for authentication/user info
 
 [Build Setup](./frontend/README.md)
+
+Source codes: https://github.com/mubaidr/node-vue-template
