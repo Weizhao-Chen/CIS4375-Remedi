@@ -4,14 +4,14 @@
       <div class="tableHeading-left">
         <span class="tableHeading-text">Assigned Module List</span>
       </div>
-      <div class="tableHeading-right">
+      <!-- <div class="tableHeading-right">
         <button
           class="swal2-editform swal2-styled"
           v-on:click="addNewAssignedModule"
         >
           Add Assigned Module List
         </button>
-      </div>
+      </div> -->
     </div>
     <div>
       <div slot="table-actions"></div>
@@ -68,12 +68,20 @@ export default {
           field: 'Contractor.contractorID',
         },
         {
-          label: 'module id',
-          field: 'Module.moduleID',
+          label: 'contractor last name',
+          field: 'Contractor.lastName',
         },
         {
-          label: 'project id',
-          field: 'Project.projectID',
+          label: 'contractor first name',
+          field: 'Contractor.firstName',
+        },
+        {
+          label: 'module name',
+          field: 'Module.moduleName',
+        },
+        {
+          label: 'project name',
+          field: 'Project.projectName',
         },
       ],
     }
@@ -83,17 +91,17 @@ export default {
     'vue-good-table': VueGoodTable,
   },
   methods: {
-    onRowDoubleClick(params) {
-      this.$router.push({
-        name: '/assignedmodule/edit',
-        params: {
-          assignedModuleID: params.row.assignedModuleID,
-        },
-      })
-    },
-    addNewAssignedModule() {
-      this.$router.push('/assignedmodule/edit')
-    },
+    // onRowDoubleClick(params) {
+    //   this.$router.push({
+    //     name: '/assignedmodule/edit',
+    //     params: {
+    //       assignedModuleID: params.row.assignedModuleID,
+    //     },
+    //   })
+    // },
+    // addNewAssignedModule() {
+    //   this.$router.push('/assignedmodule/edit')
+    // },
     loadData() {
       axios
         .get(`${config.api}/api/Assigned_Module/find`)
