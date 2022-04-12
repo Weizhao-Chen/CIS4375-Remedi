@@ -1,4 +1,8 @@
-# Node-Vue-Template hi
+Original Template: https://github.com/tierdal/uh_projects_3365 and https://github.com/mubaidr/node-vue-template
+
+# UH - CIS4375 - Class Project - RemediHS
+
+
 
 [![codebeat badge](https://codebeat.co/badges/ae01fa78-b892-403c-9020-875e7607cd7b)](https://codebeat.co/projects/github-com-mubaidr-node-vue-template-master)
 
