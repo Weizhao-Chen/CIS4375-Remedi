@@ -14,36 +14,22 @@ v1.6.1 Removed code in v1.6 from routes and models
 v1.7 added contractor project report and contractor wisdom report (wip)
 v1.8 fixed contractor wisdom report, added contractor perferred module. Set default page to project. Removed unwanting tables like airline and car company.
 v1.9 added validation log inside patchnotes.
+v2.0 added views/read for the associate tables. Fixed the requirement of having approvalid as approval name for flight cost over 500 bucks.
+Beta
+v1.0 Ready for Production.
+v1.1 added remedi logo.
 
 TodoList:
-1. Finalizing Patch Notes.
+1. N/A
 
 
 
 
 
 
-Buglist as of Alpha v1.9
+Buglist as of Beta v1.1
 unsure
-1. validations of max value and entity types for most if not all tables.
+1. validations of max value and entity types for most tables. Especially for the names and addresses,
 
-Featurelist as of Alpha v1.9
+Featurelist as of Beta v1.1
 1. No need worry too much about duplicates for Contractors on Project since it'll automatically remove duplicates.
-
-Validation checklist
-Assigned_Clinic_Area = finish, need read
-Assigned_Module = finish, need read
-Assigned_Rental_Car = finish, can add duplicates but only keeping the first one, need Read
-Clinic_Area = finish, need validation on phone(DONE)
-Contractor_Flight = finish, can't add more than one, need read
-Contractor_Project = finish, reports system for Read
-Contractor_Status = finish
-Contractor = finish, need validation on phone, zip (DONE)
-EMR = finish, pass validation but not sure about char count.
-Flight = finish, need to change approvalname to the same as approvalid
-Hospital = finish, need validation on edits
-Module = finish.
-Preferred_module = finish, reports system for Read
-Project_Status = finish
-Project = finish
-Rental_Car = finish

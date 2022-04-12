@@ -76,7 +76,7 @@
           type="text"
           name="clinicAreaLeadPhone"
           label="phone number"
-          validation="required|min:10,length"
+          validation="required|number|min:10,length"
           v-model="form.model.ClinicAreaLeadPhone"
           :validation-messages="{ required: 'The Phone Number is required' }"
         />

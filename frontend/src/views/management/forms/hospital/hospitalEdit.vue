@@ -81,7 +81,7 @@
                 type="text"
                 name="hospitalZipCode"
                 label="zip"
-                validation="required"
+                validation="required|min:5,length"
                 v-model="form.model.HospitalZipCode"
                 :validation-messages="{required: 'The zip is required'}"
             />
@@ -103,7 +103,7 @@
                 type="text"
                 name="hospitalContactPhone"
                 label="phone number"
-                validation="required"
+                validation="required|number|min:10,length"
                 v-model="form.model.HospitalContactPhone"
                 :validation-messages="{required: 'The phone number is required'}"
             />
@@ -114,7 +114,7 @@
                 type="text"
                 name="hospitalContactEmail"
                 label="email"
-                validation="required"
+                validation="email"
                 v-model="form.model.HospitalContactEmail"
                 :validation-messages="{required: 'The email is required'}"
             />

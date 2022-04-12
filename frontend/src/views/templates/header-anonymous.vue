@@ -16,12 +16,14 @@
           <!-- Medical related stuff -->
           <b-nav-item-dropdown
             id = "medical-dropdown"
-            text="EMR related"
+            text="Hospital related"
             toggle-class="nav-link-custom"
             left
             >
             <b-dropdown-item href="/emr" @click="hide">EMR</b-dropdown-item>
             <b-dropdown-item href="/module" @click="hide">Module</b-dropdown-item>
+            <b-dropdown-item href="/hospital" @click="hide">Hospital</b-dropdown-item>
+            <b-dropdown-item href="/clinicarea" @click="hide">Clinic Area</b-dropdown-item>
           </b-nav-item-dropdown>
           <br>
           <!-- Contractor and Project -->
@@ -45,6 +47,7 @@
             <b-dropdown-item href="/contractorstatus" @click="hide">Contractor Status</b-dropdown-item>
             <b-dropdown-item href="/projectstatus" @click="hide">Project Status</b-dropdown-item>
           </b-nav-item-dropdown>
+          <br>
           <!-- <b-nav-item href="/emr" @click="hide">EMR</b-nav-item> -->
           <!-- <b-nav-item href="/projectstatus" @click="hide"
             >Project Status</b-nav-item
@@ -52,28 +55,40 @@
           <b-nav-item href="/contractorstatus" @click="hide"
             >Contractor Status</b-nav-item
           > -->
-          <br>
+          
           <!-- <b-nav-item href="/module" @click="hide">Module</b-nav-item> -->
           <!-- <b-nav-item href="/contractor" @click="hide">Contractor</b-nav-item>
           <b-nav-item href="/project" @click="hide">Project</b-nav-item> -->
-          <b-nav-item href="/contractorproject" @click="hide"
+          <!-- <b-nav-item href="/contractorproject" @click="hide"
             >Contractor Project</b-nav-item
           >
-          <br>
-          <b-nav-item href="/clinicarea" @click="hide">Clinic Area</b-nav-item>
-          <b-nav-item href="/assignedclinicarea" @click="hide"
+          <br> -->
+          <!-- <b-nav-item href="/clinicarea" @click="hide">Clinic Area</b-nav-item> -->
+          <!-- <b-nav-item href="/assignedclinicarea" @click="hide"
             >Assigned Clinic Area</b-nav-item
-          >
+          > -->
           <!-- <b-nav-item href="/perferred_modules" @click="hide"
             >Perferred Modules</b-nav-item
-          > not sure if we still needed this since we have a /cpmreport at the bottom-->
-          <b-nav-item href="/flight" @click="hide">Flight</b-nav-item>
+          > related tables bottom-->
+          <b-nav-item-dropdown
+            id = "report-dropdown"
+            text="Flights and Cars"
+            toggle-class="nav-link-custom"
+            left
+            >
+            <b-dropdown-item href="/flight" @click="hide">Flight</b-dropdown-item>
+          <b-dropdown-item href="/rentalcar" @click="hide">Rental Car</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <br>
+          <!-- <b-nav-item href="/flight" @click="hide">Flight</b-nav-item>
           <br>
           <b-nav-item href="/rentalcar" @click="hide">Rental Car</b-nav-item>
           <br>
           <b-nav-item href="/hospital" @click="hide">Hospital</b-nav-item>
           <br>
-          <!-- Contractor and Project -->
+          <b-nav-item href="/clinicarea" @click="hide">Clinic Area</b-nav-item>
+          <br> -->
+          <!-- Reports -->
           <b-nav-item-dropdown
             id = "report-dropdown"
             text="Reports"
@@ -83,6 +98,22 @@
             <b-dropdown-item href="/cpreport" @click="hide">Contractor Project Report</b-dropdown-item>
             <b-dropdown-item href="/cwreport" @click="hide">Contractor Wisdom Report</b-dropdown-item>
             <b-dropdown-item href="/cpmreport" @click="hide">Contractor Preferred Module Report</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <br>
+          <!-- Reports -->
+          <b-nav-item-dropdown
+            id = "assigned-dropdown"
+            text="Assigned/Misc"
+            toggle-class="nav-link-custom"
+            left
+            >
+            <b-dropdown-item href="/assignedclinicarea" @click="hide">Assigned Clinic Area</b-dropdown-item>
+            <b-dropdown-item href="/contractorproject" @click="hide">Contractor Project</b-dropdown-item>
+            <b-dropdown-item href="/contractor_flight" @click="hide">Contractor Flight</b-dropdown-item>
+            <b-dropdown-item href="/assignedrentalcar" @click="hide">Assigned Rental Car</b-dropdown-item>
+            <b-dropdown-item href="/assignedmodule" @click="hide">Assigned Module</b-dropdown-item>
+            <b-dropdown-item href="/perferred_modules" @click="hide">Perferred Modules</b-dropdown-item>
+
           </b-nav-item-dropdown>
           <!-- <b-nav-item href="/cpreport" @click="hide">Contractor Project Report</b-nav-item>
           <b-nav-item href="/cwreport" @click="hide">Contractor Wisdom Report</b-nav-item>

@@ -50,6 +50,9 @@ import hospitalEdit from '../views/management/forms/hospital/hospitalEdit.vue'
 import hospitaladmin from '../views/management/forms/hospital/hospitaladmin.vue'
 
 import perferredModulesList from '../views/management/perferredModules.vue'
+import assignedmoduleList from '../views/management/forms/assigned module/assignedmoduleList.vue'
+import contractorflight from '../views/management/contractorflight.vue'
+import assignedrentalcar from '../views/management/assignedrentalcar.vue'
 
 //reports
 import cpreport from '../views/management/reports/cpreport.vue'
@@ -243,6 +246,15 @@ const router = new VueRouter({
         isOpen: true,
       },
     },
+    //assigned rental car
+    {
+      path: '/assignedrentalcar',
+      component: assignedrentalcar,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
     //contractor project
     {
       path: '/contractorproject',
@@ -256,6 +268,15 @@ const router = new VueRouter({
       path: '/contractorproject/edit',
       name: '/contractorproject/edit',
       component: contractorprojectEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    //contractor flight
+    {
+      path: '/contractor_flight',
+      component: contractorflight,
       props: true,
       meta: {
         isOpen: true,
@@ -328,6 +349,14 @@ const router = new VueRouter({
       path: '/module/edit',
       name: '/module/edit',
       component: moduleEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/assignedmodule',
+      component: assignedmoduleList,
       props: true,
       meta: {
         isOpen: true,

@@ -58,7 +58,7 @@ export default {
       myAPI: `${config.api}/api/Preferred_Module`,
       dataFields: [
         {
-          label: 'First Name',
+          label: 'ID',
           field: 'Contractor.contractorID',
           hidden: true,
         },

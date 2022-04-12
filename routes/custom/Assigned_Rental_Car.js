@@ -4,10 +4,10 @@ const router = express.Router({ caseSensitive: true })
 router.get('/find', (req, res, next) => {
   const db = req.app.get('db')
   return db.Assigned_Rental_Car.findAll({
-    // include: [
-    //     db.Hospital,
-    //     db.Project_Status
-    // ]
+    include: [
+        db.Contractor,
+        db.Rental_Car
+    ]
   })
     .then((Rental_Car) => res.send(Rental_Car))
     .catch((err) => {

@@ -1,17 +1,12 @@
 <template>
   <div>
     <div class="tableHeading">
-      <div class="tableHeading-left">
-        <span class="tableHeading-text">Assigned Clinic Area List</span>
-      </div>
-      <div class="tableHeading-right">
-        <!-- <button
-          class="swal2-editform swal2-styled"
-          v-on:click="addNewAssignedClinicArea"
-        >
-          Add Assigned Clinic Area List
-        </button> -->
-      </div>
+      <div class="tableHeading-left"></div>
+      <!-- <div class="tableHeading-right">
+        <button class="swal2-editform swal2-styled" v-on:click="addNewAirline">
+          Add New Perferred Modules
+        </button>
+      </div> -->
     </div>
 
     <div>
@@ -44,14 +39,12 @@
         compactMode
       />
     </div>
-    <!-- @on-row-dblclick="onRowDoubleClick" -->
-    <!-- {{ this.DB_DATA }} -->
   </div>
 </template>
 
 <script>
-import axios from '../../../../utilities/axios'
-import config from '../../../../config'
+import axios from '../../utilities/axios'
+import config from '../../config'
 import 'vue-good-table/dist/vue-good-table.css'
 import { VueGoodTable } from 'vue-good-table'
 import Swal from 'sweetalert2'
@@ -61,25 +54,25 @@ export default {
     return {
       DB_DATA: [],
       Contractor_DATA: [],
-      Clinic_Area_DATA: [],
-      myAPI: `${config.api}/api/Assigned_Clinic_Area`,
+      Flight_DATA: [],
+      myAPI: `${config.api}/api/Contractor_Flight`,
       dataFields: [
         {
-          label: 'contractor id',
+          label: 'ID',
           field: 'Contractor.contractorID',
-          hidden: true,
+        //   hidden: true,
         },
         {
-          label: 'first name',
+          label: 'First Name',
           field: 'Contractor.firstName',
         },
         {
-          label: 'last name',
+          label: 'Last Name',
           field: 'Contractor.lastName',
         },
         {
-          label: 'Clinic Area',
-          field: 'Clinic_Area.clinicAreaName',
+          label: 'flight ID',
+          field: 'Flight.flightID',
         },
       ],
     }
@@ -89,26 +82,14 @@ export default {
     'vue-good-table': VueGoodTable,
   },
   methods: {
-    // onRowDoubleClick(params) {
-    //   this.$router.push({
-    //     name: '/assignedclinicarea/edit',
-    //     params: {
-    //       contractorID: params.row.contractorID,
-    //       clinicID: params.row.clinicID,
-    //     },
-    //   })
-    // },
-    // addNewAssignedClinicArea() {
-    //   this.$router.push('/assignedclinicarea/edit')
-    // },
     loadData() {
       axios
-        .get(`${config.api}/api/Assigned_Clinic_Area/find`)
+        .get(`${config.api}/api/Contractor_Flight/find`)
         .then((response) => {
           this.DB_DATA = response.data
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong', 'error')
+          Swal.fire('Error 2', 'Something went wrong', 'error')
         })
     },
   },
@@ -118,9 +99,4 @@ export default {
 }
 </script>
 
-<style scoped>
-button {
-  margin-right: 15px;
-  height: 100%;
-}
-</style>
+<style scoped></style>

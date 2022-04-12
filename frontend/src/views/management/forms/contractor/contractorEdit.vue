@@ -153,7 +153,7 @@
           name="phoneNumber"
           label="phone number"
           v-model="form.model.PhoneNumber"
-          validation="required|min:10,length"
+          validation="required|number|min:10,length"
           :validation-messages="{ required: 'The phone number is required' }"
         />
       </div>
