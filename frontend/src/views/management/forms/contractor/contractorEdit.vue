@@ -141,7 +141,7 @@
           type="text"
           name="zipCode"
           label="zip"
-          validation="required|min:5,length"
+          validation="required|min:3,length|max:5,length"
           v-model="form.model.ZipCode"
           :validation-messages="{ required: 'The zip is required' }"
         />
@@ -509,13 +509,13 @@ export default {
           ZipCode: '',
           PhoneNumber: '',
           Email: '',
-          RemediHistory: '',
-          SupportWisdom: '',
-          NumberOfGoLives: '',
-          NumberofEpicProjects: '',
-          YearsOfSupportEpic: '',
-          SupportVirtualEpic: '',
-          CreditCardHotel: '',
+          RemediHistory: '0',
+          SupportWisdom: '0',
+          NumberOfGoLives: '0',
+          NumberofEpicProjects: '0',
+          YearsOfSupportEpic: '0',
+          SupportVirtualEpic: '0',
+          CreditCardHotel: '0',
           ContractorStatusID: '',
         },
       },
@@ -547,9 +547,9 @@ export default {
         this.validationEmail.hasErrors === false &&
         // this.validationHistory.hasErrors === false &&
         // this.validationWisdom.hasErrors === false &&
-        this.validationGolives.hasErrors === false &&
-        this.validationEpicProjects.hasErrors === false &&
-        this.validationYearSupportEpic.hasErrors === false &&
+        // this.validationGolives.hasErrors === false &&
+        // this.validationEpicProjects.hasErrors === false &&
+        // this.validationYearSupportEpic.hasErrors === false &&
         // this.validationSupportVirtualEpic.hasErrors === false &&
         // this.validationCreditCard.hasErrors === false &&
         this.validationContractorStatus === false

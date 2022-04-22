@@ -50,14 +50,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Project__11F14D85070E9DE6",
-        unique: true,
-        fields: [
-          { name: "projectID" },
-        ]
-      },
-      {
-        name: "PK__Project__11F14D85E49F6657",
+        name: "PK__Project__11F14D856A12AFE1",
         unique: true,
         fields: [
           { name: "projectID" },

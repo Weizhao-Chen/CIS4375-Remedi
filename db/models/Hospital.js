@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     hospitalAddressLineTwo: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     hospitalCity: {
       type: DataTypes.STRING,
@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     hospitalContactPhone: {
-      type: DataTypes.STRING,
+      type: DataTypes.CHAR,
       allowNull: false
     },
     hospitalContactEmail: {
@@ -56,14 +56,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Hospital__C7F8EC0523C7D765",
-        unique: true,
-        fields: [
-          { name: "hospitalID" },
-        ]
-      },
-      {
-        name: "PK__Hospital__C7F8EC05708FAC10",
+        name: "PK__Hospital__C7F8EC0537E79A63",
         unique: true,
         fields: [
           { name: "hospitalID" },

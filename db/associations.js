@@ -1,7 +1,7 @@
 module.exports = {
   associate: (models) => {
     //below is for future and testing purpose
-    models.login.belongsTo(models.accountType)
+    // models.login.belongsTo(models.accountType)
 
     //this does the PK/FK connecting
     //top uses the one below
@@ -37,9 +37,9 @@ module.exports = {
     models.Contractor_Project.belongsTo(models.Contractor, {
       foreignKey: 'contractorID',
     })
-    models.Contractor_Project.belongsTo(models.Clinic_Area, {
-      foreignKey: 'clinicID',
-    })
+    // models.Contractor_Project.belongsTo(models.Clinic_Area, {
+    //   foreignKey: 'clinicID',
+    // })
 
     models.Preferred_Module.belongsTo(models.Module, { foreignKey: 'moduleID' })
     models.Preferred_Module.belongsTo(models.Contractor, {

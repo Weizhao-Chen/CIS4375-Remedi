@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     addressLineTwo: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     city: {
       type: DataTypes.STRING,
@@ -46,7 +46,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     phoneNumber: {
-      type: DataTypes.STRING,
+      type: DataTypes.CHAR,
       allowNull: false
     },
     email: {
@@ -106,14 +106,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Contract__BE48F41509B717E2",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-        ]
-      },
-      {
-        name: "PK__Contract__BE48F4155DE2FD63",
+        name: "PK__Contract__BE48F4150170E865",
         unique: true,
         fields: [
           { name: "contractorID" },

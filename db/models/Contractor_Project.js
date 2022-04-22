@@ -4,16 +4,20 @@ module.exports = function(sequelize, DataTypes) {
     contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references: {
+        model: 'Contractor',
+        key: 'contractorID'
+      }
     },
     projectID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
-    },
-    clinicID: {
-      type: DataTypes.INTEGER,
-      allowNull: true
+      primaryKey: true,
+      references: {
+        model: 'Project',
+        key: 'projectID'
+      }
     }
   }, {
     sequelize,
@@ -26,31 +30,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Contract__FF57E0CD5D3B895B",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "projectID" },
-        ]
-      },
-      {
-        name: "PK__Contract__FF57E0CD6F0567AD",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "projectID" },
-        ]
-      },
-      {
-        name: "PK__Contract__FF57E0CD72CEC8D6",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "projectID" },
-        ]
-      },
-      {
-        name: "PK__Contract__FF57E0CDF6ED3BF8",
+        name: "PK__Contract__FF57E0CD868167AF",
         unique: true,
         fields: [
           { name: "contractorID" },

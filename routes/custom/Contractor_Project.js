@@ -4,7 +4,7 @@ const router = express.Router({ caseSensitive: true })
 router.get('/find', (req, res, next) => {
   const db = req.app.get('db')
   return db.Contractor_Project.findAll({
-    include: [db.Contractor, db.Project, db.Clinic_Area],
+    include: [db.Contractor, db.Project],
   })
     .then((Contractor_Project) => res.send(Contractor_Project))
     .catch((err) => {
@@ -46,14 +46,14 @@ router.get('/find_project/:projectID', (req, res, next) => {
     where: {
       projectID: req.params.projectID,
     },
-    include: [db.Contractor, db.Project, db.Clinic_Area],
+    include: [db.Contractor, db.Project],
   })
     .then((Contractor_Project) => {
       res.send(Contractor_Project)
     })
     .catch((err) => {
       console.log(
-        'There was an error querying Contractor Project 2',
+        'There was an error querying Contractor Project 3',
         JSON.stringify(err),
       )
       return res.send(err)
@@ -64,7 +64,7 @@ router.post('/create', (req, res, next) => {
   db.Contractor_Project.create({
     contractorID: req.body.ContractorID,
     projectID: req.body.ProjectID,
-    clinicID: req.body.ClinicID,
+    // clinicID: req.body.ClinicID,
   })
     .then(() => {
       res.status(200).send('OK')

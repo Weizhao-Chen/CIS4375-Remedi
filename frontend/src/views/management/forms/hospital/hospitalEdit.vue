@@ -13,7 +13,7 @@
       <div class="editFormFooter-left">
         <button class="swal2-editform swal2-styled goBackButton" v-on:click="goBack">Go Back</button>
       </div>
-      <div class="editFormFooter-right">
+      <div class="editFormFooter-left">
         <button v-if="!isNewHospital" class="swal2-editform swal2-styled updateButton" :disabled="validationFormCheck === false" v-on:click="updateHospital">Update Hospital</button>
         <button v-if="!isNewHospital" class="swal2-editform swal2-styled deleteButton" v-on:click="deleteHospital">Delete Hospital</button>
         <button v-if="isNewHospital" class="swal2-editform swal2-styled addNewButton" :disabled="validationFormCheck === false" v-on:click="addHospital">Submit New Hospital</button>
@@ -33,8 +33,6 @@
                 v-model="form.model.HospitalName"
                 :validation-messages="{required: 'The Hospital Name is required'}"
             />
-        </div>
-        <div class="editForm-left">
             <FormulateInput
                 @validation="validationStreet = $event"
                 type="text"
@@ -44,8 +42,6 @@
                 v-model="form.model.HospitalAddressLineOne"
                 :validation-messages="{required: 'The Street is required'}"
             />
-        </div>
-        <div class="editForm-left">
             <FormulateInput
                 type="text"
                 name="hospitalAddressLineTwo"
@@ -53,7 +49,7 @@
                 v-model="form.model.HospitalAddressLineTwo"
             />
         </div>
-        <div class="editForm-left">
+        <div class="editForm-right">
             <FormulateInput
                 @validation="validationCity = $event"
                 type="text"
@@ -63,8 +59,6 @@
                 v-model="form.model.HospitalCity"
                 :validation-messages="{required: 'The city is required'}"
             />
-        </div>
-        <div class="editForm-left">
             <FormulateInput
                 @validation="validationState = $event"
                 type="text"
@@ -74,18 +68,16 @@
                 v-model="form.model.HospitalState"
                 :validation-messages="{required: 'The state is required'}"
             />
-        </div>
-        <div class="editForm-left">
             <FormulateInput
                 @validation="validationZip = $event"
                 type="text"
                 name="hospitalZipCode"
                 label="zip"
-                validation="required|min:5,length"
+                validation="required|min:3,length|max:5,length"
                 v-model="form.model.HospitalZipCode"
                 :validation-messages="{required: 'The zip is required'}"
             />
-        </div>
+          </div>
         <div class="editForm-left">
             <FormulateInput
                 @validation="validationHName = $event"
@@ -96,8 +88,6 @@
                 v-model="form.model.HospitalContactName"
                 :validation-messages="{required: 'The contact name is required'}"
             />
-        </div>
-        <div class="editForm-left">
             <FormulateInput
                 @validation="validationPhone = $event"
                 type="text"
@@ -107,8 +97,6 @@
                 v-model="form.model.HospitalContactPhone"
                 :validation-messages="{required: 'The phone number is required'}"
             />
-        </div>
-        <div class="editForm-left">
             <FormulateInput
                 @validation="validationEmail = $event"
                 type="text"

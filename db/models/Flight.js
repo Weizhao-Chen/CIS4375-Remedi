@@ -7,8 +7,16 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    flightCompany: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     flightDate: {
       type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    flightNumber: {
+      type: DataTypes.STRING,
       allowNull: false
     },
     departTime: {
@@ -31,10 +39,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    flightCost: {
-      type: DataTypes.DECIMAL(5,2),
-      allowNull: false
-    },
     specialApprovalGranted: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
@@ -47,6 +51,10 @@ module.exports = function(sequelize, DataTypes) {
     specialApprovalDate: {
       type: DataTypes.DATEONLY,
       allowNull: true
+    },
+    flightCost: {
+      type: DataTypes.DECIMAL(10,2),
+      allowNull: false
     }
   }, {
     sequelize,
@@ -59,21 +67,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Flight__0E0186225222424C",
-        unique: true,
-        fields: [
-          { name: "flightID" },
-        ]
-      },
-      {
-        name: "PK__Flight__0E0186229A676825",
-        unique: true,
-        fields: [
-          { name: "flightID" },
-        ]
-      },
-      {
-        name: "PK__Flight__0E0186229B8C3AAC",
+        name: "PK__Flight__0E018622296B1C39",
         unique: true,
         fields: [
           { name: "flightID" },

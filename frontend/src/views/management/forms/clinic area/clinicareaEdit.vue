@@ -15,8 +15,6 @@
         >
           Go Back
         </button>
-      </div>
-      <div class="editFormFooter-right">
         <button
           v-if="!isNewClinicArea"
           class="swal2-editform swal2-styled updateButton"
@@ -51,7 +49,7 @@
           @validation="validationName = $event"
           type="text"
           name="clinicAreaName"
-          label="name"
+          label="Clinic Area Name"
           validation="required"
           v-model="form.model.ClinicAreaName"
           :validation-messages="{
@@ -59,7 +57,7 @@
           }"
         />
       </div>
-      <div class="editForm-left">
+      <div class="editForm-align">
         <FormulateInput
           @validation="validationLName = $event"
           type="text"
@@ -76,7 +74,7 @@
           type="text"
           name="clinicAreaLeadPhone"
           label="phone number"
-          validation="required|number|min:10,length"
+          validation="required|number|min:10,length|max:20,length"
           v-model="form.model.ClinicAreaLeadPhone"
           :validation-messages="{ required: 'The Phone Number is required' }"
         />

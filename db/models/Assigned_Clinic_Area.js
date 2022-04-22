@@ -4,12 +4,20 @@ module.exports = function(sequelize, DataTypes) {
     contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references: {
+        model: 'Contractor',
+        key: 'contractorID'
+      }
     },
     clinicID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references: {
+        model: 'Clinic_Area',
+        key: 'clinicID'
+      }
     }
   }, {
     sequelize,
@@ -22,23 +30,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Assigned__2124AC3C002B4F13",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "clinicID" },
-        ]
-      },
-      {
-        name: "PK__Assigned__2124AC3C557AEF24",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "clinicID" },
-        ]
-      },
-      {
-        name: "PK__Assigned__2124AC3C823896E5",
+        name: "PK__Assigned__2124AC3C2C62A896",
         unique: true,
         fields: [
           { name: "contractorID" },

@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     clinicAreaLeadPhone: {
-      type: DataTypes.STRING,
+      type: DataTypes.CHAR,
       allowNull: false
     },
     clinicAreaLeadEmail: {
@@ -42,14 +42,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Clinic_A__F6C58298538C2659",
-        unique: true,
-        fields: [
-          { name: "clinicID" },
-        ]
-      },
-      {
-        name: "PK__Clinic_A__F6C5829874D5E40B",
+        name: "PK__Clinic_A__F6C58298032B5D86",
         unique: true,
         fields: [
           { name: "clinicID" },
