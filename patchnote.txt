@@ -36,7 +36,6 @@ unsure
 1. validations of max value and entity types for most tables. Especially for the names and addresses.
 2. unable to add contractor to flight until flight has been created. -.-
 3. edit flight page does not show the flight time.
-4. contractor number of go lives doesn't update. Create is fine.
 
 
 Featurelist as of Beta v1.1
