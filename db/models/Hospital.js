@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Hospital', {
     hospitalID: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     hospitalName: {
       type: DataTypes.STRING,
@@ -63,7 +63,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Hospital__C7F8EC05AC85AE56",
+        name: "PK__Hospital__C7F8EC05BC1F8CBF",
         unique: true,
         fields: [
           { name: "hospitalID" },

@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Rental_Car', {
     rentalCarID: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     rentalCarModel: {
       type: DataTypes.STRING,
@@ -27,15 +27,6 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     createdAt: false,
     updatedAt: false,
-    deletedAt: false,
-    indexes: [
-      {
-        name: "PK__Rental_C__AA224661AE250C6B",
-        unique: true,
-        fields: [
-          { name: "rentalCarID" },
-        ]
-      },
-    ]
+    deletedAt: false
   });
 };

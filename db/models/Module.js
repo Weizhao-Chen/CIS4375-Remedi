@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Module', {
     moduleID: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     emrID: {
       type: DataTypes.INTEGER,
@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Module__8EEC8E37567D8EE6",
+        name: "PK__Module__8EEC8E37F47629D9",
         unique: true,
         fields: [
           { name: "moduleID" },

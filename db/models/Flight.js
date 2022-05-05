@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Flight', {
     flightID: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     flightName: {
       type: DataTypes.STRING,
@@ -60,29 +60,6 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     createdAt: false,
     updatedAt: false,
-    deletedAt: false,
-    indexes: [
-      {
-        name: "PK__Flight__0E01862227F18DF5",
-        unique: true,
-        fields: [
-          { name: "flightID" },
-        ]
-      },
-      {
-        name: "PK__Flight__0E0186225222424C",
-        unique: true,
-        fields: [
-          { name: "flightID" },
-        ]
-      },
-      {
-        name: "PK__Flight__0E0186229B8C3AAC",
-        unique: true,
-        fields: [
-          { name: "flightID" },
-        ]
-      },
-    ]
+    deletedAt: false
   });
 };

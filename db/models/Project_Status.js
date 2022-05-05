@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Project_Status', {
     projectStatusID: {
-      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     projectStatusType: {
       type: DataTypes.STRING,
@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Project___A0FCF07CF9DDE83C",
+        name: "PK__Project___A0FCF07C2BECAF77",
         unique: true,
         fields: [
           { name: "projectStatusID" },

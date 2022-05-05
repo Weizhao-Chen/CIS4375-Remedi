@@ -4,7 +4,7 @@
 module.exports = {
   db: {
     username: 'sa',
-    password: 'admin',
+    password: 'rootadmin',
     host: 'localhost',
     name: 'REMEDI',
   },
