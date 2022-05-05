@@ -1,0 +1,5 @@
+Terminal -> new Terminal
+or
+Control + shift + `
+then type
+npm run startAll
