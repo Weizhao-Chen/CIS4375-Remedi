@@ -9,11 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     emrID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'EMR',
-        key: 'emrID'
-      }
+      allowNull: false
     },
     moduleName: {
       type: DataTypes.STRING,
@@ -37,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Module__8EEC8E37973239B7",
+        name: "PK__Module__8EEC8E37DFF3BDFC",
         unique: true,
         fields: [
           { name: "moduleID" },

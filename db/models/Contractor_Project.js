@@ -26,6 +26,14 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
+        name: "PK__Contract__FF57E0CD17AD888B",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "projectID" },
+        ]
+      },
+      {
         name: "PK__Contract__FF57E0CD5D3B895B",
         unique: true,
         fields: [
@@ -35,14 +43,6 @@ module.exports = function(sequelize, DataTypes) {
       },
       {
         name: "PK__Contract__FF57E0CD6F0567AD",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "projectID" },
-        ]
-      },
-      {
-        name: "PK__Contract__FF57E0CD72CEC8D6",
         unique: true,
         fields: [
           { name: "contractorID" },

@@ -46,17 +46,19 @@
     <br />
 
     <form class="swal2-form mainForm">
-      <!-- <div class="editForm-left">
+      <div class="editForm-left">
         <FormulateInput
-          @validation="validationFDate = $event"
           type="text"
-          name="flightDate"
-          label="flight date"
-          validation="bail|required|date:YYYY-MM-DD"
-          v-model="form.model.FlightDate"
-          :validation-messages="{ required: 'The Flight Date is required' }"
+          name="flightName"
+          label="Airport Name"
+          validation="required"
+          v-model="form.model.FlightName"
+          :validation-messages="{
+            required: 'The depart location is required needs validation',
+          }"
         />
-      </div> -->
+      </div>
+      
       <div>
         <label for="example-datepicker">Flight Date</label>
         <b-form-datepicker
@@ -104,7 +106,6 @@
           name="arrivalLocation"
           label="arrival location"
           validation="bail|required:trim|max:500,length"
-          error-behavior="live"
           v-model="form.model.ArrivalLocation"
           :validation-messages="{
             required: 'The arrival location is required needs validation',
@@ -157,18 +158,22 @@
           }"
         />
       </div>
-      <div class="editForm-left">
-        <FormulateInput
-          @validation="validationSID = $event"
-          type="text"
-          name="specialApprovalGranted"
-          label="Approval granted id"
-          validation="required|matches:true,false"
-          error-behavior="live"
-          v-model="form.model.ApprovalGranted"
-
-        />
-      </div>
+          <b-form-group label="Is It Approved" v-slot="{ ariaDescribedby }">
+          <b-form-radio
+            v-model="form.model.ApprovalGranted"
+            :aria-describedby="ariaDescribedby"
+            name="specialApprovalGranted"
+            :value="true"
+            >Yes</b-form-radio
+          >
+          <b-form-radio
+            v-model="form.model.ApprovalGranted"
+            :aria-describedby="ariaDescribedby"
+            name="specialApprovalGranted"
+            :value="false"
+            >No</b-form-radio
+          >
+        </b-form-group>
       <div class="editForm-left" v-if="!isApproved">
         <FormulateInput
           @validation="validationSName = $event"
@@ -304,6 +309,7 @@ export default {
       form: {
         model: {
           FlightID: '',
+          FlightName: '',
           FlightDate: '',
           DepartTime: '',
           DepartLocation: '',
@@ -399,10 +405,13 @@ export default {
 
       if (!this.form.model.FlightDate) {
         Swal.fire('Error', 'Must add Flight Date', 'error')
-      } else if (!this.form.model.DepartTime) {
+      } else if (!this.form.model.DepartTime >= new Date().toLocaleString()) {
         Swal.fire('Error', 'Must add Depart Time', 'error')
+      } else if (!this.form.model.FlightName) {
+        Swal.fire('Error', 'Must add Flight Name', 'error')
       } else if (!this.form.model.ArrivalTime) {
         Swal.fire('Error', 'Must add Arrival Time', 'error')
+        //not sure if below is needed.
       } else if (this.form.model.ArrivalTime < this.form.model.DepartTime) {
         Swal.fire('Error', 'Arrival Time Cant Be Before Depart Time', 'error')
       } else if (!this.form.model.ApprovalDate) {
@@ -478,7 +487,7 @@ export default {
       }
     },
     checkFlightPrice(price) {},
-    addContractor(event) {
+    addContractor() {
       event.preventDefault()
       const addContractorPayload = {
         contractorID: this.currentContractor.contractorID,
@@ -532,7 +541,12 @@ export default {
             this.form.model.FlightDate = response.data.flightDate.split('T')[0]
           }
           // if(response.data.projectEndDate){this.form.model.ProjectEndDate = response.data.projectEndDate.split('.')[0]}
-          this.form.model.DepartTime = response.data.departTime
+          this.form.model.FlightName = response.data.flightName
+          if (response.data.departTime) {
+            this.form.model.DepartTime = response.data.departTime.split('T')[1]
+          }
+          console.log(response.data.departTime)
+          // this.form.model.DepartTime = response.data.departTime.split('T')[1]
           this.form.model.DepartLocation = response.data.departLocation
           this.form.model.ArrivalLocation = response.data.arrivalLocation
           this.form.model.ArrivalTime = response.data.arrivalTime

@@ -36,6 +36,7 @@ router.post('/create', (req, res, next) => {
   console.log(req.body)
   const db = req.app.get('db')
   db.Flight.create({
+    flightName: req.body.FlightName,
     flightDate: req.body.FlightDate,
     departTime: req.body.DepartTime,
     departLocation: req.body.DepartLocation,
@@ -60,6 +61,7 @@ router.put('/update/:flightid', (req, res, next) => {
 
   db.Flight.update(
     {
+      flightName: req.body.FlightName,
       flightDate: req.body.FlightDate,
       departTime: req.body.DepartTime,
       departLocation: req.body.DepartLocation,

@@ -25,11 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     hospitalID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Hospital',
-        key: 'hospitalID'
-      }
+      allowNull: false
     }
   }, {
     sequelize,
@@ -49,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Clinic_A__F6C5829874D5E40B",
+        name: "PK__Clinic_A__F6C58298D22EE730",
         unique: true,
         fields: [
           { name: "clinicID" },

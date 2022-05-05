@@ -7,6 +7,7 @@ import index from '../views/home/index.vue'
 import feedback from '../views/home/feedback.vue'
 import about from '../views/home/about.vue'
 import contact from '../views/home/contact.vue'
+import manual from '../views/home/manual.vue'
 // error
 import notFound from '../views/error/notFound.vue'
 // account
@@ -85,6 +86,13 @@ const router = new VueRouter({
     {
       path: '/about',
       component: about,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/manual',
+      component: manual,
       meta: {
         isOpen: true,
       },

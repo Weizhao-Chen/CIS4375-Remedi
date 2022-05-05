@@ -3,9 +3,9 @@
  */
 module.exports = {
   db: {
-    username: 'javier29',
-    password: 'test1234',
-    host: 'COT-CIS4375-07.cougarnet.uh.edu',
+    username: 'sa',
+    password: 'admin',
+    host: 'localhost',
     name: 'REMEDI',
   },
 }

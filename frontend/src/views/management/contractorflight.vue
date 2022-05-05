@@ -71,8 +71,20 @@ export default {
           field: 'Contractor.lastName',
         },
         {
-          label: 'flight ID',
+          label: 'flight id',
           field: 'Flight.flightID',
+        },
+        {
+          label: 'flight price',
+          field: 'Flight.flightCost',
+        },
+        {
+          label: 'flight arrival time',
+          field: 'Flight.arrivalTime',
+        },
+        {
+          label: 'flight arrival location',
+          field: 'Flight.arrivalLocation',
         },
       ],
     }

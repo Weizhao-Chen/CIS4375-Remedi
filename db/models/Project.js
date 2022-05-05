@@ -25,11 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     hospitalID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Hospital',
-        key: 'hospitalID'
-      }
+      allowNull: false
     },
     projectStatusID: {
       type: DataTypes.INTEGER,
@@ -50,7 +46,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Project__11F14D85070E9DE6",
+        name: "PK__Project__11F14D85D91377D0",
         unique: true,
         fields: [
           { name: "projectID" },

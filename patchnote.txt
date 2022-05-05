@@ -18,18 +18,26 @@ v2.0 added views/read for the associate tables. Fixed the requirement of having 
 Beta
 v1.0 Ready for Production.
 v1.1 added remedi logo.
+v1.2 added requirements from remedi: hotels info for contractor. Added technical manual and SLA to Main Menu. Fix flight time to only show time
 
 TodoList:
-1. N/A
+1. Need to add contractor to create flight page instead of edit page.
+2. Need to display contractor in flight page.
+3. Need to fix displayed time in flight edit page.
+3.1 Need to change DB to where it wouldn't show the 'Z'
 
 
 
 
 
 
-Buglist as of Beta v1.1
+Buglist as of Beta v1.2
 unsure
-1. validations of max value and entity types for most tables. Especially for the names and addresses,
+1. validations of max value and entity types for most tables. Especially for the names and addresses.
+2. unable to add contractor to flight until flight has been created. -.-
+3. edit flight page does not show the flight time.
+4. contractor number of go lives doesn't update. Create is fine.
+
 
 Featurelist as of Beta v1.1
 1. No need worry too much about duplicates for Contractors on Project since it'll automatically remove duplicates.

@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__accountT__3213E83F12288540",
+        name: "PK__accountT__3213E83F027BCAFB",
         unique: true,
         fields: [
           { name: "id" },

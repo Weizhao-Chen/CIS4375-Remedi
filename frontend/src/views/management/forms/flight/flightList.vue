@@ -68,6 +68,10 @@ export default {
           type: 'number',
         },
         {
+          label: 'flight name',
+          field: 'flightName',
+        },
+        {
           label: 'date',
           field: 'flightDate',
         },
@@ -129,15 +133,16 @@ export default {
 
     formatDate(data) {
       for (let i = 0; i < data.length; i++) {
-        let d = new Date(data[i].departTime)
-        let d2 = new Date(data[i].arrivalTime)
+        // let d = new Date(data[i].departTime)
+        // let d2 = new Date(data[i].arrivalTime)
         this.DB_DATA.push({
           flightID: data[i].flightID,
+          flightName: data[i].flightName,
           flightDate: data[i].flightDate.split('T')[0],
           departLocation: data[i].departLocation,
-          departTime: data[i].departTime,
+          departTime: data[i].departTime.split('T')[1],
           arrivalLocation: data[i].arrivalLocation,
-          arrivalTime: data[i].arrivalTime,
+          arrivalTime: data[i].arrivalTime.split('T')[1],
           seatNumber: data[i].seatNumber,
           flightCost: data[i].flightCost,
           specialApprovalGranted: data[i].specialApprovalGranted,
@@ -145,7 +150,7 @@ export default {
           specialApprovalDate: data[i].specialApprovalDate.split('T')[0],
         })
 
-        console.log(data[i])
+        // console.log(data[i])
       }
     },
     loadData() {

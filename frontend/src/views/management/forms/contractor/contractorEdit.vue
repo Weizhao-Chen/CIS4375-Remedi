@@ -153,7 +153,7 @@
           name="phoneNumber"
           label="phone number"
           v-model="form.model.PhoneNumber"
-          validation="required|number|min:10,length"
+          validation="required|min:10,length"
           :validation-messages="{ required: 'The phone number is required' }"
         />
       </div>
@@ -238,9 +238,9 @@
         <FormulateInput
           @validation="validationGolives = $event"
           type="text"
-          name="numberofGoLives"
+          name="numberOfGoLives"
           label="Number of GoLives"
-          validation="required"
+          validation="required|number"
           v-model="form.model.NumberOfGoLives"
           :validation-messages="{ required: 'The GoLives is required' }"
         />
@@ -251,7 +251,7 @@
           type="text"
           name="numberofEpicProjects"
           label="Number of Epic Projects"
-          validation="required"
+          validation="required|number"
           v-model="form.model.NumberofEpicProjects"
           :validation-messages="{ required: 'The Epic Project is required' }"
         />
@@ -262,7 +262,7 @@
           type="text"
           name="yearsOfSupportEpic"
           label="Years of Support Epic"
-          validation="required"
+          validation="required|number|max:100"
           v-model="form.model.YearsOfSupportEpic"
           :validation-messages="{ required: 'The Support Epic is required' }"
         />
@@ -509,13 +509,13 @@ export default {
           ZipCode: '',
           PhoneNumber: '',
           Email: '',
-          RemediHistory: '',
-          SupportWisdom: '',
-          NumberOfGoLives: '',
-          NumberofEpicProjects: '',
-          YearsOfSupportEpic: '',
-          SupportVirtualEpic: '',
-          CreditCardHotel: '',
+          RemediHistory: 'false',
+          SupportWisdom: 'false',
+          NumberOfGoLives: '0',
+          NumberofEpicProjects: '0',
+          YearsOfSupportEpic: '0',
+          SupportVirtualEpic: 'false',
+          CreditCardHotel: 'false',
           ContractorStatusID: '',
         },
       },
@@ -540,18 +540,18 @@ export default {
         this.validationFName.hasErrors === false &&
         this.validationPName.hasErrors === false &&
         this.validationStreet.hasErrors === false &&
-        // this.validationCity.hasErrors === false && need to remove cause giving
-        // this.validationState.hasErrors === false && error for defaults
+        this.validationCity != 'null' &&
+        this.validationState != 'null' &&
         this.validationZip.hasErrors === false &&
         this.validationNumber.hasErrors === false &&
         this.validationEmail.hasErrors === false &&
-        // this.validationHistory.hasErrors === false &&
-        // this.validationWisdom.hasErrors === false &&
-        this.validationGolives.hasErrors === false &&
-        this.validationEpicProjects.hasErrors === false &&
-        this.validationYearSupportEpic.hasErrors === false &&
-        // this.validationSupportVirtualEpic.hasErrors === false &&
-        // this.validationCreditCard.hasErrors === false &&
+        this.validationHistory.hasErrors != 'null' &&
+        this.validationWisdom.hasErrors != 'null' &&
+        this.validationGolives != 'null' &&
+        this.validationEpicProjects != 'null'  &&
+        this.validationYearSupportEpic != 'null'  &&
+        this.validationSupportVirtualEpic != 'null'  &&
+        this.validationCreditCard.hasErrors != 'null'  &&
         this.validationContractorStatus === false
       ) {
         return true
@@ -697,6 +697,7 @@ export default {
             (this.form.model.ContractorStatusID =
               response.data.contractorStatusID)
           this.form.model.ContractorID = response.data.contractorID
+          console.log(this.form.model.NumberOfGoLives)
         })
         .catch(() => {
           Swal.fire(

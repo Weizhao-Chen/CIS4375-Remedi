@@ -86,11 +86,13 @@ export default {
         {
           label: 'Street',
           field: 'addressLineOne',
-        },
-        {
-          label: 'Street 2',
-          field: 'addressLineTwo',
-        },
+        }
+        // ,
+        // {
+        //   label: 'Street 2',
+        //   field: 'addressLineTwo',
+        // }
+        ,
         {
           label: 'city',
           field: 'city',
@@ -103,14 +105,15 @@ export default {
           label: 'zip',
           field: 'zipCode',
         },
-        {
-          label: 'phone number',
-          field: 'phoneNumber',
-        },
-        {
-          label: 'email',
-          field: 'email',
-        },
+        // {
+        //   label: 'phone number',
+        //   field: 'phoneNumber',
+        // }
+        // ,
+        // {
+        //   label: 'email',
+        //   field: 'email',
+        // },
         {
           label: 'history',
           field: 'remediHistory',

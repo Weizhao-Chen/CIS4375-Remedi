@@ -40,14 +40,6 @@ function initModels(sequelize) {
 
   Contractor.belongsTo(Contractor_Status, { as: "contractorStatus", foreignKey: "contractorStatusID"});
   Contractor_Status.hasMany(Contractor, { as: "Contractors", foreignKey: "contractorStatusID"});
-  Module.belongsTo(EMR, { as: "emr", foreignKey: "emrID"});
-  EMR.hasMany(Module, { as: "Modules", foreignKey: "emrID"});
-  Contractor_Flight.belongsTo(Flight, { as: "flight", foreignKey: "flightID"});
-  Flight.hasMany(Contractor_Flight, { as: "Contractor_Flights", foreignKey: "flightID"});
-  Clinic_Area.belongsTo(Hospital, { as: "hospital", foreignKey: "hospitalID"});
-  Hospital.hasMany(Clinic_Area, { as: "Clinic_Areas", foreignKey: "hospitalID"});
-  Project.belongsTo(Hospital, { as: "hospital", foreignKey: "hospitalID"});
-  Hospital.hasMany(Project, { as: "Projects", foreignKey: "hospitalID"});
   Project.belongsTo(Project_Status, { as: "projectStatus", foreignKey: "projectStatusID"});
   Project_Status.hasMany(Project, { as: "Projects", foreignKey: "projectStatusID"});
   Assigned_Rental_Car.belongsTo(Rental_Car, { as: "rentalCar", foreignKey: "rentalCarID"});
