@@ -143,6 +143,18 @@ export default {
           field: 'creditCardHotel',
         },
         {
+          label: 'hotel name',
+          field: 'hotelName',
+        },
+        {
+          label: 'check in',
+          field: 'hotelCheckIn',
+        },
+        {
+          label: 'check out',
+          field: 'hotelCheckOut',
+        },
+        {
           label: 'type',
           field: 'Contractor_Status.contractorStatusType',
         },

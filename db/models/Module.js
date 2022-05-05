@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Module__8EEC8E37DFF3BDFC",
+        name: "PK__Module__8EEC8E37567D8EE6",
         unique: true,
         fields: [
           { name: "moduleID" },

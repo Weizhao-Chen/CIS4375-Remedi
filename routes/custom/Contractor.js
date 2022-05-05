@@ -57,6 +57,9 @@ router.post('/create', (req, res, next) => {
     yearsOfSupportEpic: req.body.YearsOfSupportEpic,
     supportVirtualEpic: req.body.SupportVirtualEpic,
     creditCardHotel: req.body.CreditCardHotel,
+    hotelName: req.body.HotelName,
+    hotelCheckIn: req.body.HotelCheckIn,
+    hotelCheckOut: req.body.HotelCheckOut,
     contractorStatusID: req.body.ContractorStatusID,
   })
     .then(() => {
@@ -90,6 +93,9 @@ router.put('/update/:contractorid', (req, res, next) => {
       yearsOfSupportEpic: req.body.YearsOfSupportEpic,
       supportVirtualEpic: req.body.SupportVirtualEpic,
       creditCardHotel: req.body.CreditCardHotel,
+      hotelName: req.body.HotelName,
+      hotelCheckIn: req.body.HotelCheckIn,
+      hotelCheckOut: req.body.HotelCheckOut,
       contractorStatusID: req.body.ContractorStatusID,
     },
     {

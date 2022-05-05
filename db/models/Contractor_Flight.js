@@ -34,14 +34,6 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Contract__8EA8EC7774829F83",
-        unique: true,
-        fields: [
-          { name: "contractorID" },
-          { name: "flightID" },
-        ]
-      },
-      {
         name: "PK__Contract__8EA8EC777C2B7223",
         unique: true,
         fields: [
@@ -51,6 +43,14 @@ module.exports = function(sequelize, DataTypes) {
       },
       {
         name: "PK__Contract__8EA8EC777E00C24B",
+        unique: true,
+        fields: [
+          { name: "contractorID" },
+          { name: "flightID" },
+        ]
+      },
+      {
+        name: "PK__Contract__8EA8EC77A382C1EF",
         unique: true,
         fields: [
           { name: "contractorID" },

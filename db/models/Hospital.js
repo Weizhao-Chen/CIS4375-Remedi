@@ -63,7 +63,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Hospital__C7F8EC0599CD3D20",
+        name: "PK__Hospital__C7F8EC05AC85AE56",
         unique: true,
         fields: [
           { name: "hospitalID" },

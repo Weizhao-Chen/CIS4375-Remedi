@@ -330,6 +330,33 @@
             >No</b-form-radio
           >
         </b-form-group>
+
+      <div class="editForm-left">
+        <FormulateInput
+          type="text"
+          name="hotelName"
+          label="Hotel Name"
+          v-model="form.model.HotelName"
+        />
+      </div>
+
+      <div>
+        <label for="example-datepicker">Check In</label>
+        <b-form-datepicker
+          id="Hotel-Check-In"
+          v-model="form.model.HotelCheckIn"
+          class="mb-2"
+        ></b-form-datepicker>
+      </div>
+
+      <div>
+        <label for="example-datepicker">Check Out</label>
+        <b-form-datepicker
+          id="Hotel-Check-Out"
+          v-model="form.model.HotelCheckOut"
+          class="mb-2"
+        ></b-form-datepicker>
+      </div>
       </div>
       <!-- {{ this.form.model }} -->
       <div v-if="!isNewContractor">
@@ -516,6 +543,9 @@ export default {
           YearsOfSupportEpic: '0',
           SupportVirtualEpic: 'false',
           CreditCardHotel: 'false',
+          HotelName: '',
+          HotelCheckIn: '',
+          HotelCheckOut: '',
           ContractorStatusID: '',
         },
       },
@@ -694,6 +724,9 @@ export default {
             (this.form.model.SupportVirtualEpic =
               response.data.supportVirtualEpic),
             (this.form.model.CreditCardHotel = response.data.creditCardHotel),
+            (this.form.model.HotelName = response.data.hotelName),
+            (this.form.model.HotelCheckIn = response.data.hotelCheckIn),
+            (this.form.model.HotelCheckOut = response.data.hotelCheckOut),
             (this.form.model.ContractorStatusID =
               response.data.contractorStatusID)
           this.form.model.ContractorID = response.data.contractorID

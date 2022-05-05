@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Preferre__D6A63CF6678AB998",
+        name: "PK__Preferre__D6A63CF6653E8BB8",
         unique: true,
         fields: [
           { name: "contractorID" },
@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Preferre__D6A63CF67977159C",
+        name: "PK__Preferre__D6A63CF6678AB998",
         unique: true,
         fields: [
           { name: "contractorID" },

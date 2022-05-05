@@ -87,6 +87,18 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     },
+    hotelName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    hotelCheckIn: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    hotelCheckOut: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
     contractorStatusID: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -113,7 +125,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Contract__BE48F415845BE725",
+        name: "PK__Contract__BE48F4159CAC4C07",
         unique: true,
         fields: [
           { name: "contractorID" },
