@@ -18,7 +18,7 @@ v2.0 added views/read for the associate tables. Fixed the requirement of having 
 Beta
 v1.0 Ready for Production.
 v1.1 added remedi logo.
-v1.2 added requirements from remedi: hotels info for contractor. Added technical manual and SLA to Main Menu. Fix flight time to only show time.
+v1.2 added requirements from remedi: hotels info for contractor. Added technical manual and SLA to Main Menu. Fix flight time to only show time. Added script for sql server.
 
 TodoList:
 1. Need to add contractor to create flight page instead of edit page.
