@@ -60,7 +60,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     supportWisdom: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: false
     },
     numberOfGoLives: {
@@ -70,34 +70,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     numberofEpicProjects: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       defaultValue: 0
     },
     yearsOfSupportEpic: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     supportVirtualEpic: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: false
-    },
-    creditCardHotel: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    hotelName: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    hotelCheckIn: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
-    hotelCheckOut: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
     },
     contractorStatusID: {
       type: DataTypes.INTEGER,
@@ -125,7 +108,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Contract__BE48F4159CAC4C07",
+        name: "PK__Contract__BE48F415C3226E97",
         unique: true,
         fields: [
           { name: "contractorID" },

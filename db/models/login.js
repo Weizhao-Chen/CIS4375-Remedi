@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__login__3213E83FC742FF16",
+        name: "PK__login__3213E83F30C59AC1",
         unique: true,
         fields: [
           { name: "id" },

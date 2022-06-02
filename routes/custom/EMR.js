@@ -13,7 +13,7 @@ router.get('/find', (req, res, next) => {
     })
         .then((EMR) => res.send(EMR))
         .catch((err) => {
-            console.log('There was an error querying EMR', JSON.stringify(err))
+            console.log('There was an error querying EHR', JSON.stringify(err))
             return res.send(err)
         });
 })
@@ -63,7 +63,7 @@ router.post('/create', (req, res, next) => {
             res.status(200).send('OK');
         })
         .catch(err => {
-        console.log('There was an error creating EMR', JSON.stringify(err))
+        console.log('There was an error creating EHR', JSON.stringify(err))
         return res.send(err)
     })
 })
@@ -88,7 +88,7 @@ router.put('/update', (req, res, next) => {
             res.status(200).send('OK');
         })
         .catch(err => {
-           console.log('There was an error updating EMR', JSON.stringify(err))
+           console.log('There was an error updating EHR', JSON.stringify(err))
            return res.send(err)
    })
 })
@@ -104,7 +104,7 @@ router.delete('/delete/:emrid', (req, res, next) => {
     }).then(() => {
         res.status(200).send('The record has been deleted!');
     }).catch(err => {
-        console.log('There was an error deleting EMR', JSON.stringify(err))
+        console.log('There was an error deleting EHR', JSON.stringify(err))
         return res.send(err)
     });
 })

@@ -217,7 +217,8 @@
           :placeholder="`${!{ isNewContractor } ? 'No' : 'Please Select One'}`"
         /> -->
 
-        <b-form-group label="Support Wisdom" v-slot="{ ariaDescribedby }">
+        <b-form-group label="Support Wisdom" v-if="!isNewContractor" v-slot="{ ariaDescribedby }">
+          
           <b-form-radio
             v-model="form.model.SupportWisdom"
             :aria-describedby="ariaDescribedby"
@@ -247,6 +248,7 @@
       </div>
       <div class="editForm-left">
         <FormulateInput
+          v-if="!isNewContractor"
           @validation="validationEpicProjects = $event"
           type="text"
           name="numberofEpicProjects"
@@ -258,6 +260,7 @@
       </div>
       <div class="editForm-left">
         <FormulateInput
+        v-if="!isNewContractor"
           @validation="validationYearSupportEpic = $event"
           type="text"
           name="yearsOfSupportEpic"
@@ -282,7 +285,7 @@
           :placeholder="`${!{ isNewContractor } ? 'No' : 'Please Select One'}`"
         /> -->
 
-        <b-form-group label="Support Virtual Epic" v-slot="{ ariaDescribedby }">
+        <b-form-group label="Support Virtual Epic" v-if="!isNewContractor" v-slot="{ ariaDescribedby }">
           <b-form-radio
             v-model="form.model.SupportVirtualEpic"
             :aria-describedby="ariaDescribedby"
@@ -314,7 +317,7 @@
           :placeholder="`${!{ isNewContractor } ? 'No' : 'Please Select One'}`"
         /> -->
 
-        <b-form-group label="Credit Card Hotel" v-slot="{ ariaDescribedby }">
+        <!-- <b-form-group label="Credit Card Hotel" v-slot="{ ariaDescribedby }">
           <b-form-radio
             v-model="form.model.CreditCardHotel"
             :aria-describedby="ariaDescribedby"
@@ -329,9 +332,9 @@
             :value="false"
             >No</b-form-radio
           >
-        </b-form-group>
+        </b-form-group> -->
 
-      <div class="editForm-left">
+      <!-- <div class="editForm-left">
         <FormulateInput
           type="text"
           name="hotelName"
@@ -356,7 +359,7 @@
           v-model="form.model.HotelCheckOut"
           class="mb-2"
         ></b-form-datepicker>
-      </div>
+      </div> -->
       </div>
       <!-- {{ this.form.model }} -->
       <div v-if="!isNewContractor">
@@ -514,7 +517,6 @@ export default {
       validationEpicProjects: {},
       validationYearSupportEpic: {},
       validationSupportVirtualEpic: {},
-      validationCreditCard: {},
       DB_DATA: [],
       Contractor_Status_DATA: [],
       ContractorProjects: [],
@@ -537,15 +539,11 @@ export default {
           PhoneNumber: '',
           Email: '',
           RemediHistory: 'false',
-          SupportWisdom: 'false',
+          SupportWisdom: 'false', //gone
           NumberOfGoLives: '0',
-          NumberofEpicProjects: '0',
-          YearsOfSupportEpic: '0',
-          SupportVirtualEpic: 'false',
-          CreditCardHotel: 'false',
-          HotelName: '',
-          HotelCheckIn: '',
-          HotelCheckOut: '',
+          NumberofEpicProjects: '0', //gone
+          YearsOfSupportEpic: '0', //gone
+          SupportVirtualEpic: 'false', //gone
           ContractorStatusID: '',
         },
       },
@@ -581,7 +579,6 @@ export default {
         this.validationEpicProjects != 'null'  &&
         this.validationYearSupportEpic != 'null'  &&
         this.validationSupportVirtualEpic != 'null'  &&
-        this.validationCreditCard.hasErrors != 'null'  &&
         this.validationContractorStatus === false
       ) {
         return true
@@ -723,10 +720,6 @@ export default {
               response.data.yearsOfSupportEpic),
             (this.form.model.SupportVirtualEpic =
               response.data.supportVirtualEpic),
-            (this.form.model.CreditCardHotel = response.data.creditCardHotel),
-            (this.form.model.HotelName = response.data.hotelName),
-            (this.form.model.HotelCheckIn = response.data.hotelCheckIn),
-            (this.form.model.HotelCheckOut = response.data.hotelCheckOut),
             (this.form.model.ContractorStatusID =
               response.data.contractorStatusID)
           this.form.model.ContractorID = response.data.contractorID

@@ -1,0 +1,25 @@
+USE [REMEDI]
+GO
+
+/****** Object:  Table [dbo].[Hotel]    Script Date: 6/2/2022 5:20:07 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Hotel](
+	[hotelID] [int] IDENTITY(1,1) NOT NULL,
+	[hotelname] [varchar](255) NOT NULL,
+	[hotelcheckindate] [date] NULL,
+	[hotelcheckintime] [time](7) NULL,
+	[hotelcheckoutdate] [date] NULL,
+	[hotelcheckouttime] [time](7) NULL,
+ CONSTRAINT [PK_Hotel] PRIMARY KEY CLUSTERED 
+(
+	[hotelID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

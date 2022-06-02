@@ -63,14 +63,14 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Flight__0E01862227F18DF5",
+        name: "PK__Flight__0E0186225222424C",
         unique: true,
         fields: [
           { name: "flightID" },
         ]
       },
       {
-        name: "PK__Flight__0E0186225222424C",
+        name: "PK__Flight__0E01862270485BCB",
         unique: true,
         fields: [
           { name: "flightID" },

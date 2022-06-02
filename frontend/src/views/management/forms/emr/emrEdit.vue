@@ -28,7 +28,7 @@
           @validation="validationName = $event"
           type="text"
           name="emrName"
-          label="emr Name"
+          label="EHR Name"
           validation="required"
           v-model="form.model.emrName"
           :validation-messages="{required: 'The Name is required'}"
@@ -88,7 +88,7 @@ export default {
           this.goBack()
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong (creating EMR)', 'error')
+          Swal.fire('Error', 'Something went wrong (creating EHR)', 'error')
         })
     },
     updateEMR(){
@@ -104,7 +104,7 @@ export default {
             this.goBack()
           })
           .catch(() => {
-            Swal.fire('Error', 'Something went wrong (updating EMR)', 'error')
+            Swal.fire('Error', 'Something went wrong (updating EHR)', 'error')
           })
     },
     deleteEMR(){
@@ -119,7 +119,7 @@ export default {
             this.goBack()
           })
           .catch(() => {
-            Swal.fire('Error', 'Something went wrong (deleting EMR)', 'error')
+            Swal.fire('Error', 'Something went wrong (deleting EHR)', 'error')
           })
     },
     loadData(){
@@ -129,7 +129,7 @@ export default {
             this.form.model.emrName = response.data.emrName
         })
         .catch(() => {
-          Swal.fire('Error', 'Something went wrong (finding EMR)', 'error')
+          Swal.fire('Error', 'Something went wrong (finding EHR)', 'error')
         })
     }
   },

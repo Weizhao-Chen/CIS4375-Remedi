@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Contract__FF57E0CDBD23F5B4",
+        name: "PK__Contract__FF57E0CDCF60EDE9",
         unique: true,
         fields: [
           { name: "contractorID" },

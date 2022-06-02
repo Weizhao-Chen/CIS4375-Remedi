@@ -19,6 +19,10 @@ Beta
 v1.0 Ready for Production.
 v1.1 added remedi logo.
 v1.2 added requirements from remedi: hotels info for contractor. Added technical manual and SLA to Main Menu. Fix flight time to only show time. Added script for sql server.
+v1.3 added hotel and contractor hotel. Removed hotel info from contractor.
+Removed the ability to see support wisdom, number of epic projects, years of support, support virtual epic when creating a contractor but is still available during edits.
+Change just the view name of EMR to EHR, rest of the file stays the same.
+Added the ability to add contractor to a project without module nor clinic area but will encounter bugs. see buglist below. Added updated script.
 
 TodoList:
 1. Need to add contractor to create flight page instead of edit page.
@@ -26,17 +30,16 @@ TodoList:
 3. Need to fix displayed time in flight edit page.
 3.1 Need to change DB to where it wouldn't show the 'Z'
 
-
-
-
-
-
-Buglist as of Beta v1.2
+Buglist as of Beta v1.3
 unsure
 1. validations of max value and entity types for most tables. Especially for the names and addresses.
 2. unable to add contractor to flight until flight has been created. -.-
 3. edit flight page does not show the flight time.
+4. able to delete preferred module without first removing it from project.
+5. unable to add contractor to hotel until hotel has been created.
+6. edit hotel page does not show the hotel time.
+7. for all displayed time, its bugged to 1970.
+8. able to add assigned clinic area when there is no contractor selected or any is selected.
 
-
-Featurelist as of Beta v1.1
-1. No need worry too much about duplicates for Contractors on Project since it'll automatically remove duplicates.
+Featurelist as of Beta v1.3
+1. No need worry too much about duplicates for Contractors on Project nor Hotel since it'll automatically remove duplicates.

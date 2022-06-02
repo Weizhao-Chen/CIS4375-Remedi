@@ -41,6 +41,9 @@ import projectadmin from '../views/management/forms/project/projectadmin.vue'
 import contractorprojectEdit from '../views/management/forms/contractor project/contractorprojectEdit.vue'
 import contractorprojectadmin from '../views/management/forms/contractor project/contractorprojectadmin.vue'
 
+import hotelEdit from '../views/management/forms/hotel/hotelEdit.vue'
+import hoteladmin from '../views/management/forms/hotel/hoteladmin.vue'
+
 import flightEdit from '../views/management/forms/flight/flightEdit.vue'
 import flightadmin from '../views/management/forms/flight/flightadmin.vue'
 
@@ -54,6 +57,7 @@ import perferredModulesList from '../views/management/perferredModules.vue'
 import assignedmoduleList from '../views/management/forms/assigned module/assignedmoduleList.vue'
 import contractorflight from '../views/management/contractorflight.vue'
 import assignedrentalcar from '../views/management/assignedrentalcar.vue'
+import contractorhotel from '../views/management/contractorhotel.vue'
 
 //reports
 import cpreport from '../views/management/reports/cpreport.vue'
@@ -258,6 +262,41 @@ const router = new VueRouter({
     {
       path: '/assignedrentalcar',
       component: assignedrentalcar,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    //hotel
+    {
+      path: '/hotel',
+      component: hoteladmin,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/hotel/edit/:hotelID',
+      name: '/hotel/edit',
+      component: hotelEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    {
+      path: '/hotel/create',
+      component: hotelEdit,
+      props: true,
+      meta: {
+        isOpen: true,
+      },
+    },
+    //assigned hotel
+    {
+      path: '/contractor_hotel',
+      component: contractorhotel,
       props: true,
       meta: {
         isOpen: true,

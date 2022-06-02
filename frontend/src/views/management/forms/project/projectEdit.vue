@@ -429,16 +429,19 @@ export default {
         ContractorID: this.currentContractor.contractorID,
         ClinicID: this.currentClinicArea.clinicID,
       }
-
+      
       if (this.checkForContractor(this.currentContractor.contractorID)) {
         Swal.fire('Error', 'Contractor Already Assigned', 'error')
       } else if (!this.currentContractor.contractorID) {
         Swal.fire('Error', 'Must add Contractor', 'error')
-      } else if (!this.currentModule.contractorID) {
-        Swal.fire('Error', 'Must add Module', 'error')
-      } else if (!this.currentClinicArea.clinicID) {
-        Swal.fire('Error', 'Must add Clinic Area', 'error')
-      } else {
+      }
+      // else if (!this.currentModule.contractorID) {
+      //   Swal.fire('Error', 'Must add Module', 'error')
+      // } 
+      // else if (!this.currentClinicArea.clinicID) {
+      //   Swal.fire('Error', 'Must add Clinic Area', 'error')
+      // } 
+      else {
         axios
           .post(`${config.api}/api/Contractor_Project/create`, payLoad)
           .then((response) => {

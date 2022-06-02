@@ -1,0 +1,47 @@
+USE [REMEDI]
+GO
+
+ALTER TABLE [dbo].[Assigned_Clinic_Area] DROP CONSTRAINT [FK__Assigned___contr__5070F446]
+GO
+
+ALTER TABLE [dbo].[Assigned_Clinic_Area] DROP CONSTRAINT [FK__Assigned___clini__4F7CD00D]
+GO
+
+/****** Object:  Table [dbo].[Assigned_Clinic_Area]    Script Date: 6/1/2022 1:51:10 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Assigned_Clinic_Area]') AND type in (N'U'))
+DROP TABLE [dbo].[Assigned_Clinic_Area]
+GO
+
+/****** Object:  Table [dbo].[Assigned_Clinic_Area]    Script Date: 6/1/2022 1:51:10 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Assigned_Clinic_Area](
+	[contractorID] [int] NOT NULL,
+	[clinicID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[contractorID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Assigned_Clinic_Area] ADD  DEFAULT ((0)) FOR [clinicID]
+GO
+
+ALTER TABLE [dbo].[Assigned_Clinic_Area]  WITH CHECK ADD FOREIGN KEY([clinicID])
+REFERENCES [dbo].[Clinic_Area] ([clinicID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[Assigned_Clinic_Area]  WITH CHECK ADD FOREIGN KEY([contractorID])
+REFERENCES [dbo].[Contractor] ([contractorID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+

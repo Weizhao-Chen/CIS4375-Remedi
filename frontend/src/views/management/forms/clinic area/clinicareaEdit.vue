@@ -51,7 +51,7 @@
           @validation="validationName = $event"
           type="text"
           name="clinicAreaName"
-          label="name"
+          label="clinic name"
           validation="required"
           v-model="form.model.ClinicAreaName"
           :validation-messages="{
@@ -64,7 +64,7 @@
           @validation="validationLName = $event"
           type="text"
           name="clinicAreaLead"
-          label="Name"
+          label="area lead name"
           validation="required"
           v-model="form.model.ClinicAreaLead"
           :validation-messages="{ required: 'The Name is required' }"

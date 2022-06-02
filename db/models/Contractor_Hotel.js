@@ -1,23 +1,23 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Module', {
-    moduleID: {
-      autoIncrement: true,
+  return sequelize.define('Contractor_Hotel', {
+    contractorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    emrID: {
+    hotelID: {
       type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    moduleName: {
-      type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'Hotel',
+        key: 'hotelID'
+      }
     }
   }, {
     sequelize,
-    tableName: 'Module',
+    tableName: 'Contractor_Hotel',
     schema: 'dbo',
     timestamps: true,
     underscored: true,
@@ -26,17 +26,11 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Module__8EEC8E371EC1E27E",
+        name: "PK__Contract__8F32285C3869F4F0",
         unique: true,
         fields: [
-          { name: "moduleID" },
-        ]
-      },
-      {
-        name: "PK__Module__8EEC8E37A5DF0F9E",
-        unique: true,
-        fields: [
-          { name: "moduleID" },
+          { name: "contractorID" },
+          { name: "hotelID" },
         ]
       },
     ]

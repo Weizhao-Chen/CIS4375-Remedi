@@ -1,0 +1,122 @@
+<template>
+  <div>
+    <div class="tableHeading">
+      <div class="tableHeading-left"></div>
+      <!-- <div class="tableHeading-right">
+        <button class="swal2-editform swal2-styled" v-on:click="addNewAirline">
+          Add New Perferred Modules
+        </button>
+      </div> -->
+    </div>
+
+    <div>
+      <div slot="table-actions"></div>
+      <vue-good-table
+        :columns="dataFields"
+        :rows="DB_DATA"
+        :row-style-class="'rowStyle'"
+        :search-options="{
+          enabled: true,
+          skipDiacritics: true,
+          placeholder: 'Search this table',
+        }"
+        :sort-options="{
+          enabled: true,
+          initialSortBy: { field: 'Contractor.contractorID', type: 'asc' },
+        }"
+        :pagination-options="{
+          enabled: true,
+          mode: 'records',
+          perPage: 10,
+          position: 'top',
+          perPageDropdown: [10, 25, 50, 100],
+          dropdownAllowAll: false,
+          nextLabel: 'next',
+          prevLabel: 'prev',
+          rowsPerPageLabel: 'Rows per page',
+          ofLabel: 'of',
+        }"
+        compactMode
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from '../../utilities/axios'
+import config from '../../config'
+import 'vue-good-table/dist/vue-good-table.css'
+import { VueGoodTable } from 'vue-good-table'
+import Swal from 'sweetalert2'
+
+export default {
+  data() {
+    return {
+      DB_DATA: [],
+      Contractor_DATA: [],
+      Hotel_DATA: [],
+      myAPI: `${config.api}/api/Contractor_Hotel`,
+      dataFields: [
+        {
+          label: 'ID',
+          field: 'Contractor.contractorID',
+        //   hidden: true,
+        },
+        {
+          label: 'First Name',
+          field: 'Contractor.firstName',
+        },
+        {
+          label: 'Last Name',
+          field: 'Contractor.lastName',
+        },
+        {
+          label: 'hotel id',
+          field: 'Hotel.hotelID',
+        },
+        {
+          label: 'hotel name',
+          field: 'Hotel.hotelname',
+        },
+        {
+          label: 'Hotel Check In Date',
+          field: 'Hotel.hotelcheckindate',
+        },
+        {
+          label: 'Hotel Check In Time',
+          field: 'Hotel.hotelcheckintime',
+        },
+        {
+          label: 'Hotel Check Out Date',
+          field: 'Hotel.hotelcheckoutdate',
+        },
+        {
+          label: 'Hotel Check Out Time',
+          field: 'Hotel.hotelcheckouttime',
+        }
+      ],
+    }
+  },
+
+  components: {
+    'vue-good-table': VueGoodTable,
+  },
+  methods: {
+    loadData() {
+      axios
+        .get(`${config.api}/api/Contractor_Hotel/find`)
+        .then((response) => {
+          this.DB_DATA = response.data
+        })
+        .catch(() => {
+          Swal.fire('Error 2', 'Something went wrong', 'error')
+        })
+    },
+  },
+  beforeMount() {
+    this.loadData()
+  },
+}
+</script>
+
+<style scoped></style>

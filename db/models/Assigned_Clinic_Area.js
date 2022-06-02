@@ -8,8 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     clinicID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,
@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Assigned__2124AC3C2EBFB804",
+        name: "PK__Assigned__2124AC3C823896E5",
         unique: true,
         fields: [
           { name: "contractorID" },
@@ -38,11 +38,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "PK__Assigned__2124AC3C823896E5",
+        name: "PK__Assigned__BE48F4158728531D",
         unique: true,
         fields: [
           { name: "contractorID" },
-          { name: "clinicID" },
         ]
       },
     ]

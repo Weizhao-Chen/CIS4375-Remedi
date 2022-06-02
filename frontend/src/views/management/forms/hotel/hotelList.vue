@@ -2,14 +2,13 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">Contractor List</span>
+        <span class="tableHeading-text">Hotel List</span>
       </div>
       <div class="tableHeading-right">
         <button
-          class="swal2-editform swal2-styled"
-          v-on:click="addNewContractor"
+          class="swal2-editform swal2-styled" v-on:click="addNewHotel"
         >
-          Add New Contractor List
+          Add New Hotel List
         </button>
       </div>
     </div>
@@ -27,7 +26,7 @@
         }"
         :sort-options="{
           enabled: true,
-          initialSortBy: { field: 'contractorID', type: 'asc' },
+          initialSortBy: { field: 'hotelID', type: 'asc' },
         }"
         :pagination-options="{
           enabled: true,
@@ -59,89 +58,43 @@ export default {
   data() {
     return {
       DB_DATA: [],
-      Contractor_Status_DATA: [],
-      myAPI: `${config.api}/api/Contractor`,
+    //   Contractor_DATA: [],
+      myAPI: `${config.api}/api/Hotel`,
       dataFields: [
         {
           label: 'id',
-          field: 'contractorID',
+          field: 'hotelID',
           type: 'number',
         },
         {
-          label: 'Onsite',
-          field: 'virtualOnsite',
+          label: 'Hotel Name',
+          field: 'hotelname',
         },
         {
-          label: 'Last Name',
-          field: 'lastName',
+          label: 'Hotel Check In Date',
+          field: 'hotelcheckindate',
         },
         {
-          label: 'First Name',
-          field: 'firstName',
+          label: 'Hotel Check In Time',
+          field: 'hotelcheckintime',
         },
         {
-          label: 'Preferred Name',
-          field: 'preferredName',
+          label: 'Hotel Check Out Date',
+          field: 'hotelcheckoutdate',
         },
         {
-          label: 'Street',
-          field: 'addressLineOne',
+          label: 'Hotel Check Out Time',
+          field: 'hotelcheckouttime',
         }
         // ,
         // {
-        //   label: 'Street 2',
-        //   field: 'addressLineTwo',
-        // }
-        ,
-        {
-          label: 'city',
-          field: 'city',
-        },
-        {
-          label: 'state',
-          field: 'state',
-        },
-        {
-          label: 'zip',
-          field: 'zipCode',
-        },
-        // {
-        //   label: 'phone number',
-        //   field: 'phoneNumber',
-        // }
-        // ,
-        // {
-        //   label: 'email',
-        //   field: 'email',
+        //   label: 'Contractor Last Name',
+        //   field: 'Contractor.lastName',
         // },
-        {
-          label: 'history',
-          field: 'remediHistory',
-        },
-        {
-          label: 'wisdom',
-          field: 'supportWisdom',
-        },
-        {
-          label: 'GoLives',
-          field: 'numberOfGoLives',
-        },
-        {
-          label: 'Epic Project',
-          field: 'numberofEpicProjects',
-        },
-        {
-          label: 'Support Epic',
-          field: 'yearsOfSupportEpic',
-        },
-        {
-          label: 'Virtual Epic',
-          field: 'supportVirtualEpic',
-        },
-        {
-          label: 'type',
-          field: 'Contractor_Status.contractorStatusType',
-        },
+        // {
+        //   label: 'Contractor First Name',
+        //   field: 'Contractor.firstName',
+        // }
       ],
     }
   },
@@ -152,20 +105,37 @@ export default {
   methods: {
     onRowDoubleClick(params) {
       this.$router.push({
-        name: '/contractor/edit',
+        name: '/hotel/edit',
         params: {
-          contractorID: params.row.contractorID,
+          hotelID: params.row.hotelID,
         },
       })
     },
-    addNewContractor() {
-      this.$router.push('/contractor/create')
+    addNewHotel() {
+      this.$router.push('/hotel/create')
+    },
+    formatDate(data) {
+      for (let i = 0; i < data.length; i++) {
+        // let d = new Date(data[i].departTime)
+        // let d2 = new Date(data[i].arrivalTime)
+        this.DB_DATA.push({
+          hotelID: data[i].hotelID,
+          hotelname: data[i].hotelname,
+          hotelcheckindate: data[i].hotelcheckindate.split('T')[0],
+          hotelcheckintime: data[i].hotelcheckintime.split('T')[1],
+          hotelcheckoutdate: data[i].hotelcheckoutdate.split('T')[0],
+          hotelcheckouttime: data[i].hotelcheckouttime.split('T')[1],
+        })
+
+        // console.log(data[i])
+      }
     },
     loadData() {
       axios
-        .get(`${config.api}/api/Contractor/find`)
+        .get(`${config.api}/api/Hotel/find`)
         .then((response) => {
-          this.DB_DATA = response.data
+          this.formatDate(response.data)
+          
         })
         .catch(() => {
           Swal.fire('Error', 'Something went wrong', 'error')

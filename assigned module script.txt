@@ -1,0 +1,67 @@
+USE [REMEDI]
+GO
+
+ALTER TABLE [dbo].[Assigned_Module] DROP CONSTRAINT [FK__Assigned___proje__06CD04F7]
+GO
+
+ALTER TABLE [dbo].[Assigned_Module] DROP CONSTRAINT [FK__Assigned___modul__05D8E0BE]
+GO
+
+ALTER TABLE [dbo].[Assigned_Module] DROP CONSTRAINT [FK__Assigned___contr__04E4BC85]
+GO
+
+ALTER TABLE [dbo].[Assigned_Module] DROP CONSTRAINT [DF__Assigned___proje__03F0984C]
+GO
+
+ALTER TABLE [dbo].[Assigned_Module] DROP CONSTRAINT [DF__Assigned___modul__02FC7413]
+GO
+
+/****** Object:  Table [dbo].[Assigned_Module]    Script Date: 6/1/2022 1:48:09 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Assigned_Module]') AND type in (N'U'))
+DROP TABLE [dbo].[Assigned_Module]
+GO
+
+/****** Object:  Table [dbo].[Assigned_Module]    Script Date: 6/1/2022 1:48:09 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Assigned_Module](
+	[contractorID] [int] NOT NULL,
+	[moduleID] [int] NULL,
+	[projectID] [int] NULL,
+ CONSTRAINT [PK_Assigned_Module] PRIMARY KEY CLUSTERED 
+(
+	[contractorID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [dbo].[Assigned_Module] ADD  DEFAULT ((0)) FOR [moduleID]
+GO
+
+ALTER TABLE [dbo].[Assigned_Module] ADD  DEFAULT ((0)) FOR [projectID]
+GO
+
+ALTER TABLE [dbo].[Assigned_Module]  WITH CHECK ADD FOREIGN KEY([contractorID])
+REFERENCES [dbo].[Contractor] ([contractorID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[Assigned_Module]  WITH CHECK ADD FOREIGN KEY([moduleID])
+REFERENCES [dbo].[Module] ([moduleID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[Assigned_Module]  WITH CHECK ADD FOREIGN KEY([projectID])
+REFERENCES [dbo].[Project] ([projectID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+

@@ -8,13 +8,13 @@ module.exports = function(sequelize, DataTypes) {
     },
     moduleID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
+      allowNull: true,
+      defaultValue: 0
     },
     projectID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,
@@ -27,12 +27,10 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: false,
     indexes: [
       {
-        name: "PK__Assigned__52B7CDBB09AE1DFB",
+        name: "PK__Assigned__BE48F415D75689A5",
         unique: true,
         fields: [
           { name: "contractorID" },
-          { name: "moduleID" },
-          { name: "projectID" },
         ]
       },
     ]

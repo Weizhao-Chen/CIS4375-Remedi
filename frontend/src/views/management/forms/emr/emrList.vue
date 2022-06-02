@@ -2,11 +2,11 @@
   <div>
     <div class="tableHeading">
       <div class="tableHeading-left">
-        <span class="tableHeading-text">EMR List</span>
+        <span class="tableHeading-text">EHR List</span>
       </div>
       <div class="tableHeading-right">
         <button class="swal2-editform swal2-styled" v-on:click="addNewEMR">
-          Add New EMR
+          Add New EHR
         </button>
       </div>
     </div>

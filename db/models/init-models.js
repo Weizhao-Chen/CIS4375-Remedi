@@ -5,11 +5,13 @@ var _Assigned_Rental_Car = require("./Assigned_Rental_Car");
 var _Clinic_Area = require("./Clinic_Area");
 var _Contractor = require("./Contractor");
 var _Contractor_Flight = require("./Contractor_Flight");
+var _Contractor_Hotel = require("./Contractor_Hotel");
 var _Contractor_Project = require("./Contractor_Project");
 var _Contractor_Status = require("./Contractor_Status");
 var _EMR = require("./EMR");
 var _Flight = require("./Flight");
 var _Hospital = require("./Hospital");
+var _Hotel = require("./Hotel");
 var _Module = require("./Module");
 var _Preferred_Module = require("./Preferred_Module");
 var _Project = require("./Project");
@@ -25,11 +27,13 @@ function initModels(sequelize) {
   var Clinic_Area = _Clinic_Area(sequelize, DataTypes);
   var Contractor = _Contractor(sequelize, DataTypes);
   var Contractor_Flight = _Contractor_Flight(sequelize, DataTypes);
+  var Contractor_Hotel = _Contractor_Hotel(sequelize, DataTypes);
   var Contractor_Project = _Contractor_Project(sequelize, DataTypes);
   var Contractor_Status = _Contractor_Status(sequelize, DataTypes);
   var EMR = _EMR(sequelize, DataTypes);
   var Flight = _Flight(sequelize, DataTypes);
   var Hospital = _Hospital(sequelize, DataTypes);
+  var Hotel = _Hotel(sequelize, DataTypes);
   var Module = _Module(sequelize, DataTypes);
   var Preferred_Module = _Preferred_Module(sequelize, DataTypes);
   var Project = _Project(sequelize, DataTypes);
@@ -40,6 +44,8 @@ function initModels(sequelize) {
 
   Contractor.belongsTo(Contractor_Status, { as: "contractorStatus", foreignKey: "contractorStatusID"});
   Contractor_Status.hasMany(Contractor, { as: "Contractors", foreignKey: "contractorStatusID"});
+  Contractor_Hotel.belongsTo(Hotel, { as: "hotel", foreignKey: "hotelID"});
+  Hotel.hasMany(Contractor_Hotel, { as: "Contractor_Hotels", foreignKey: "hotelID"});
   Project.belongsTo(Project_Status, { as: "projectStatus", foreignKey: "projectStatusID"});
   Project_Status.hasMany(Project, { as: "Projects", foreignKey: "projectStatusID"});
   Assigned_Rental_Car.belongsTo(Rental_Car, { as: "rentalCar", foreignKey: "rentalCarID"});
@@ -52,11 +58,13 @@ function initModels(sequelize) {
     Clinic_Area,
     Contractor,
     Contractor_Flight,
+    Contractor_Hotel,
     Contractor_Project,
     Contractor_Status,
     EMR,
     Flight,
     Hospital,
+    Hotel,
     Module,
     Preferred_Module,
     Project,
